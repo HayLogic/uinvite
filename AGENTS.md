@@ -12,3 +12,9 @@ Music must start only following user interaction and handle rejected play promis
 
 ## Verification
 Check envelope opening, audio state, countdown expiry, conditional RSVP fields and widths 360, 390, 768 and 1440 pixels. Report any checks that cannot be run. Do not deploy or add dependencies unless requested.
+
+## Invitation numbering and current work
+
+The user is building multiple distinct invitations. The completed burgundy/gold corporate New Year invitation for HayLogic Line Day is **068**. Its files currently remain at the repository root. Its recorded application revision is `872ca6db9fd74298ca7151b0c97a8a8b416a0e9b`; see `INVITATIONS.md`.
+
+The next active invitation is **069**. Keep its work separate in `invitations/069/` with its own `index.html`, `style.css`, `script.js`, and `assets/` when implementation starts. This per-invitation layout supersedes the root-only layout instruction above for new invitations. Do not overwrite 068 while working on 069. Read the new invitation's user brief before choosing its design; the burgundy Christmas palette applies to 068, not automatically to every future invitation. No design brief or event data for 069 has been supplied yet.
