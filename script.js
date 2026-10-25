@@ -3,6 +3,7 @@
 const CONFIG = Object.freeze({
   companyName: 'HayLogic Line Day',
   eventTitle: 'Ամանորյա կորպորատիվ երեկո',
+  newYearGreeting: 'Դիմավորում ենք 2027 թվականը',
   eventDate: '2026-12-18T18:00:00+04:00', // Հայաստանի ժամային գոտի. ժամը նույնպես այստեղ է։
   venueName: 'Paravon ռեստորան',
   address: 'Միջոցառման հասցեն կճշտվի',
@@ -27,6 +28,7 @@ $('#venue').textContent = CONFIG.venueName;
 $('#address').textContent = CONFIG.address;
 document.title = `${CONFIG.eventTitle} · ${CONFIG.companyName}`;
 $('.hero-title').textContent = CONFIG.eventTitle;
+$('#new-year-greeting').textContent = CONFIG.newYearGreeting;
 $('#sample-note').hidden = !CONFIG.demoMode;
 function safeHttpUrl(value) { try { const url = new URL(value); return ['http:','https:'].includes(url.protocol) ? url.href : ''; } catch { return ''; } }
 const mapsUrl = safeHttpUrl(CONFIG.mapsUrl);
