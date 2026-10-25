@@ -186,3 +186,24 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .map-button:hover{filter:brightness(1.1);transform:translateY(-2px)}
 .map-button span{font-family:Arial,sans-serif}
 @media(min-width:768px){.venue-card{grid-template-columns:1fr 1fr}.venue-photo{aspect-ratio:auto;min-height:440px}.venue-information{padding:45px 30px}}
+
+/* A luminous serpentine ribbon replaces the straight program rule. */
+.flow-timeline{position:relative;width:min(100%,660px);margin:40px auto 0;isolation:isolate}
+.timeline-art{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:-1}
+.timeline-track{fill:none;stroke:#c99c4e;stroke-opacity:.12;stroke-width:1;vector-effect:non-scaling-stroke}
+.timeline-draw{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.timeline-glow{stroke:#ffbe45;stroke-width:5;filter:blur(4px);opacity:.8}
+.timeline-core{stroke:#f8daa0;stroke-width:1.5;filter:drop-shadow(0 0 3px #edb749)}
+.timeline-spark{fill:#ffe7a8;filter:drop-shadow(0 0 3px #ffd270);animation:ribbon-spark 2.8s ease-in-out infinite alternate}
+.timeline-tip-halo{fill:#ffd16a;opacity:.4;filter:blur(6px)}
+.flow-timeline .timeline{max-width:none;margin:0;list-style:none;padding:0}
+.flow-timeline .timeline li{height:185px;padding:20px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;position:relative}
+.flow-timeline .timeline li::before,.flow-timeline .timeline li::after{display:none}
+.flow-timeline .timeline time{font-size:28px;color:#dcb774;font-style:italic;line-height:1.4}
+.flow-timeline .timeline li>div{width:70%;max-width:340px}
+.flow-timeline .timeline h3{font-size:16px;line-height:1.8;margin-bottom:8px}
+.flow-timeline .timeline p{font-size:11px;line-height:1.8;color:#bba6a5}
+.flow-timeline .timeline .is-reached time{color:#ffe1a0;text-shadow:0 0 18px #e9b95b66}
+@keyframes ribbon-spark{from{opacity:.35}to{opacity:1}}
+@media(min-width:768px){.flow-timeline .timeline li{height:205px}.flow-timeline .timeline time{font-size:34px}.flow-timeline .timeline h3{font-size:19px}.flow-timeline .timeline p{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.timeline-spark{animation:none;opacity:.8}}

@@ -245,3 +245,50 @@ let submitting=false;
 async function sendRSVP(payload) { const endpoint=safeHttpUrl(CONFIG.rsvpEndpoint); if(!endpoint) throw new Error('invalid endpoint'); const controller=new AbortController(); const timeout=setTimeout(()=>controller.abort(),15000); try { const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal}); if(!response.ok) throw new Error('request failed'); } finally { clearTimeout(timeout); } }
 form.addEventListener('submit',async event => { event.preventDefault(); if(submitting) return; const name=$('#full-name'); name.setCustomValidity(name.value.trim().split(/\s+/).length<2 ? 'Խնդրում ենք նշել անունը և ազգանունը։' : ''); if(!form.reportValidity()) return; const status=$('#form-status'); status.classList.remove('error'); const payload={fullName:name.value.trim(),attendance:form.elements.attendance.value,guests:form.elements.attendance.value==='yes' ? Number($('#guests').value) : 0,comment:$('#comment').value.trim()}; if(isDemo) { status.textContent='Դաշտերը ճիշտ են լրացված։ Սա ցուցադրական ստուգում է․ պատասխանը չի ուղարկվել և չի պահպանվել։'; status.focus(); return; } submitting=true; $('#submit-rsvp').disabled=true; form.setAttribute('aria-busy','true'); status.textContent='Ուղարկվում է…'; try { await sendRSVP(payload); status.textContent='Շնորհակալություն։ Ձեր պատասխանն ընդունված է։'; form.reset(); syncGuests(); } catch { status.classList.add('error'); status.textContent='Չհաջողվեց հաստատել պատասխանի ընդունումը։ Փորձեք ավելի ուշ կամ կապվեք կազմակերպչի հետ։'; } finally { submitting=false; $('#submit-rsvp').disabled=false; form.removeAttribute('aria-busy'); status.focus(); } });
 $('#full-name').addEventListener('input',event => event.target.setCustomValidity(''));
+
+
+// Scroll-linked golden ribbon: scrolling backwards retracts the same path.
+function initializeTimeline() {
+  const container = $('#flow-timeline');
+  const path = $('#timeline-curve');
+  if (!container || !path) return;
+  const length = path.getTotalLength();
+  const strokes = container.querySelectorAll('.timeline-draw');
+  strokes.forEach(stroke => { stroke.style.strokeDasharray = length; });
+  const namespace = 'http://www.w3.org/2000/svg';
+  const sparks = [];
+  for (let i = 0; i < 95; i++) {
+    const fraction = i / 94;
+    const point = path.getPointAtLength(fraction * length);
+    const spark = document.createElementNS(namespace, 'circle');
+    spark.setAttribute('cx', point.x + Math.sin(i * 7.3) * 5);
+    spark.setAttribute('cy', point.y + Math.cos(i * 5.7) * 3);
+    spark.setAttribute('r', i % 7 === 0 ? '1.9' : '1');
+    spark.setAttribute('class', 'timeline-spark');
+    spark.style.animationDelay = `-${(i * .37) % 3}s`;
+    $('#timeline-sparks').append(spark);
+    sparks.push({element:spark, fraction});
+  }
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  let pending = 0;
+  function update() {
+    pending = 0;
+    if ($('#invitation').hidden) return;
+    const rect = container.getBoundingClientRect();
+    const progress = motion.matches ? 1 : Math.max(0, Math.min(1, (innerHeight * .7 - rect.top) / rect.height));
+    strokes.forEach(stroke => { stroke.style.strokeDashoffset = length * (1-progress); });
+    const point = path.getPointAtLength(length * progress);
+    $('#timeline-tip').setAttribute('transform', `translate(${point.x} ${point.y})`);
+    $('#timeline-tip').style.opacity = progress > 0 && progress < 1 ? '1' : '0';
+    sparks.forEach(spark => { spark.element.style.visibility = spark.fraction <= progress ? 'visible' : 'hidden'; });
+    container.querySelectorAll('.timeline li').forEach((item, i) => item.classList.toggle('is-reached', progress >= (i + .5)/5));
+    container.dataset.progress = progress.toFixed(4);
+  }
+  function schedule() { if (!pending) pending = requestAnimationFrame(update); }
+  window.addEventListener('scroll', schedule, {passive:true});
+  window.addEventListener('resize', schedule, {passive:true});
+  document.addEventListener('invitation:opened', schedule);
+  motion.addEventListener('change', schedule);
+  schedule();
+}
+initializeTimeline();
