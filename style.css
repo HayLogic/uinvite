@@ -113,3 +113,10 @@ body.intro-active .music-button span{display:none}
 .seam-light{stroke:#b77d56;stroke-opacity:.5}
 @media(min-width:700px){.fold-shadow .shadow-portrait{display:none}.fold-shadow .shadow-landscape{display:block}}
 @media(prefers-reduced-motion:reduce){.fold-shadow{transition:none!important}}
+
+/* Visible light follows the actual pointer, above the hero decoration. */
+.pointer-light{position:fixed;top:0;left:0;width:0;height:0;z-index:20;pointer-events:none;opacity:0;transition:opacity .25s ease,transform .12s ease-out;will-change:transform}
+.pointer-light.is-visible{opacity:1}
+.pointer-light::before{content:'';position:absolute;left:-45px;top:-45px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,#fffbe9 0 2%,#ffeab9cc 4%,#ffc45b99 10%,#f0a12d33 30%,#eaa12b0d 52%,transparent 70%);filter:drop-shadow(0 0 7px #ffc968)}
+.pointer-light::after{content:'';position:absolute;left:-12px;top:-17px;width:24px;height:34px;background:#fff2c2;clip-path:polygon(50% 0,57% 42%,100% 50%,57% 57%,50% 100%,43% 57%,0 50%,43% 42%);filter:drop-shadow(0 0 4px #ffe8a0)}
+@media(prefers-reduced-motion:reduce){.pointer-light{display:none}}

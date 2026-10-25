@@ -70,9 +70,16 @@ function initializeTree() {
   let visible = false, frame = 0, lastFrame = 0;
   const tip = {x:0, y:0, targetX:0, targetY:0};
   const hero = $('#home');
-  function resetTip() { tip.targetX = 0; tip.targetY = 0; }
+  const pointerLight = document.createElement('span');
+  pointerLight.className = 'pointer-light';
+  pointerLight.setAttribute('aria-hidden', 'true');
+  document.body.append(pointerLight);
+  function hidePointerLight() { pointerLight.classList.remove('is-visible'); }
+  function resetTip() { tip.targetX = 0; tip.targetY = 0; hidePointerLight(); }
   hero.addEventListener('pointermove', event => {
     if (motion.matches || !visible || document.body.classList.contains('intro-active')) return;
+    pointerLight.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+    pointerLight.classList.add('is-visible');
     const bounds = canvas.getBoundingClientRect();
     // Work in visual CSS coordinates, independently of canvas pixel density.
     const horizontal = (event.clientX - (bounds.left + bounds.width / 2)) / (bounds.width / 2);
@@ -86,6 +93,7 @@ function initializeTree() {
   function draw(time) {
     if (motion.matches) {
       tip.x = tip.y = tip.targetX = tip.targetY = 0;
+      hidePointerLight();
     } else {
       const easing = 1 - Math.exp(-Math.min(100, Math.max(0, time - lastFrame)) / 150);
       tip.x += (tip.targetX - tip.x) * easing;
@@ -114,6 +122,8 @@ function initializeTree() {
     context.save();
     context.translate(tip.x, tip.y);
     context.globalAlpha = .9;
+    const pulse = motion.matches ? 1 : 1 + .12 * Math.sin(time * .002);
+    context.drawImage(glow,165 - 35 * pulse,26 - 35 * pulse,70 * pulse,70 * pulse);
     context.drawImage(glow,149,5,32,42);
     context.globalAlpha = 1;
     context.fillStyle='#fff4c4';
@@ -134,10 +144,11 @@ function initializeTree() {
     draw(motion.matches ? 0 : performance.now());
     if (visible && !document.hidden && !motion.matches) frame=requestAnimationFrame(tick);
   }
-  const observer=new IntersectionObserver(entries=>{ visible=entries[0].isIntersecting; resume(); });
+  const observer=new IntersectionObserver(entries=>{ visible=entries[0].isIntersecting; if (!visible) resetTip(); resume(); });
   observer.observe(canvas);
   document.addEventListener('visibilitychange',() => { if (document.hidden) resetTip(); resume(); });
   motion.addEventListener('change',resume);
+  window.addEventListener('scroll', hidePointerLight, {passive:true});
   draw(0);
 }
 initializeTree();
