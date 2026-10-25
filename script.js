@@ -3,7 +3,7 @@
 const CONFIG = Object.freeze({
   companyName: 'HayLogic Line Day',
   eventTitle: 'Ամանորյա կորպորատիվ երեկո',
-  newYearGreeting: 'Դիմավորում ենք 2027 թվականը',
+  newYearGreeting: 'Միասին դեպի 2027 թվական',
   eventDate: '2026-12-18T18:00:00+04:00', // Հայաստանի ժամային գոտի. ժամը նույնպես այստեղ է։
   venueName: 'Paravon ռեստորան',
   address: 'Միջոցառման հասցեն կճշտվի',
