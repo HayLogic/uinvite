@@ -226,7 +226,7 @@ function updateCountdown(now=Date.now()) { const remaining=validDate ? eventDate
 updateCountdown(); setInterval(updateCountdown,1000);
 const form=$('#rsvp-form');
 const isDemo=CONFIG.demoMode || !CONFIG.rsvpEndpoint;
-$('#submit-rsvp').firstChild.textContent=isDemo ? 'Ստուգել պատասխանը ' : 'Հաստատել մասնակցությունը ';
+$('#submit-rsvp').firstChild.textContent = 'Հաստատել ';
 let submitting=false;
 // API ինտեգրացիայի միակ հատվածը. endpoint-ը պետք է ընդունի JSON և վերադարձնի 2xx։
 // Սերվերը պետք է ստուգի դաշտերը, սահմանափակի հարցումները և ապահովի CORS-ը, եթե այլ դոմեն է։
