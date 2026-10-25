@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="hy">
+<html lang="en">
 <head>
  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
  <meta name="theme-color" content="#e6e6d8"><meta name="description" content="Նուրբ ձմեռային հրավիրատոմս՝ բացվող ձիթապտղագույն ծրարով։">
- <title>Հրավիրատոմս 069</title><link rel="stylesheet" href="style.css?v=069-1"><script src="script.js?v=069-1" defer></script>
+ <title>Հրավիրատոմս 069</title><link rel="stylesheet" href="style.css?v=069-sections-1"><script src="script.js?v=069-sections-1" defer></script>
 </head>
 <body>
  <main class="winter-scene" id="scene">
@@ -21,11 +21,54 @@
    </button>
    <p class="open-caption" id="open-caption">CLICK TO OPEN</p>
   </section>
-  <section class="inside" id="inside" hidden aria-label="Բացված հրավերը">
-   <p class="invitation-from">ԴՈՒՔ ՀՐԱՎԻՐՎԱԾ ԵՔ</p><h2 class="hosts" data-hosts>Patricia &amp; Adam</h2>
-   <span class="inside-rule" aria-hidden="true"></span><p class="inside-message">Ձեր ներկայությունը մեր օրվա ամենաթանկ նվերն է։</p>
-   <button class="close-invitation" id="close-envelope">Փակել հրավերը</button>
-  </section>
+  <article class="inside" id="inside" hidden aria-label="Christmas party invitation">
+   <section class="party-hero invitation-section" id="party-home" aria-labelledby="party-heading">
+    <span class="gold-stars stars-hero" aria-hidden="true"></span>
+    <p class="sample-note" id="sample-note">Preview · sample names · event details to follow</p>
+    <img class="christmas-tree" src="assets/christmas-tree.png" alt="A snow-covered Christmas tree with delicate golden lights" width="600" height="900" decoding="async">
+    <p class="small-caps">PLEASE JOIN US FOR A</p><h2 id="party-heading"><span class="script-title">Christmas</span><span class="roman-title">PARTY</span></h2>
+    <p class="small-caps hosted-label">HOSTED BY</p><p class="hosts" data-hosts>Patricia &amp; Adam</p>
+    <a class="down-link" href="#party-details" aria-label="See the party details">↓</a>
+   </section>
+   <section class="party-details invitation-section" id="party-details" aria-labelledby="details-heading">
+    <span class="gold-stars stars-details" aria-hidden="true"></span>
+    <h2 class="section-title" id="details-heading"><span class="script-title">The</span><span class="roman-title">DETAILS</span></h2>
+    <div class="detail-stack">
+     <div class="event-detail"><h3>DATE &amp; TIME</h3><div class="sage-pill date-pill"><p id="event-date">Date to be announced</p><p id="event-time"></p></div></div>
+     <div class="event-detail"><h3>LOCATION</h3><div class="sage-pill location-pill"><img id="location-image" alt="" hidden><svg class="location-icon" id="location-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 34s12-11 12-20a12 12 0 0 0-24 0c0 9 12 20 12 20Z"/><circle cx="20" cy="14" r="4"/></svg><div><p id="venue-name">Location to be announced</p><p id="venue-address"></p></div></div><a class="gold-button" id="maps-link" target="_blank" rel="noopener noreferrer" hidden>GOOGLE MAP ↗</a></div>
+     <div class="event-detail"><h3>RSVP</h3><a class="sage-pill rsvp-pill" href="#party-rsvp">LET US KNOW IF YOU CAN JOIN US<span>We would love to celebrate with you</span></a></div>
+    </div>
+   </section>
+   <section class="gift-exchange invitation-section" id="gift-exchange" aria-labelledby="gift-heading">
+    <p class="small-caps">A LITTLE CHRISTMAS MAGIC</p><h2 id="gift-heading">GIFT EXCHANGE</h2>
+    <p class="gift-message" id="gift-message">Bring a little joy, wrapped with love. Join our gift exchange and share a festive surprise with someone special.</p>
+    <p class="gift-budget" id="gift-budget" hidden></p>
+    <img class="gift-picture" src="assets/christmas-gifts.png" alt="Ivory and sage wrapped presents with gold ribbons and evergreen sprigs" width="900" height="600" loading="lazy" decoding="async">
+    <span class="fine-divider" aria-hidden="true"></span>
+   </section>
+   <section class="party-rsvp invitation-section" id="party-rsvp" aria-labelledby="rsvp-heading">
+    <h2 class="sr-only" id="rsvp-heading">RSVP — let us know</h2>
+    <img class="botanical-rsvp" src="assets/botanical-rsvp.png" alt="RSVP in evergreen branches with golden lights" width="700" height="700" loading="lazy" decoding="async">
+    <p class="small-caps deadline" id="rsvp-deadline" hidden></p><p class="rsvp-intro">Confirm your attendance by filling out<br>the form below.</p>
+    <button class="gold-button" id="open-rsvp" aria-expanded="false" aria-controls="rsvp-form-panel">OPEN RSVP FORM</button>
+    <div id="rsvp-form-panel" hidden>
+     <form id="rsvp-form"><p class="preview-form-note" id="preview-form-note">Preview form — responses are not sent or stored.</p>
+      <label for="full-name">Name &amp; surname <span aria-hidden="true">*</span></label><input id="full-name" name="fullName" autocomplete="name" required minlength="3" maxlength="120" placeholder="Your full name">
+      <fieldset><legend>Will you join us? <span aria-hidden="true">*</span></legend><div class="attendance-options"><label><input type="radio" name="attendance" value="yes" required checked> I will attend</label><label><input type="radio" name="attendance" value="no"> I will not attend</label></div></fieldset>
+      <label for="comment">Comment <span class="optional">(optional)</span></label><textarea id="comment" name="comment" rows="3" maxlength="1000" placeholder="A little note for the hosts…"></textarea>
+      <button class="gold-button" id="submit-rsvp" type="submit">CONFIRM</button><p id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+     </form>
+    </div>
+   </section>
+   <section class="thank-you invitation-section" aria-labelledby="thank-heading">
+    <span class="gold-stars stars-thanks" aria-hidden="true"></span>
+    <img class="thank-tree" src="assets/christmas-tree.png" alt="" width="600" height="900" loading="lazy" decoding="async">
+    <h2 class="script-title" id="thank-heading">Thank you!</h2><span class="fine-divider" aria-hidden="true"></span>
+    <p class="thank-message">WE’RE SO EXCITED TO CELEBRATE<br>THIS HOLIDAY SEASON WITH<br>SPARKLE, JOY, AND YOU.<br><br>THANK YOU FOR BEING A PART OF<br>THIS MAGICAL EVENING. YOUR<br>PRESENCE IS THE PERFECT FINISHING<br>TOUCH TO OUR CELEBRATION.<br><br>LET’S MAKE THIS A NIGHT TO REMEMBER,<br>FULL OF LIGHTS, LAUGHTER, AND<br>CHRISTMAS CHEER.</p>
+    <p class="small-caps with-love">WITH LOVE</p><p class="hosts" data-hosts>Patricia &amp; Adam</p>
+    <button class="close-invitation" id="close-envelope">Back to the envelope</button>
+   </section>
+  </article>
  </main>
  <noscript><p class="noscript">Հրավիրատոմսը բացելու համար միացրեք JavaScript-ը։</p></noscript>
 </body>
