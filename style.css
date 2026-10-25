@@ -264,7 +264,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .festive-edges{isolation:isolate;background:transparent;text-shadow:0 2px 12px #10000566}
 .dress.festive-edges .dress-panel{background:transparent;border:0;box-shadow:none}
 .dress.festive-edges .dress-panel::before,.dress.festive-edges .dress-corner{display:none}
-.details.festive-edges .venue-card{background:#22091233;border-color:#d5b57733;box-shadow:none;max-width:900px}
+.details.festive-edges .venue-card{background:transparent;border:0;box-shadow:none;max-width:900px}
 @media(min-width:768px){.details.festive-edges{padding-left:12%;padding-right:12%}.dress.festive-edges{padding-top:65px;padding-bottom:65px}}
 
 .details.festive-edges .venue-card{max-width:560px;grid-template-columns:1fr}
