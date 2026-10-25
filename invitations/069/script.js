@@ -233,13 +233,13 @@ function initializeSnowfall() {
     canvas.width = Math.round(width * ratio);
     canvas.height = Math.round(height * ratio);
     context.setTransform(ratio,0,0,ratio,0,0);
-    const count = Math.min(115,Math.max(48,Math.round(width*height/11000)));
-    flakes = Array.from({length:count},()=>({x:random()*width,y:random()*height,radius:1.2+random()*2.5,speed:18+random()*31,drift:4+random()*10,phase:random()*Math.PI*2,opacity:.45+random()*.5}));
+    const count = Math.min(150,Math.max(72,Math.round(width*height/8000)));
+    flakes = Array.from({length:count},()=>({x:random()*width,y:random()*height,radius:1.8+random()*3.6,speed:27+random()*38,drift:4+random()*10,phase:random()*Math.PI*2,opacity:.65+random()*.3,crystal:random()>.82}));
     draw(0);
   }
   function draw(elapsed) {
     context.clearRect(0,0,width,height);
-    context.shadowColor='rgba(75,89,60,.12)'; context.shadowBlur=2;
+    context.shadowColor='rgba(73,89,61,.28)'; context.shadowBlur=3;
     for (const flake of flakes) {
       if (elapsed>0) {
         flake.phase += elapsed * .55;
@@ -250,7 +250,27 @@ function initializeSnowfall() {
         if (flake.x< -6) flake.x=width+6;
       }
       context.fillStyle=`rgba(255,255,249,${flake.opacity})`;
-      context.beginPath();context.arc(flake.x,flake.y,flake.radius,0,Math.PI*2);context.fill();
+      if (flake.crystal) {
+        // A sage-edged white crystal remains visible against the pale ivory cards.
+        const radius = flake.radius * 1.6;
+        context.beginPath();
+        for (let arm=0;arm<6;arm++) {
+          const angle = arm*Math.PI/3 + flake.phase*.08;
+          const dx = Math.cos(angle), dy = Math.sin(angle);
+          context.moveTo(flake.x,flake.y);
+          context.lineTo(flake.x+dx*radius,flake.y+dy*radius);
+          for (const side of [-1,1]) {
+            const branch = angle+side*Math.PI/3;
+            context.moveTo(flake.x+dx*radius*.6,flake.y+dy*radius*.6);
+            context.lineTo(flake.x+dx*radius*.6-Math.cos(branch)*radius*.28,flake.y+dy*radius*.6-Math.sin(branch)*radius*.28);
+          }
+        }
+        context.strokeStyle=`rgba(86,104,75,${flake.opacity*.38})`;context.lineWidth=2.5;context.stroke();
+        context.strokeStyle=`rgba(255,255,251,${flake.opacity})`;context.lineWidth=1.2;context.stroke();
+      } else {
+        context.beginPath();context.arc(flake.x,flake.y,flake.radius,0,Math.PI*2);context.fill();
+        context.strokeStyle=`rgba(86,104,75,${flake.opacity*.23})`;context.lineWidth=.8;context.stroke();
+      }
     }
   }
   function tick(time) {
