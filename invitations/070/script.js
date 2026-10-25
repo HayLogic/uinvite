@@ -1,0 +1,186 @@
+'use strict';
+// 070-ի ցուցադրական տվյալներ. փոխարինեք հաստատված տվյալներով հրապարակումից առաջ։
+const CONFIG = Object.freeze({
+  invitationNumber: '070',
+  companyName: 'Ձեր ընկերությունը',
+  eventTitle: 'Ամանորյա կորպորատիվ երեկույթ',
+  exampleData: true,
+  eventDate: '2026-12-24T19:00:00+04:00', // Օրինակային օր և ժամ՝ Հայաստանի ժամային գոտով։
+  venueName: 'Ռեստորանի անունը',
+  address: 'Հասցեն կճշտվի',
+  mapsUrl: '',
+  inviteMessage: 'Սիրելի՛ գործընկերներ, հրավիրում ենք ձեզ միասին ամփոփելու տարին, կիսվելու մեր ձեռքբերումներով և տոնական տրամադրությամբ դիմավորելու նոր սկիզբը։ Թող այս երեկոն դառնա ջերմ հանդիպումների ու գեղեցիկ հիշողությունների առիթ։',
+  program: [
+    {time:'19:00',title:'Հյուրերի դիմավորում',description:'Ջերմ հանդիպումներ և տոնական տրամադրություն'},
+    {time:'19:30',title:'Տոնական ընթրիք',description:'Տարվա ձեռքբերումների ամփոփում և կենացներ'},
+    {time:'20:30',title:'Խաղեր և անակնկալներ',description:'Ժպիտներ, նվերներ և հաճելի բացահայտումներ'},
+    {time:'21:30',title:'Երաժշտություն և պարեր',description:'Երեկոյի ամենավառ ռիթմերը'},
+    {time:'23:00',title:'Տոնական ավարտ',description:'Նոր հիշողություններով՝ դեպի նոր տարի'}
+  ],
+  dressDescription: 'Սպիտակի նրբությունը, ոսկու ջերմությունը և արծաթի փայլը։',
+  dressColors: [
+    {name:'Սպիտակ',color:'#fdfdfa'},
+    {name:'Ոսկեգույն',color:'#d0ad60'},
+    {name:'Արծաթագույն',color:'#bec5c9'}
+  ],
+  rsvpEndpoint: '', // Առանց backend-ի ձևը ցուցադրական է։ Գաղտնի բանալիներ չտեղադրել։
+  snowEnabled: true
+});
+const $ = selector => document.querySelector(selector);
+document.querySelectorAll('[data-company]').forEach(element=>{element.textContent=CONFIG.companyName;});
+document.title = `${CONFIG.companyName} · ${CONFIG.eventTitle} · ${CONFIG.invitationNumber}`;
+$('#example-note').hidden=!CONFIG.exampleData;
+$('#invite-copy').textContent=CONFIG.inviteMessage;
+$('#venue-name').textContent=CONFIG.venueName;
+$('#venue-address').textContent=CONFIG.address;
+function safeURL(value, relative=false) {
+  if (!value) return '';
+  try { const url=relative ? new URL(value,location.href) : new URL(value);return ['https:','http:'].includes(url.protocol) ? url.href : ''; } catch { return ''; }
+}
+const mapsUrl=safeURL(CONFIG.mapsUrl);
+if(mapsUrl){$('#maps-link').href=mapsUrl;$('#maps-link').hidden=false;}
+const eventDate=new Date(CONFIG.eventDate);
+const validDate=Number.isFinite(eventDate.getTime())&&/\+04:00$/.test(CONFIG.eventDate);
+const months=['հունվարի','փետրվարի','մարտի','ապրիլի','մայիսի','հունիսի','հուլիսի','օգոստոսի','սեպտեմբերի','հոկտեմբերի','նոյեմբերի','դեկտեմբերի'];
+const monthTitles=['Հունվար','Փետրվար','Մարտ','Ապրիլ','Մայիս','Հունիս','Հուլիս','Օգոստոս','Սեպտեմբեր','Հոկտեմբեր','Նոյեմբեր','Դեկտեմբեր'];
+const weekdays=['Կիրակի','Երկուշաբթի','Երեքշաբթի','Չորեքշաբթի','Հինգշաբթի','Ուրբաթ','Շաբաթ'];
+const parts=validDate ? Object.fromEntries(new Intl.DateTimeFormat('en-GB',{year:'numeric',month:'numeric',day:'numeric',timeZone:'Asia/Yerevan'}).formatToParts(eventDate).map(part=>[part.type,part.value])) : {};
+if(validDate){
+  const year=Number(parts.year),month=Number(parts.month)-1,day=Number(parts.day);
+  const weekday=new Date(Date.UTC(year,month,day)).getUTCDay();
+  const time=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',hourCycle:'h23',timeZone:'Asia/Yerevan'}).format(eventDate);
+  $('#event-weekday').textContent=weekdays[weekday];
+  $('#event-month').textContent=monthTitles[month];
+  $('#event-day').textContent=day;
+  $('#event-year').textContent=year;
+  $('#event-time').textContent=`Ժամը՝ ${time}`;
+  $('#calendar-month').textContent=`${monthTitles[month]} ${year}`;
+  $('#calendar-note').textContent=`${day} ${months[month]} ${year} · ${time}`;
+  const start=(new Date(Date.UTC(year,month,1)).getUTCDay()+6)%7;
+  const days=new Date(Date.UTC(year,month+1,0)).getUTCDate();
+  const calendar=document.createDocumentFragment();
+  for(let week=0;week<Math.ceil((start+days)/7);week++){
+    const row=document.createElement('tr');
+    for(let column=0;column<7;column++){
+      const cell=document.createElement('td');
+      const date=week*7+column-start+1;
+      if(date>0&&date<=days){
+        const timeElement=document.createElement('time');
+        timeElement.dateTime=`${year}-${String(month+1).padStart(2,'0')}-${String(date).padStart(2,'0')}`;
+        timeElement.textContent=date;
+        if(date===day){cell.className='event-date';timeElement.setAttribute('aria-label',`${date} ${months[month]} ${year}՝ միջոցառման օրը`);}
+        cell.append(timeElement);
+      }
+      row.append(cell);
+    }
+    calendar.append(row);
+  }
+  $('#calendar-days').append(calendar);
+}else{
+  $('#event-month').textContent='Օրը կճշտվի';$('#event-day').textContent='—';$('#calendar-section').hidden=true;
+}
+function updateCountdown(now=Date.now()){
+  const remaining=validDate ? eventDate.getTime()-now : NaN;
+  if(!Number.isFinite(remaining)||remaining<=0){
+    $('#countdown').hidden=true;$('#countdown-message').hidden=false;
+    $('#countdown-message').textContent=validDate ? 'Մեր տոնական երեկոն արդեն մեկնարկել է։' : 'Միջոցառման ամսաթիվը կճշտվի։';
+    return;
+  }
+  $('#countdown').hidden=false;$('#countdown-message').hidden=true;
+  const seconds=Math.floor(remaining/1000);
+  const values=[Math.floor(seconds/86400),Math.floor(seconds/3600)%24,Math.floor(seconds/60)%60,seconds%60];
+  ['days','hours','minutes','seconds'].forEach((id,i)=>{document.getElementById(id).textContent=String(values[i]).padStart(2,'0');});
+}
+updateCountdown();setInterval(updateCountdown,1000);
+const program=document.createDocumentFragment();
+CONFIG.program.forEach(item=>{
+  const entry=document.createElement('li');
+  const time=document.createElement('time');time.textContent=item.time;time.dateTime=item.time;
+  const text=document.createElement('div');
+  const title=document.createElement('h3');title.textContent=item.title;
+  const description=document.createElement('p');description.textContent=item.description;
+  text.append(title,description);entry.append(time,text);program.append(entry);
+});
+$('#program-items').append(program);
+$('#dress-description').textContent=CONFIG.dressDescription;
+CONFIG.dressColors.forEach(color=>{
+  const item=document.createElement('li');
+  const swatch=document.createElement('span');swatch.className='swatch';swatch.style.setProperty('--color',color.color);swatch.setAttribute('aria-hidden','true');
+  const label=document.createElement('span');label.textContent=color.name;
+  item.append(swatch,label);$('#dress-colors').append(item);
+});
+// Open the outer folds around the page, without pulling a card out of the envelope.
+let opened=false;
+$('#open-envelope').addEventListener('click',()=>{
+  if(opened)return;
+  opened=true;$('#open-envelope').disabled=true;$('#open-envelope').setAttribute('aria-expanded','true');
+  const cover=$('#envelope-cover'),invitation=$('#invitation');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  invitation.hidden=false;invitation.inert=true;invitation.setAttribute('aria-hidden','true');
+  window.scrollTo({top:0,behavior:'instant'});
+  cover.classList.add('opening');
+  setTimeout(()=>cover.classList.add('leaving'),reduced ? 0 : 2800);
+  setTimeout(()=>{
+    cover.hidden=true;invitation.inert=false;invitation.removeAttribute('aria-hidden');document.body.classList.remove('cover-active');
+    $('#hero-title').tabIndex=-1;$('#hero-title').focus({preventScroll:true});
+    document.dispatchEvent(new Event('invitation:opened'));
+  },reduced ? 0 : 4100);
+});
+const form=$('#rsvp-form');
+const isPreview=!CONFIG.rsvpEndpoint;
+$('#preview-note').hidden=!isPreview;
+let submitting=false;
+// API integration: JSON POST with fullName, attendance (yes/no) and comment.
+async function sendRSVP(payload){
+  const endpoint=safeURL(CONFIG.rsvpEndpoint,true);
+  if(!endpoint)throw new Error('Invalid endpoint');
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),15000);
+  try{
+    const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});
+    if(!response.ok)throw new Error('Request failed');
+  }finally{clearTimeout(timeout);}
+}
+form.addEventListener('submit',async event=>{
+  event.preventDefault();if(submitting)return;
+  const name=$('#full-name');
+  name.setCustomValidity(name.value.trim().split(/\s+/).length<2 ? 'Խնդրում ենք նշել անունը և ազգանունը։' : '');
+  if(!form.reportValidity())return;
+  const status=$('#form-status');status.classList.remove('error');
+  if(isPreview){status.textContent='Դաշտերը ճիշտ են լրացված։ Սա ցուցադրական ձև է․ պատասխանը չի ուղարկվել և չի պահպանվել։';status.focus();return;}
+  const payload={fullName:name.value.trim(),attendance:form.elements.attendance.value,comment:$('#comment').value.trim()};
+  submitting=true;$('#submit-rsvp').disabled=true;form.setAttribute('aria-busy','true');status.textContent='Ուղարկվում է…';
+  try{await sendRSVP(payload);status.textContent='Շնորհակալություն։ Ձեր պատասխանն ընդունված է։';form.reset();}
+  catch{status.classList.add('error');status.textContent='Չհաջողվեց հաստատել պատասխանի ընդունումը։ Փորձեք ավելի ուշ կամ կապվեք կազմակերպչի հետ։';}
+  finally{submitting=false;$('#submit-rsvp').disabled=false;form.removeAttribute('aria-busy');status.focus();}
+});
+$('#full-name').addEventListener('input',event=>event.target.setCustomValidity(''));
+function initializeSnow(){
+  const canvas=$('#snowfall'),context=canvas.getContext('2d');
+  if(!CONFIG.snowEnabled||!context){canvas.hidden=true;return;}
+  const preference=matchMedia('(prefers-reduced-motion: reduce)');
+  let flakes=[],width=0,height=0,frame=0,last=0;
+  let seed=702026;
+  const random=()=>{seed=seed*16807%2147483647;return(seed-1)/2147483646;};
+  function resize(){
+    width=innerWidth;height=innerHeight;const ratio=Math.min(devicePixelRatio||1,1.5);
+    canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);context.setTransform(ratio,0,0,ratio,0,0);
+    const count=Math.min(60,Math.max(25,Math.round(width*height/23000)));
+    flakes=Array.from({length:count},()=>({x:random()*width,y:random()*height,size:1.2+random()*2.5,speed:9+random()*12,phase:random()*Math.PI*2,opacity:.45+random()*.4}));draw(0);
+  }
+  function draw(elapsed){
+    context.clearRect(0,0,width,height);context.shadowColor='#96a18a33';context.shadowBlur=2;
+    flakes.forEach(flake=>{
+      if(elapsed){flake.y+=flake.speed*elapsed;flake.phase+=elapsed*.3;flake.x+=Math.sin(flake.phase)*4*elapsed;if(flake.y>height+5){flake.y=-5;flake.x=random()*width;}}
+      context.fillStyle=`rgba(255,255,252,${flake.opacity})`;context.strokeStyle='#b6bca033';context.lineWidth=.7;
+      context.beginPath();context.arc(flake.x,flake.y,flake.size,0,Math.PI*2);context.fill();context.stroke();
+    });
+  }
+  function tick(time){
+    frame=0;if(document.hidden||preference.matches||document.body.classList.contains('cover-active'))return;
+    if(!last)last=time;if(time-last>=33){draw(Math.min((time-last)/1000,.1));last=time;}frame=requestAnimationFrame(tick);
+  }
+  function resume(){if(frame)cancelAnimationFrame(frame);frame=0;last=0;draw(0);if(!document.hidden&&!preference.matches&&!document.body.classList.contains('cover-active'))frame=requestAnimationFrame(tick);}
+  window.addEventListener('resize',resize,{passive:true});document.addEventListener('visibilitychange',resume);document.addEventListener('invitation:opened',resume);preference.addEventListener('change',resume);resize();resume();
+}
+initializeSnow();
