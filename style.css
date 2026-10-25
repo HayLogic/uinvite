@@ -61,7 +61,7 @@ body.intro-active .music-button span{display:none}
 .intro{transition:opacity 1.5s ease,background-color 2s ease 1.2s;background-image:none}
 .envelope{transform-style:preserve-3d;transition:transform 3.8s cubic-bezier(.25,.1,.25,1)}
 .envelope-back{transition:opacity 2s ease 1.3s}
-.envelope-side{position:absolute;inset:0;z-index:2;background-size:cover;background-image:linear-gradient(120deg,#0008,#6f311827 47%,#000b),url('assets/envelope-velvet.png');backface-visibility:hidden;transition:transform 2.5s cubic-bezier(.25,.1,.25,1) 1.35s,opacity 1.5s ease 2.3s;pointer-events:none}
+.envelope-side{position:absolute;inset:0;z-index:2;background-size:cover;background-image:linear-gradient(120deg,#0008,#6f311827 47%,#000b),url('assets/envelope-velvet.png');backface-visibility:hidden;transition:transform 2.5s cubic-bezier(.25,.1,.25,1) .65s,opacity 1.5s ease 1.9s;pointer-events:none}
 .envelope-side-left{clip-path:polygon(0 0,56% 67%,0 100%);transform-origin:left center;box-shadow:inset 2px 0 3px #a3653a70}
 .envelope-side-right{clip-path:polygon(100% 0,44% 67%,100% 100%);transform-origin:right center;background-image:linear-gradient(240deg,#0008,#6f311827 47%,#000b),url('assets/envelope-velvet.png');box-shadow:inset -2px 0 3px #a3653a70}
 .envelope-front{clip-path:polygon(0 100%,50% 43%,100% 100%);transform-origin:center bottom;z-index:3;backface-visibility:hidden;transition:transform 2.5s cubic-bezier(.25,.1,.25,1) 1.55s,opacity 1.5s ease 2.5s}
@@ -89,3 +89,27 @@ body.intro-active .music-button span{display:none}
 @media(prefers-reduced-motion:reduce){.envelope,.envelope-side,.flap,.envelope-front,.seal,.intro,.envelope-back{transition:none!important}}
 .envelope-side-left{background-image:linear-gradient(120deg,#000b,#17060377 47%,#000c),url('assets/envelope-velvet.png')}
 .envelope-side-right{background-image:linear-gradient(240deg,#000b,#17060377 47%,#000c),url('assets/envelope-velvet.png')}
+
+/* Warm oxblood velvet and separate cast shadows outside the clipped folds. */
+.envelope-back,.envelope-side,.envelope-front,.flap{
+ background-color:#310c07;
+ background-blend-mode:normal,luminosity;
+}
+.envelope-back{background-image:linear-gradient(#16040066,#10020188),url('assets/envelope-velvet.png')}
+.flap{background-image:radial-gradient(ellipse at 48% 12%,#300704a8,#100100bb),url('assets/envelope-velvet.png')}
+.envelope-front{background-image:linear-gradient(0deg,#170302aa,#30090499),url('assets/envelope-velvet.png')}
+.envelope-side-left{background-image:linear-gradient(120deg,#090100bb,#300803aa 47%,#050000e8),url('assets/envelope-velvet.png')}
+.envelope-side-right{background-image:linear-gradient(240deg,#090100bb,#300803aa 47%,#050000e8),url('assets/envelope-velvet.png')}
+.fold-shadow{position:absolute;inset:0;pointer-events:none;backface-visibility:hidden;display:block}
+.fold-shadow svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;fill:#080100;filter:blur(10px)}
+.fold-shadow-top{z-index:3;transform-origin:center top;transition:transform 2.8s cubic-bezier(.22,.61,.36,1) .5s,opacity 1.5s ease 2.3s}
+.fold-shadow-top svg{transform:translateY(10px);opacity:.95}
+.fold-shadow-bottom{z-index:2;transform-origin:center bottom;transition:transform 2.5s cubic-bezier(.25,.1,.25,1) 1.55s,opacity 1.5s ease 2.5s}
+.fold-shadow-bottom svg{transform:translateY(-7px);opacity:.85}
+.fold-shadow .shadow-landscape{display:none}
+.opening .fold-shadow-top{transform:rotateX(165deg);opacity:0}
+.opening .fold-shadow-bottom{transform:rotateX(-105deg);opacity:0}
+.lower-seams{stroke:#ad7453;stroke-opacity:.42}
+.seam-light{stroke:#b77d56;stroke-opacity:.5}
+@media(min-width:700px){.fold-shadow .shadow-portrait{display:none}.fold-shadow .shadow-landscape{display:block}}
+@media(prefers-reduced-motion:reduce){.fold-shadow{transition:none!important}}
