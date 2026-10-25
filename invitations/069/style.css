@@ -1,0 +1,39 @@
+@font-face{font-family:Pinyon;src:url('assets/PinyonScript-Regular.ttf') format('truetype');font-display:swap}
+:root{color-scheme:light;--cream:#e6e6d8;--ink:#4c4d3e;--gold:#8c7c58;--sage:#888d73}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;scrollbar-width:none}body{background:var(--cream);color:var(--ink);font-family:Georgia,'Sylfaen',serif}body::-webkit-scrollbar{display:none}button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible{outline:2px solid #625d36;outline-offset:8px}[hidden]{display:none!important}
+.winter-scene{min-height:100svh;position:relative;isolation:isolate;display:grid;place-items:center;padding:45px 18px;background-color:var(--cream);background-image:linear-gradient(#ecebdf22,#e8e8db33),url('assets/winter-forest.png');background-size:cover;background-position:center}
+.winter-scene::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#ecebdf33,transparent 55%,#e9e8dd22);pointer-events:none}
+.invitation-cover{width:min(100%,570px);text-align:center;transition:opacity 1.2s ease,transform 1.6s ease}
+.invitation-from{font-family:Georgia,serif;font-size:11px;line-height:1.18;font-weight:400;margin:0 0 18px;color:#555746}
+.hosts{font-family:Pinyon,Georgia,serif;font-weight:400;font-size:clamp(42px,10vw,67px);line-height:1.1;margin:0 0 15px;color:var(--gold);text-shadow:0 1px 0 #f9f7ec77;overflow-wrap:anywhere}
+.envelope{display:block;position:relative;width:min(100%,440px);aspect-ratio:1.54;margin:12px auto 0;border:0;padding:0;background:none;border-radius:2px;perspective:1300px;isolation:isolate;filter:drop-shadow(0 5px 4px #30332066);transition:filter 1.4s ease}
+.paper{position:absolute;inset:0;background-color:var(--sage);background-image:url('assets/sage-paper.svg');background-size:250px 250px}
+.envelope-back{border:1px solid #515741;border-radius:2px;box-shadow:inset 0 0 28px #323c1d33;transition:opacity 1.7s ease .9s}
+.envelope-pocket{z-index:2;clip-path:polygon(0 100%,50% 28%,100% 100%);background-color:#91967c;box-shadow:inset 0 -1px #4f573f;transform-origin:center bottom;transition:transform 2.1s ease 1s,opacity 1.2s ease 1.3s}
+.fold{z-index:1;backface-visibility:hidden;transition:transform 2.1s ease .7s,opacity 1.2s ease 1.2s}
+.fold-left{clip-path:polygon(0 0,55% 59%,0 100%);transform-origin:left;background-color:#92967e;background-image:linear-gradient(135deg,#b5b99c33,#2b361e15),url('assets/sage-paper.svg')}
+.fold-right{clip-path:polygon(100% 0,45% 59%,100% 100%);transform-origin:right;background-color:#969b82;background-image:linear-gradient(225deg,#b9bea133,#2b361e15),url('assets/sage-paper.svg')}
+.flap{z-index:4;height:67%;clip-path:polygon(0 0,100% 0,98% 15%,50% 96%,2% 15%);transform-origin:center top;background-color:#91967b;background-image:linear-gradient(170deg,#cad0af22,#38432b22),url('assets/sage-paper.svg');backface-visibility:hidden;transition:transform 2.4s cubic-bezier(.22,.61,.36,1) .4s,opacity 1.2s ease 1.5s}
+.flap svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:#d0d1b566;stroke-width:1}
+.flap-shadow{position:absolute;inset:0;z-index:3;transform-origin:top;transition:transform 2.4s cubic-bezier(.22,.61,.36,1) .4s,opacity 1.2s ease 1.5s}
+.flap-shadow svg{width:100%;height:100%;fill:#222b16bb;filter:blur(4px);transform:translateY(4px)}
+.seal-decoration{position:absolute;z-index:5;width:45%;height:64%;left:27.5%;top:35%;pointer-events:none;filter:drop-shadow(0 3px 3px #20281a66);transition:opacity .8s ease,transform 1s ease}
+.seal-decoration img{display:block;width:100%;height:100%;object-fit:contain}
+.open-caption{font-size:12px;color:#424734;line-height:1.6;margin:20px 0 0;transition:opacity .6s ease}
+.opening .seal-decoration{opacity:0;transform:translateY(12px) scale(1.02)}
+.opening .flap,.opening .flap-shadow{transform:rotateX(165deg);opacity:0}
+.opening .fold-left{transform:rotateY(-100deg);opacity:0}
+.opening .fold-right{transform:rotateY(100deg);opacity:0}
+.opening .envelope-pocket{transform:rotateX(-100deg);opacity:0}
+.opening .envelope-back,.opening .open-caption{opacity:0}
+.leaving{opacity:0;transform:translateY(-10px)}
+.inside{text-align:center;max-width:560px;padding:45px 30px;border:1px solid #9c9f7b55;background:#eeeee266;backdrop-filter:blur(4px);box-shadow:0 10px 60px #42452c0d;animation:reveal 1.3s ease both}
+.inside .hosts{margin:25px 0;font-size:clamp(43px,10vw,69px)}
+.inside-rule{display:block;width:65px;height:1px;background:#9d926b88;margin:25px auto}
+.inside-message{font-size:14px;line-height:2.2;max-width:370px}
+.close-invitation{border:0;border-bottom:1px solid #878b6b;background:transparent;font-size:11px;padding:9px 3px;margin-top:20px}
+.noscript{position:fixed;bottom:10px;background:#eeeee5;padding:12px;font-size:12px}
+@keyframes reveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:768px){.winter-scene{padding:60px 30px;background-position:center 60%}.invitation-from{font-size:13px;margin-bottom:22px}.hosts{font-size:69px;margin-bottom:15px}.envelope{width:490px}.open-caption{font-size:14px;margin-top:23px}}
+@media(max-height:550px) and (min-width:700px){.winter-scene{padding:25px}.hosts{font-size:43px;margin-bottom:10px}.invitation-from{font-size:10px;margin-bottom:10px}.envelope{width:330px}.open-caption{margin-top:13px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
