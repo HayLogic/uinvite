@@ -165,15 +165,42 @@ function initializeSnow(){
   function resize(){
     width=innerWidth;height=innerHeight;const ratio=Math.min(devicePixelRatio||1,1.5);
     canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);context.setTransform(ratio,0,0,ratio,0,0);
-    const count=Math.min(60,Math.max(25,Math.round(width*height/23000)));
-    flakes=Array.from({length:count},()=>({x:random()*width,y:random()*height,size:1.2+random()*2.5,speed:9+random()*12,phase:random()*Math.PI*2,opacity:.45+random()*.4}));draw(0);
+    const count=Math.min(45,Math.max(20,Math.round(width*height/30000)));
+    flakes=Array.from({length:count},(_,i)=>({x:random()*width,y:random()*height,size:6+random()*7,speed:7+random()*10,phase:random()*Math.PI*2,rotation:random()*Math.PI/3,opacity:.45+random()*.4,gold:i%2===0}));draw(0);
   }
   function draw(elapsed){
-    context.clearRect(0,0,width,height);context.shadowColor='#96a18a33';context.shadowBlur=2;
+    context.clearRect(0,0,width,height);
+    context.lineCap='round';context.lineJoin='round';
     flakes.forEach(flake=>{
-      if(elapsed){flake.y+=flake.speed*elapsed;flake.phase+=elapsed*.3;flake.x+=Math.sin(flake.phase)*4*elapsed;if(flake.y>height+5){flake.y=-5;flake.x=random()*width;}}
-      context.fillStyle=`rgba(255,255,252,${flake.opacity})`;context.strokeStyle='#b6bca033';context.lineWidth=.7;
-      context.beginPath();context.arc(flake.x,flake.y,flake.size,0,Math.PI*2);context.fill();context.stroke();
+      if(elapsed){
+        flake.y+=flake.speed*elapsed;flake.phase+=elapsed*.25;flake.rotation+=elapsed*.025;
+        flake.x+=Math.sin(flake.phase)*3*elapsed;
+        if(flake.y>height+18){flake.y=-18;flake.x=random()*width;}
+        if(flake.x>width+18)flake.x=-18;
+        if(flake.x< -18)flake.x=width+18;
+      }
+      // Six fine crystalline arms, like the supplied snowflake reference.
+      context.beginPath();
+      for(let arm=0;arm<6;arm++){
+        const angle=flake.rotation+arm*Math.PI/3-Math.PI/2;
+        const dx=Math.cos(angle),dy=Math.sin(angle),radius=flake.size;
+        context.moveTo(flake.x,flake.y);context.lineTo(flake.x+dx*radius,flake.y+dy*radius);
+        for(const fraction of [.46,.74]){
+          for(const side of [-1,1]){
+            const jointX=flake.x+dx*radius*fraction,jointY=flake.y+dy*radius*fraction;
+            const branch=angle+side*Math.PI/3;
+            context.moveTo(jointX,jointY);
+            context.lineTo(jointX-Math.cos(branch)*radius*.24,jointY-Math.sin(branch)*radius*.24);
+          }
+        }
+      }
+      if(flake.gold){
+        context.shadowBlur=0;context.strokeStyle=`rgba(184,151,80,${flake.opacity})`;context.lineWidth=.75;context.stroke();
+      }else{
+        context.shadowColor='#a5ae9444';context.shadowBlur=1.5;
+        context.strokeStyle=`rgba(151,164,132,${flake.opacity*.2})`;context.lineWidth=1.8;context.stroke();
+        context.strokeStyle=`rgba(255,255,253,${flake.opacity})`;context.lineWidth=1.05;context.stroke();
+      }
     });
   }
   function tick(time){
