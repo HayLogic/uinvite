@@ -1,19 +1,30 @@
 <!doctype html>
 <html lang="hy">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#370c18">
-  <title>Uinvite · Ամանորյա հրավիրատոմս</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#310c18">
+<meta name="description" content="Տարվա ամենաջերմ երեկոյի հրավերը։ Ամանորյա կորպորատիվ տոն՝ միասին։">
+<title>Ամանորյա հրավեր · Uinvite</title><link rel="stylesheet" href="style.css"><script src="script.js" defer></script>
 </head>
 <body>
-  <main class="starter">
-    <p class="brand">Uinvite</p>
-    <h1>Ամանորյա կորպորատիվ հրավիրատոմս</h1>
-    <p>Նախագծի մեկնարկային միջավայրը պատրաստ է։</p>
-    <p class="note">Հաջորդ փուլում այստեղ կստեղծվի բորդո և ոսկեգույն հրավիրատոմսը՝ բացվող ծրարով։</p>
-  </main>
-</body>
-</html>
+<div class="intro" id="intro">
+ <div class="intro-inner"><p class="eyebrow">ՀԱՏՈՒԿ ՁԵԶ ՀԱՄԱՐ</p><h1>Դուք հրավիրված եք</h1><p class="intro-sub">Մի երեկո՝ լի ջերմությամբ ու նոր սկիզբներով</p>
+ <button class="envelope" id="open-invite" aria-label="Բացել հրավիրատոմսը"><span class="envelope-back"></span><span class="letter"><span class="letter-star">✦</span><span>Սիրով սպասում ենք ձեզ</span></span><span class="envelope-front"></span><span class="flap"></span><span class="envelope-name" data-company></span><span class="seal"><svg class="seal-mark" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 8 20 23h6L15 34h9L12 45h15v7h6v-7h15L36 34h9L34 23h6Z"/><path d="m18 48-6 3m30-3 6 3M30 4v3"/></svg><span class="seal-ring"></span></span></button>
+ <p class="open-hint">Սեղմեք՝ հրավիրատոմսը բացելու համար</p><span class="intro-line"></span><p class="tiny">ՏՈՆԸ ՍԿՍՎՈՒՄ Է ՀՐԱՎԵՐԻՑ</p></div>
+</div>
+<main id="invitation" hidden>
+ <header class="masthead"><a href="#home" class="wordmark">Uinvite<span>THE ART OF CELEBRATION</span></a><span class="edition">ԱՄԱՆՈՐ <span data-year></span></span></header>
+ <section class="hero" id="home"><div class="hero-glow"></div><div class="bough bough-left" aria-hidden="true"></div><div class="bough bough-right" aria-hidden="true"></div>
+ <p class="eyebrow">ՄԻԱՍԻՆ ԴԵՊԻ ՆՈՐ ՍԿԻԶԲՆԵՐ</p><div class="tree" id="tree" aria-hidden="true"><span class="tree-star">✦</span><svg viewBox="0 0 300 340" class="tree-lines"><defs><linearGradient id="gold"><stop stop-color="#9f7035"/><stop offset=".5" stop-color="#ffe3a0"/><stop offset="1" stop-color="#b68542"/></linearGradient></defs><path d="M151 32 C115 68 196 67 171 87 S73 119 117 138 S250 151 178 179 S36 210 98 234 S276 255 217 274 S84 302 41 307 M152 29 C164 82 114 88 112 119 S197 154 179 185 S92 234 103 267 S177 298 233 310" fill="none" stroke="url(#gold)" stroke-width="1.3"/><path d="M150 40 L33 310 Q150 336 267 310 Z" fill="none" stroke="#cf9f55" stroke-opacity=".13"/></svg><div id="tree-particles"></div><span class="tree-base"></span></div>
+ <p class="script-line">Թող այս երեկոն դառնա հիշողություն</p><h2 class="hero-title">Ամանորյա<br><span>կորպորատիվ երեկո</span></h2><p class="company" data-company></p><div class="hero-date"><span data-date></span><span class="date-dot">✦</span><span data-time></span></div><a class="button" href="#rsvp">Հաստատել մասնակցությունը <span aria-hidden="true">↗</span></a><p class="sample-note" id="sample-note">Օրինակային հրավիրատոմս · տվյալները ենթակա են փոփոխման</p><a class="scroll-cue" href="#welcome" aria-label="Անցնել հրավերի տեքստին">↓</a>
+ </section>
+ <section class="welcome section" id="welcome"><p class="eyebrow">ՄԵՐ ՏԱՐԻՆ։ ՄԵՐ ՊԱՏՄՈՒԹՅՈՒՆԸ։</p><h2>Լավագույն պահերը՝<br><em>միասին</em></h2><div class="ornament" aria-hidden="true">✦</div><p class="prose">Սիրելի՛ գործընկերներ և բարեկամներ,<br>մեր ձեռքբերումների հետևում մարդիկ են, իսկ ամենաջերմ հիշողությունները ստեղծվում են միասին։ Հրավիրում ենք ձեզ ամփոփելու անցնող տարին, բարձրացնելու բաժակները և նոր երազանքներով դիմավորելու գալիքը։</p><p class="closing-line">Մի երեկո՝ մեր բոլորի համար։</p></section>
+ <section class="details section" id="details"><p class="eyebrow">ՊԱՀՊԱՆԵՔ ԱՅՍ ՕՐԸ</p><h2>Հանդիպման վայրը</h2><div class="detail-grid"><div><span class="detail-number" id="day-number"></span><span data-date></span><p>Սկիզբը՝ <span data-time></span></p></div><span class="detail-divider" aria-hidden="true"></span><div><span class="line-icon" aria-hidden="true">⌖</span><h3 id="venue"></h3><p id="address"></p><a class="text-link" id="map-link" target="_blank" rel="noopener noreferrer" hidden>Տեսնել քարտեզի վրա ↗</a></div></div></section>
+ <section class="section program"><p class="eyebrow">ԱՄԵՆ ՊԱՀԸ՝ ՀԱՏՈՒԿ</p><h2>Երեկոյի ծրագիրը</h2><ol class="timeline"><li><time>18:00</time><div><h3>Հյուրերի դիմավորում</h3><p>Ջերմ հանդիպումներ և առաջին կենացը</p></div></li><li><time>18:30</time><div><h3>Տոնական ընթրիք</h3><p>Համեր, զրույցներ և գեղեցիկ պահեր</p></div></li><li><time>19:30</time><div><h3>Խաղեր և անակնկալներ</h3><p>Մի փոքր կախարդանք՝ յուրաքանչյուրի համար</p></div></li><li><time>20:30</time><div><h3>Երաժշտություն և պարեր</h3><p>Երեկոյի ամենավառ ռիթմերը</p></div></li><li><time>22:00</time><div><h3>Տոնական ավարտ</h3><p>Նոր հիշողություններով՝ դեպի նոր տարի</p></div></li></ol></section>
+ <section class="section dress"><p class="eyebrow">ԵՐԵԿՈՅԻ ՏՐԱՄԱԴՐՈՒԹՅՈՒՆԸ</p><h2>Տոնական նրբագեղություն</h2><p class="muted">Ձեր անհատական ոճը՝ մեր տոնական գույներով։</p><div class="swatches"><div><i style="--swatch:#75263d"></i><span>Բորդո</span></div><div><i class="gold-swatch" style="--swatch:#cda65f"></i><span>Ոսկեգույն</span></div><div><i style="--swatch:#213e33"></i><span>Մուգ կանաչ</span></div><div><i style="--swatch:#171719"></i><span>Սև</span></div></div></section>
+ <section class="section countdown-section"><p class="eyebrow">ՍՊԱՍՈՒՄ ԵՆՔ ՄԵՐ ՀԱՆԴԻՊՄԱՆԸ</p><h2>Տոնին մնացել է</h2><div class="countdown" id="countdown" role="timer" aria-label="Մինչև միջոցառումը մնացած ժամանակը"><div><strong id="days">00</strong><span>օր</span></div><b>:</b><div><strong id="hours">00</strong><span>ժամ</span></div><b>:</b><div><strong id="minutes">00</strong><span>րոպե</span></div><b>:</b><div><strong id="seconds">00</strong><span>վայրկյան</span></div></div><p id="countdown-message" hidden></p></section>
+ <section class="section rsvp" id="rsvp"><div class="rsvp-heading"><p class="eyebrow">ՁԵՐ ՏԵՂԸ ՍՊԱՍՈՒՄ Է ՁԵԶ</p><h2>Կլինե՞ք մեզ հետ</h2><p class="muted">Խնդրում ենք հաստատել ձեր մասնակցությունը։</p></div><form id="rsvp-form"><p class="demo-notice" id="demo-notice">Ցուցադրական ձև․ տվյալները չեն ուղարկվում և չեն պահպանվում։</p><label for="full-name">Անուն, ազգանուն <span aria-hidden="true">*</span></label><input id="full-name" name="fullName" autocomplete="name" placeholder="Ձեր անունը և ազգանունը" required minlength="3" maxlength="120"><fieldset><legend>Մասնակցություն <span aria-hidden="true">*</span></legend><div class="attendance-options"><label><input type="radio" name="attendance" value="yes" required checked><span>Մասնակցելու եմ</span></label><label><input type="radio" name="attendance" value="no"><span>Չեմ կարող մասնակցել</span></label></div></fieldset><div id="guests-field"><label for="guests">Հյուրերի քանակը՝ ներառյալ ձեզ <span aria-hidden="true">*</span></label><input type="number" id="guests" name="guests" min="1" max="20" step="1" value="1" required></div><label for="comment">Մեկնաբանություն <span class="optional">/ ոչ պարտադիր</span></label><textarea id="comment" name="comment" rows="3" maxlength="1000" placeholder="Ձեր ցանկությունը կամ փոքրիկ հաղորդագրությունը…"></textarea><button type="submit" class="button" id="submit-rsvp">Ստուգել պատասխանը <span aria-hidden="true">↗</span></button><p id="form-status" role="status" aria-live="polite" tabindex="-1"></p></form></section>
+ <footer><div class="ornament" aria-hidden="true">✦</div><p>Սիրով սպասում ենք ձեզ</p><h2 data-company></h2><a href="#home" class="footer-brand">Uinvite <span>պահեր, որոնք դառնում են հիշողություն</span></a></footer>
+</main>
+<button class="music-button" id="music-toggle" aria-label="Միացնել երաժշտությունը" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17V5l11-2v12M9 8l11-2"/><ellipse cx="6" cy="17" rx="3" ry="2.5"/><ellipse cx="17" cy="15" rx="3" ry="2.5"/></svg><span id="music-label">Երաժշտություն</span></button><span class="sr-only" id="audio-status" role="status"></span><audio id="music" loop preload="none"></audio>
+<noscript><p class="noscript">Հրավիրատոմսը բացելու համար խնդրում ենք միացնել JavaScript-ը։</p></noscript>
+</body></html>
