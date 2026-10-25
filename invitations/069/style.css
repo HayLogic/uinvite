@@ -45,7 +45,7 @@ html{scroll-behavior:smooth;scroll-padding-top:20px}
 .invitation-section{position:relative;isolation:isolate;overflow:hidden;text-align:center;background:#e7e8d9;border:1px solid #f7f5e377;border-radius:24px;padding:50px 24px;margin-bottom:20px;box-shadow:0 3px 12px #45472b25}
 .small-caps{font-size:10px;line-height:1.8;letter-spacing:2px;color:#565b47;margin:0 0 10px}
 .sample-note{font-family:Georgia,serif;font-size:9px;letter-spacing:.6px;color:#747861;line-height:1.6;margin:0 auto 10px;max-width:290px}
-.gold-stars{position:absolute;width:120px;height:190px;background:url('assets/gold-stars.svg') center/contain no-repeat;z-index:-1;pointer-events:none;opacity:.75}
+
 .stars-hero{top:40px;right:5px}
 .party-hero{padding-top:24px;padding-bottom:26px}
 .christmas-tree{display:block;max-width:100%;width:310px;height:390px;object-fit:contain;margin:0 auto 8px;filter:drop-shadow(0 12px 9px #6b6c4920)}
@@ -169,3 +169,6 @@ html[lang=hy] #rsvp-form input:not([type=radio]),html[lang=hy] #rsvp-form textar
 
 .dress-colors li>span:last-child{overflow-wrap:normal;word-break:normal;text-wrap:balance}
 @media(max-width:767px){.dress-colors li>span:last-child{font-size:8px}}
+
+/* Continuous snowfall replaces the stationary golden star decorations. */
+.snowfall{position:fixed;inset:0;display:block;width:100%;height:100%;z-index:10;pointer-events:none;user-select:none}

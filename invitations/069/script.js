@@ -2,6 +2,7 @@
 // 069. Ընկերության անունն ու ծրագիրն օրինակային են, օրը, ժամը և վայրն օգտատիրոջ տվյալներն են։
 const CONFIG = Object.freeze({
   invitationNumber: '069',
+  snowEnabled: true,
   companyName: 'Codu',
   eventTitle: 'Ամանորյա կորպորատիվ երեկույթ',
   companyArtwork: 'assets/botanical-codu.png',
@@ -215,3 +216,62 @@ form.addEventListener('submit',async event=>{
   }
 });
 $('#full-name').addEventListener('input',event=>event.target.setCustomValidity(''));
+
+
+// Viewport-sized snowfall: no DOM particle swarm, no input interception.
+function initializeSnowfall() {
+  const canvas = $('#snowfall');
+  const context = canvas.getContext('2d');
+  if (!CONFIG.snowEnabled || !context) { canvas.hidden = true; return; }
+  const preference = matchMedia('(prefers-reduced-motion: reduce)');
+  let flakes = [], width = 0, height = 0, frame = 0, previousTime = 0;
+  let seed = 69026;
+  const random = () => { seed = seed * 16807 % 2147483647; return (seed-1)/2147483646; };
+  function resize() {
+    width = innerWidth; height = innerHeight;
+    const ratio = Math.min(devicePixelRatio || 1, 1.5);
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    context.setTransform(ratio,0,0,ratio,0,0);
+    const count = Math.min(115,Math.max(48,Math.round(width*height/11000)));
+    flakes = Array.from({length:count},()=>({x:random()*width,y:random()*height,radius:1.2+random()*2.5,speed:18+random()*31,drift:4+random()*10,phase:random()*Math.PI*2,opacity:.45+random()*.5}));
+    draw(0);
+  }
+  function draw(elapsed) {
+    context.clearRect(0,0,width,height);
+    context.shadowColor='rgba(75,89,60,.12)'; context.shadowBlur=2;
+    for (const flake of flakes) {
+      if (elapsed>0) {
+        flake.phase += elapsed * .55;
+        flake.y += elapsed * flake.speed;
+        flake.x += Math.sin(flake.phase)*flake.drift*elapsed;
+        if (flake.y>height+6) { flake.y=-6; flake.x=random()*width; }
+        if (flake.x>width+6) flake.x=-6;
+        if (flake.x< -6) flake.x=width+6;
+      }
+      context.fillStyle=`rgba(255,255,249,${flake.opacity})`;
+      context.beginPath();context.arc(flake.x,flake.y,flake.radius,0,Math.PI*2);context.fill();
+    }
+  }
+  function tick(time) {
+    frame=0;
+    if (document.hidden || preference.matches) return;
+    if (!previousTime) previousTime=time;
+    if (time-previousTime>=33) {
+      draw(Math.min((time-previousTime)/1000,.1));
+      previousTime=time;
+    }
+    frame=requestAnimationFrame(tick);
+  }
+  function resume() {
+    if (frame) cancelAnimationFrame(frame);
+    frame=0;previousTime=0;
+    draw(0);
+    if (!document.hidden && !preference.matches) frame=requestAnimationFrame(tick);
+  }
+  window.addEventListener('resize',resize,{passive:true});
+  document.addEventListener('visibilitychange',resume);
+  preference.addEventListener('change',resume);
+  resize();resume();
+}
+initializeSnowfall();
