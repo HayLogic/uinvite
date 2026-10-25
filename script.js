@@ -199,7 +199,7 @@ const audio = $('#music');
 const musicButton = $('#music-toggle');
 let musicMissing = !CONFIG.musicUrl;
 if(CONFIG.musicUrl) audio.src = CONFIG.musicUrl;
-function syncMusic() { const playing = !audio.paused && !audio.ended && !musicMissing; musicButton.setAttribute('aria-pressed',String(playing)); musicButton.setAttribute('aria-label',musicMissing ? 'Երաժշտության ֆայլը հասանելի չէ' : playing ? 'Դադարեցնել երաժշտությունը' : 'Միացնել երաժշտությունը'); $('#music-label').textContent = musicMissing ? 'Երաժշտություն չկա' : playing ? 'Դադարեցնել' : 'Երաժշտություն'; }
+function syncMusic() { const playing = !audio.paused && !audio.ended && !musicMissing; musicButton.setAttribute('aria-pressed',String(playing)); musicButton.setAttribute('aria-label',musicMissing ? 'Երաժշտության ֆայլը հասանելի չէ' : playing ? 'Դադարեցնել երաժշտությունը' : 'Միացնել երաժշտությունը'); }
 async function playMusic() { if(musicMissing) return; try { await audio.play(); } catch { $('#audio-status').textContent = musicMissing ? 'Երաժշտության ֆայլը հասանելի չէ։' : 'Երաժշտությունը չի միացել։ Կարող եք կրկին փորձել կոճակով։'; } syncMusic(); }
 ['play','pause','ended'].forEach(event => audio.addEventListener(event,syncMusic));
 audio.addEventListener('error',() => { musicMissing=true; syncMusic(); $('#audio-status').textContent='Երաժշտության ֆայլը հասանելի չէ։'; });

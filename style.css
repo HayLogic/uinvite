@@ -256,3 +256,10 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .gift-art img{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 20px #15040b44)}
 .gifts>.ornament{margin-top:0;margin-bottom:0}
 @media(min-width:768px){.gifts{padding-top:75px}.gift-art{width:470px}}
+
+/* Icon-only audio control at every viewport, with state mirrored by aria-pressed. */
+.music-button,body.intro-active .music-button{width:46px;height:46px;min-height:46px;border-radius:50%;padding:12px;justify-content:center;gap:0}
+.music-button .music-play{display:block;fill:currentColor;stroke:none}
+.music-button .music-pause{display:none;stroke-width:3;stroke-linecap:round}
+.music-button[aria-pressed=true] .music-play{display:none}
+.music-button[aria-pressed=true] .music-pause{display:block}
