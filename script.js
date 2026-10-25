@@ -1,5 +1,5 @@
 'use strict';
-// Միջոցառման տվյալներ. լուսանկարը, հասցեն և RSVP endpoint-ը դեռ պետք է լրացնել։
+// Միջոցառման տվյալներ. հասցեն և RSVP endpoint-ը դեռ պետք է լրացնել։
 const CONFIG = Object.freeze({
   companyName: 'HayLogic Line Day',
   eventTitle: 'Ամանորյա կորպորատիվ երեկո',
@@ -8,7 +8,6 @@ const CONFIG = Object.freeze({
   giftsImage: 'assets/christmas-gifts.png',
   eventDate: '2026-12-18T18:00:00+04:00', // Հայաստանի ժամային գոտի. ժամը նույնպես այստեղ է։
   venueName: 'Ադանա Կոմպլեքս',
-  venueImage: '', // Add the supplied restaurant photo here, e.g. assets/adana-complex.jpg,
   address: 'Միջոցառման հասցեն կճշտվի',
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Adana+Complex+Armenia',
   musicUrl: 'assets/music.mp3',
@@ -65,19 +64,7 @@ function renderEventCalendar() {
 renderEventCalendar();
 $('#venue').textContent = CONFIG.venueName;
 $('#address').textContent = CONFIG.address;
-const venueImage = $('#venue-image');
-if (CONFIG.venueImage) {
-  venueImage.alt = `${CONFIG.venueName}՝ ռեստորանի լուսանկարը`;
-  venueImage.addEventListener('load', () => {
-    venueImage.hidden = false;
-    $('#venue-photo-fallback').hidden = true;
-  });
-  venueImage.addEventListener('error', () => {
-    venueImage.hidden = true;
-    $('#venue-photo-fallback').hidden = false;
-  });
-  venueImage.src = CONFIG.venueImage;
-}
+
 document.title = `${CONFIG.eventTitle} · ${CONFIG.companyName}`;
 $('.hero-title').textContent = CONFIG.eventTitle;
 $('#new-year-greeting').textContent = CONFIG.newYearGreeting;
