@@ -143,3 +143,27 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .calendar-note{font-size:11px;color:var(--muted);margin:30px auto 0;line-height:2;max-width:440px}
 .calendar-key{display:inline-block;width:5px;height:5px;background:var(--gold);transform:rotate(45deg);margin-right:6px;margin-left:5px;vertical-align:middle}
 @media(min-width:768px){.event-calendar td{height:70px;font-size:21px}.event-calendar th{font-size:12px}.calendar-tree{width:60px;height:69px}.event-calendar caption{font-size:26px}}
+
+/* Full-bleed artwork created specifically for the invitation text section. */
+.welcome{
+ min-height:620px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ background-color:#240a12;
+ background-image:linear-gradient(90deg,#1c060b55,#21070f99 28%,#21070f99 72%,#1c060b55),linear-gradient(0deg,#210a1299,transparent 20%,transparent 80%,#210a1277),url('assets/welcome-background.png');
+ background-size:cover;
+ background-position:center;
+ background-repeat:no-repeat;
+ text-shadow:0 2px 12px #100005aa;
+}
+.welcome>.eyebrow{margin-bottom:22px}
+.welcome>h2{margin-bottom:0}
+.welcome>.ornament{flex-shrink:0}
+.welcome .prose{color:#f0e3d7;max-width:640px}
+.welcome .closing-line{margin-bottom:0;color:#e4c47f}
+@media(min-width:768px){.welcome{min-height:680px;padding-top:85px;padding-bottom:85px}}
+@media(max-width:767px){
+ .welcome{background-image:linear-gradient(90deg,#1c060b44,#21070f88 25%,#21070f88 75%,#1c060b44),linear-gradient(0deg,#210a1266,transparent 20%,transparent 80%,#210a1255),url('assets/welcome-background-mobile.png')}
+}
