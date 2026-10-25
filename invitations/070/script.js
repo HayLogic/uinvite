@@ -184,3 +184,53 @@ function initializeSnow(){
   window.addEventListener('resize',resize,{passive:true});document.addEventListener('visibilitychange',resume);document.addEventListener('invitation:opened',resume);preference.addEventListener('change',resume);resize();resume();
 }
 initializeSnow();
+
+
+// A winding botanical gold ribbon is drawn/retracted by the scroll position.
+function initializeProgramRibbon(){
+  const container=$('#program-flow'),svg=$('#program-art'),path=$('#program-curve');
+  const rows=CONFIG.program.length;
+  if(!rows){container.hidden=true;return;}
+  const viewHeight=rows*200;
+  svg.setAttribute('viewBox',`0 0 600 ${viewHeight}`);
+  let curve='M300 0';
+  for(let i=0;i<rows;i++){
+    const y=i*200,x=i%2===0 ? 80 : 520;
+    curve+=` C300 ${y+35} ${x} ${y+55} ${x} ${y+100} C${x} ${y+155} 300 ${y+165} 300 ${y+200}`;
+  }
+  path.setAttribute('d',curve);
+  const length=path.getTotalLength();
+  const strokes=container.querySelectorAll('.program-line');
+  strokes.forEach(stroke=>{stroke.style.strokeDasharray=length;});
+  const namespace='http://www.w3.org/2000/svg',decorations=[];
+  const count=Math.ceil(length/80);
+  for(let i=0;i<count;i++){
+    const fraction=(i+.5)/count;
+    const point=path.getPointAtLength(length*fraction);
+    const next=path.getPointAtLength(Math.min(length,length*fraction+2));
+    const angle=Math.atan2(next.y-point.y,next.x-point.x)*180/Math.PI-90;
+    const group=document.createElementNS(namespace,'g');
+    group.setAttribute('transform',`translate(${point.x} ${point.y}) rotate(${angle})`);
+    const image=document.createElementNS(namespace,'image');
+    image.setAttribute('href','assets/gold-botanical-sprig.png');
+    image.setAttribute('x','-29');image.setAttribute('y','-46');image.setAttribute('width','58');image.setAttribute('height','92');
+    group.append(image);$('#program-botanical').append(group);decorations.push({element:group,fraction});
+  }
+  const preference=matchMedia('(prefers-reduced-motion: reduce)');
+  let pending=0;
+  function update(){
+    pending=0;if($('#invitation').hidden)return;
+    const rect=container.getBoundingClientRect();
+    const progress=preference.matches ? 1 : Math.max(0,Math.min(1,(innerHeight*.7-rect.top)/rect.height));
+    strokes.forEach(stroke=>{stroke.style.strokeDashoffset=length*(1-progress);});
+    decorations.forEach(item=>{item.element.setAttribute('opacity',String(Math.max(0,Math.min(1,(progress-item.fraction)*45))));});
+    const point=path.getPointAtLength(length*progress);
+    $('#program-tip').setAttribute('transform',`translate(${point.x} ${point.y})`);
+    $('#program-tip').style.opacity=progress>0&&progress<1 ? '1' : '0';
+    container.dataset.progress=progress.toFixed(4);
+  }
+  function schedule(){if(!pending)pending=requestAnimationFrame(update);}
+  window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule,{passive:true});
+  document.addEventListener('invitation:opened',schedule);preference.addEventListener('change',schedule);schedule();
+}
+initializeProgramRibbon();
