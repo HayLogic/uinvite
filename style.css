@@ -222,3 +222,28 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 5%,transparent 24%,transparent 76%,#000 95%,#000 100%);
  mask-image:linear-gradient(90deg,#000 0%,#000 5%,transparent 24%,transparent 76%,#000 95%,#000 100%)}
 }
+
+/* Three tactile fabric swatches inside a restrained gold stationery frame. */
+.dress{padding:65px 16px;background:radial-gradient(ellipse at center,#6b263b33,transparent 70%)}
+.dress-panel{position:relative;max-width:940px;margin:0 auto;padding:48px 17px 35px;border:1px solid #d5b57740;background:radial-gradient(ellipse at 50% 45%,#722a3e22,transparent 65%),linear-gradient(120deg,#1c071122,#15050b55);box-shadow:inset 0 0 0 6px #310c1822,0 22px 70px #13030a22;isolation:isolate}
+.dress-panel::before{content:'';position:absolute;inset:7px;border:1px solid #d5b57713;pointer-events:none;z-index:-1}
+.dress-corner{position:absolute;width:24px;height:24px;border-color:#d2ad6b;border-style:solid;pointer-events:none}
+.dress-corner-top{left:-1px;top:-1px;border-width:1px 0 0 1px}
+.dress-corner-bottom{right:-1px;bottom:-1px;border-width:0 1px 1px 0}
+.dress-panel>.eyebrow{font-size:10px;letter-spacing:4px;margin-bottom:16px}
+.dress-panel h2{font-size:clamp(27px,4vw,43px);line-height:1.6;margin-bottom:0;text-wrap:balance}
+.dress-panel h2 em{display:block;color:#e1bf7e}
+.dress-panel>.ornament{margin:22px auto}
+.dress-description{font-size:12px;line-height:2.1;color:#cbb6ae;max-width:530px;margin:0 auto}
+.dress-palette{list-style:none;padding:0;margin:38px auto 28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:540px;align-items:start}
+.dress-palette li{display:flex;flex-direction:column;align-items:center;min-width:0}
+.fabric-swatch{position:relative;display:block;width:clamp(62px,17vw,104px);aspect-ratio:1;border-radius:50%;border:4px solid #2e0e1a;outline:1px solid #b78d4b99;box-shadow:0 8px 20px #10020766,inset 0 2px 8px #fff2;transition:transform .4s ease,box-shadow .4s ease}
+.fabric-swatch::after{content:'';position:absolute;inset:-8px;border:1px solid #d8b57320;border-radius:50%;pointer-events:none}
+.fabric-burgundy{background:radial-gradient(ellipse at 30% 20%,#c0697855,transparent 55%),linear-gradient(125deg,#360614,#8b2946 30%,#59102b 52%,#932f4b 70%,#330a19)}
+.fabric-gold{background:linear-gradient(130deg,#78501f,#d8b26a 20%,#fff0b8 36%,#bd8e42 52%,#f0d58d 72%,#946b2e);box-shadow:0 8px 30px #d2a64e22,inset 0 2px 8px #fff6}
+.fabric-black{background:radial-gradient(ellipse at 30% 20%,#ffffff12,transparent 60%),linear-gradient(125deg,#050507,#2d292d 30%,#0a090d 52%,#29252b 72%,#050508)}
+.fabric-name{font-size:14px;color:#e5c78e;line-height:1.8;margin-top:21px}
+.fabric-caption{font-size:9px;line-height:1.7;color:#ad9490;max-width:100px;margin-top:5px;text-wrap:balance}
+.dress-footnote{font-size:10px;color:#bda68f;line-height:1.9;margin:0 auto;max-width:400px}
+@media(hover:hover){.dress-palette li:hover .fabric-swatch{transform:translateY(-5px);box-shadow:0 12px 26px #d3ad4c22}}
+@media(min-width:768px){.dress{padding:85px 35px}.dress-panel{padding:60px 55px 45px}.dress-palette{margin-top:45px;margin-bottom:35px;gap:55px}.fabric-swatch{width:112px}.dress-description{font-size:14px}.fabric-name{font-size:18px;margin-top:25px}.fabric-caption{font-size:10px;max-width:140px}.dress-palette li:nth-child(2){transform:translateY(-8px)}.dress-panel h2 em{display:inline}.dress-footnote{font-size:12px}}
