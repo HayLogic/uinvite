@@ -119,4 +119,8 @@ body.intro-active .music-button span{display:none}
 .pointer-light.is-visible{opacity:1}
 .pointer-light::before{content:'';position:absolute;left:-45px;top:-45px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,#fffbe9 0 2%,#ffeab9cc 4%,#ffc45b99 10%,#f0a12d33 30%,#eaa12b0d 52%,transparent 70%);filter:drop-shadow(0 0 7px #ffc968)}
 .pointer-light::after{content:'';position:absolute;left:-12px;top:-17px;width:24px;height:34px;background:#fff2c2;clip-path:polygon(50% 0,57% 42%,100% 50%,57% 57%,50% 100%,43% 57%,0 50%,43% 42%);filter:drop-shadow(0 0 4px #ffe8a0)}
-@media(prefers-reduced-motion:reduce){.pointer-light{display:none}}
+@media(prefers-reduced-motion:reduce){.pointer-light{transition:none}}
+
+/* Hide the visual scrollbar without blocking wheel, touch, or keyboard scrolling. */
+html,body{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}

@@ -68,44 +68,33 @@ function initializeTree() {
   gc.fillStyle=gradient; gc.fillRect(0,0,64,64);
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let visible = false, frame = 0, lastFrame = 0;
-  const tip = {x:0, y:0, targetX:0, targetY:0};
-  const hero = $('#home');
+  // The cursor glow is independent of the fixed tree tip and remains visible.
   const pointerLight = document.createElement('span');
   pointerLight.className = 'pointer-light';
   pointerLight.setAttribute('aria-hidden', 'true');
   document.body.append(pointerLight);
-  function hidePointerLight() { pointerLight.classList.remove('is-visible'); }
-  function resetTip() { tip.targetX = 0; tip.targetY = 0; hidePointerLight(); }
-  hero.addEventListener('pointermove', event => {
-    if (motion.matches || !visible || document.body.classList.contains('intro-active')) return;
-    pointerLight.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+  let lightPosition = {x:window.innerWidth * .75, y:window.innerHeight * .35};
+  function positionLight() {
+    lightPosition.x = Math.max(24, Math.min(window.innerWidth - 24, lightPosition.x));
+    lightPosition.y = Math.max(24, Math.min(window.innerHeight - 24, lightPosition.y));
+    pointerLight.style.transform = `translate3d(${lightPosition.x}px, ${lightPosition.y}px, 0)`;
+  }
+  document.addEventListener('invitation:opened', () => {
+    positionLight();
     pointerLight.classList.add('is-visible');
-    const bounds = canvas.getBoundingClientRect();
-    // Work in visual CSS coordinates, independently of canvas pixel density.
-    const horizontal = (event.clientX - (bounds.left + bounds.width / 2)) / (bounds.width / 2);
-    const vertical = (event.clientY - (bounds.top + bounds.height * 26 / height)) / (bounds.height / 2);
-    tip.targetX = Math.max(-1, Math.min(1, horizontal)) * 32;
-    tip.targetY = Math.max(-1, Math.min(1, vertical)) * 12;
+  }, {once:true});
+  document.addEventListener('pointermove', event => {
+    if (motion.matches || document.body.classList.contains('intro-active')) return;
+    lightPosition = {x:event.clientX, y:event.clientY};
+    positionLight();
   }, {passive:true});
-  hero.addEventListener('pointerleave', resetTip);
-  hero.addEventListener('pointercancel', resetTip);
-  hero.addEventListener('pointerup', event => { if (event.pointerType !== 'mouse') resetTip(); });
+  window.addEventListener('resize', positionLight, {passive:true});
   function draw(time) {
-    if (motion.matches) {
-      tip.x = tip.y = tip.targetX = tip.targetY = 0;
-      hidePointerLight();
-    } else {
-      const easing = 1 - Math.exp(-Math.min(100, Math.max(0, time - lastFrame)) / 150);
-      tip.x += (tip.targetX - tip.x) * easing;
-      tip.y += (tip.targetY - tip.y) * easing;
-    }
     context.clearRect(0,0,width,height);
     context.globalCompositeOperation='lighter';
     for (const p of particles) {
-      // Only the uppermost dust bends with the light; the tree stays rooted.
-      const influence = Math.max(0, 1 - (p.y - 26) / 100) ** 2;
-      const x = p.x + tip.x * influence;
-      const y = p.y + tip.y * influence;
+      const x = p.x;
+      const y = p.y;
       const wave = .5 + .5 * Math.sin(time * .001 * p.speed + p.phase);
       const brightness = motion.matches ? .67 : .15 + .85 * wave * wave;
       context.globalAlpha = p.alpha * brightness;
@@ -120,7 +109,6 @@ function initializeTree() {
       }
     }
     context.save();
-    context.translate(tip.x, tip.y);
     context.globalAlpha = .9;
     const pulse = motion.matches ? 1 : 1 + .12 * Math.sin(time * .002);
     context.drawImage(glow,165 - 35 * pulse,26 - 35 * pulse,70 * pulse,70 * pulse);
@@ -144,11 +132,10 @@ function initializeTree() {
     draw(motion.matches ? 0 : performance.now());
     if (visible && !document.hidden && !motion.matches) frame=requestAnimationFrame(tick);
   }
-  const observer=new IntersectionObserver(entries=>{ visible=entries[0].isIntersecting; if (!visible) resetTip(); resume(); });
+  const observer=new IntersectionObserver(entries=>{ visible=entries[0].isIntersecting; resume(); });
   observer.observe(canvas);
-  document.addEventListener('visibilitychange',() => { if (document.hidden) resetTip(); resume(); });
+  document.addEventListener('visibilitychange',resume);
   motion.addEventListener('change',resume);
-  window.addEventListener('scroll', hidePointerLight, {passive:true});
   draw(0);
 }
 initializeTree();
@@ -185,6 +172,7 @@ $('#open-invite').addEventListener('click', () => {
     invitation.inert = false;
     invitation.removeAttribute('aria-hidden');
     document.body.classList.remove('intro-active');
+    document.dispatchEvent(new Event('invitation:opened'));
     const heading = $('.hero-title');
     heading.tabIndex = -1;
     heading.focus({preventScroll:true});
