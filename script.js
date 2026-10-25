@@ -68,33 +68,63 @@ function initializeTree() {
   gc.fillStyle=gradient; gc.fillRect(0,0,64,64);
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let visible = false, frame = 0, lastFrame = 0;
+  const tip = {x:0, y:0, targetX:0, targetY:0};
+  const hero = $('#home');
+  function resetTip() { tip.targetX = 0; tip.targetY = 0; }
+  hero.addEventListener('pointermove', event => {
+    if (motion.matches || !visible || document.body.classList.contains('intro-active')) return;
+    const bounds = canvas.getBoundingClientRect();
+    // Work in visual CSS coordinates, independently of canvas pixel density.
+    const horizontal = (event.clientX - (bounds.left + bounds.width / 2)) / (bounds.width / 2);
+    const vertical = (event.clientY - (bounds.top + bounds.height * 26 / height)) / (bounds.height / 2);
+    tip.targetX = Math.max(-1, Math.min(1, horizontal)) * 32;
+    tip.targetY = Math.max(-1, Math.min(1, vertical)) * 12;
+  }, {passive:true});
+  hero.addEventListener('pointerleave', resetTip);
+  hero.addEventListener('pointercancel', resetTip);
+  hero.addEventListener('pointerup', event => { if (event.pointerType !== 'mouse') resetTip(); });
   function draw(time) {
+    if (motion.matches) {
+      tip.x = tip.y = tip.targetX = tip.targetY = 0;
+    } else {
+      const easing = 1 - Math.exp(-Math.min(100, Math.max(0, time - lastFrame)) / 150);
+      tip.x += (tip.targetX - tip.x) * easing;
+      tip.y += (tip.targetY - tip.y) * easing;
+    }
     context.clearRect(0,0,width,height);
     context.globalCompositeOperation='lighter';
     for (const p of particles) {
+      // Only the uppermost dust bends with the light; the tree stays rooted.
+      const influence = Math.max(0, 1 - (p.y - 26) / 100) ** 2;
+      const x = p.x + tip.x * influence;
+      const y = p.y + tip.y * influence;
       const wave = .5 + .5 * Math.sin(time * .001 * p.speed + p.phase);
       const brightness = motion.matches ? .67 : .15 + .85 * wave * wave;
       context.globalAlpha = p.alpha * brightness;
       const radius = p.size * (p.flare ? 9 : 3.8);
-      context.drawImage(glow,p.x-radius,p.y-radius,radius*2,radius*2);
+      context.drawImage(glow,x-radius,y-radius,radius*2,radius*2);
       context.fillStyle='#ffe6a5';
-      context.fillRect(p.x,p.y,p.size*.65,p.size*.65);
+      context.fillRect(x,y,p.size*.65,p.size*.65);
       if (p.flare && brightness > .65) {
         const arm = 3 + brightness * 3;
         context.strokeStyle='#fff1be'; context.lineWidth=.55;
-        context.beginPath();context.moveTo(p.x-arm,p.y);context.lineTo(p.x+arm,p.y);context.moveTo(p.x,p.y-arm);context.lineTo(p.x,p.y+arm);context.stroke();
+        context.beginPath();context.moveTo(x-arm,y);context.lineTo(x+arm,y);context.moveTo(x,y-arm);context.lineTo(x,y+arm);context.stroke();
       }
     }
+    context.save();
+    context.translate(tip.x, tip.y);
     context.globalAlpha = .9;
     context.drawImage(glow,149,5,32,42);
     context.globalAlpha = 1;
     context.fillStyle='#fff4c4';
     context.beginPath();context.moveTo(165,14);context.lineTo(166.3,24);context.lineTo(171,26);context.lineTo(166.3,28);context.lineTo(165,38);context.lineTo(163.7,28);context.lineTo(159,26);context.lineTo(163.7,24);context.closePath();context.fill();
+    context.restore();
     context.globalCompositeOperation='source-over';
   }
   function tick(time) {
     frame = 0;
-    if (!visible || document.hidden || motion.matches) return;
+    if (!visible || document.hidden) return;
+    if (motion.matches) { draw(0); return; }
     if (time-lastFrame >= 33) { draw(time); lastFrame=time; }
     frame=requestAnimationFrame(tick);
   }
@@ -106,7 +136,7 @@ function initializeTree() {
   }
   const observer=new IntersectionObserver(entries=>{ visible=entries[0].isIntersecting; resume(); });
   observer.observe(canvas);
-  document.addEventListener('visibilitychange',resume);
+  document.addEventListener('visibilitychange',() => { if (document.hidden) resetTip(); resume(); });
   motion.addEventListener('change',resume);
   draw(0);
 }
