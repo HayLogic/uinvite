@@ -66,3 +66,23 @@ footer{padding:35px 22px 65px;text-align:center;background:linear-gradient(#fbfb
 .program-flow .program h3{font-size:14px;line-height:1.9;margin-bottom:8px}
 .program-flow .program p{font-size:10px;line-height:1.9}
 @media(min-width:768px){.program-flow .program li{height:210px}.program-flow .program time{font-size:34px}.program-flow .program h3{font-size:18px}.program-flow .program p{font-size:12px}}
+
+/* Selected calendar date becomes a gold bauble with its own cap and hanging thread. */
+.calendar .event-date time{min-width:43px;min-height:43px;border:1px solid #c3a15b;background:radial-gradient(circle at 30% 23%,#fff7dc 0%,#edd99f 32%,#d6b66b 67%,#b89246 100%);box-shadow:inset -3px -4px 7px #9e7c2b22,inset 2px 3px 4px #fff8daaa,0 3px 8px #ad8b4822;color:#8c6425;text-shadow:0 1px #fff4c099}
+.calendar .event-date time::before{content:'';position:absolute;width:11px;height:7px;left:calc(50% - 5.5px);top:-6px;border-radius:2px 2px 0 0;border:1px solid #be9a53;background:repeating-linear-gradient(90deg,#c6a25e 0 2px,#f3dd9e 2px 4px);z-index:-1}
+.calendar .event-date time::after{content:'';position:absolute;width:1px;height:14px;background:#c6a561;left:calc(50% - .5px);top:-20px;opacity:.7}
+/* A final thank-you scene, composed from separate winter tree and ornament assets. */
+.thank-you{min-height:700px;display:flex;align-items:center;justify-content:center;padding-top:85px;padding-bottom:65px;background:#f5f6f3 url('assets/winter-background.png') center/cover no-repeat;isolation:isolate}
+.thank-you::before{content:'';position:absolute;inset:0;left:0;width:auto;height:auto;background:linear-gradient(90deg,#ffffffdf,#fffef7dd 60%,#ffffff66);z-index:-1;pointer-events:none}
+.thanks-tree{position:absolute;right:-70px;bottom:-45px;width:330px;height:480px;object-fit:contain;z-index:-1;opacity:.18;pointer-events:none}
+.thanks-ornament{position:absolute;left:-34px;top:-80px;width:145px;height:220px;object-fit:contain;z-index:-1;opacity:.7;pointer-events:none}
+.thanks-content{width:100%;max-width:550px;position:relative}
+.thanks-content>.eyebrow{font-size:8px;letter-spacing:1.1px;max-width:420px;margin:0 auto 18px}
+.thanks-content h2{font-size:clamp(27px,6vw,43px);font-style:italic;color:#b58e46;margin-bottom:16px;line-height:1.8}
+.thank-rule{display:block;width:75px;height:1px;background:linear-gradient(90deg,transparent,#bfa467,transparent);margin:20px auto 27px}
+.thank-message{font-size:12px;line-height:2.3;color:#858c7e;white-space:pre-line;margin:0 auto;max-width:500px}
+.thank-closing{font-size:13px;line-height:2;color:#b39a60;font-style:italic;margin:27px auto}
+.thanks-content>.thanks-signoff{font-size:8px;margin-top:30px;margin-bottom:10px}
+.thanks-content>.company-name{font-size:clamp(26px,5vw,38px)}
+@media(min-width:768px){.calendar .event-date time{min-width:49px;min-height:49px}.thank-message{font-size:14px;line-height:2.3}.thank-closing{font-size:15px}.thanks-content>.eyebrow{font-size:9px}}
+@media(min-width:1000px){.thank-you{min-height:760px;justify-content:flex-start;padding-left:10%;padding-right:45%}.thanks-content{min-width:0}.thanks-tree{right:-10px;bottom:-55px;width:52%;height:680px;opacity:.78}.thanks-ornament{left:2%;top:-100px;width:175px;height:270px}}

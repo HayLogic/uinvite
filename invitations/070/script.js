@@ -2,13 +2,14 @@
 // 070-ի ցուցադրական տվյալներ. փոխարինեք հաստատված տվյալներով հրապարակումից առաջ։
 const CONFIG = Object.freeze({
   invitationNumber: '070',
-  companyName: 'Ձեր ընկերությունը',
+  companyName: 'AMA ընկերություն',
   eventTitle: 'Ամանորյա կորպորատիվ երեկույթ',
   exampleData: true,
   eventDate: '2026-12-24T19:00:00+04:00', // Օրինակային օր և ժամ՝ Հայաստանի ժամային գոտով։
-  venueName: 'Ռեստորանի անունը',
+  venueName: 'Palermo Hall',
   address: 'Հասցեն կճշտվի',
   mapsUrl: '',
+  thankMessage: 'Սիրելի՛ գործընկերներ,\n\nՇնորհակալ ենք ձեր աշխատանքի, նվիրվածության և այն ջերմության համար, որով ամեն օր ստեղծում եք մեր ընկերության հաջողությունը։\n\nՄեր ձեռքբերումների հիմքում դուք եք՝ ձեր տաղանդը, ջանքերն ու թիմային ոգին։\n\nԹող այս տոնական երեկոն և գալիք 2027 թվականը լինեն նոր հնարավորությունների ու միասին կերտած գեղեցիկ պահերի սկիզբ։',
   inviteMessage: 'Սիրելի՛ գործընկերներ, հրավիրում ենք ձեզ միասին ամփոփելու տարին, կիսվելու մեր ձեռքբերումներով և տոնական տրամադրությամբ դիմավորելու նոր սկիզբը։ Թող այս երեկոն դառնա ջերմ հանդիպումների ու գեղեցիկ հիշողությունների առիթ։',
   program: [
     {time:'19:00',title:'Հյուրերի դիմավորում',description:'Ջերմ հանդիպումներ և տոնական տրամադրություն'},
@@ -31,6 +32,7 @@ document.querySelectorAll('[data-company]').forEach(element=>{element.textConten
 document.title = `${CONFIG.companyName} · ${CONFIG.eventTitle} · ${CONFIG.invitationNumber}`;
 $('#example-note').hidden=!CONFIG.exampleData;
 $('#invite-copy').textContent=CONFIG.inviteMessage;
+$('#thank-message').textContent=CONFIG.thankMessage;
 $('#venue-name').textContent=CONFIG.venueName;
 $('#venue-address').textContent=CONFIG.address;
 function safeURL(value, relative=false) {
