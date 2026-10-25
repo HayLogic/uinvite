@@ -3,6 +3,7 @@
 const CONFIG = Object.freeze({
   invitationNumber: '069',
   snowEnabled: true,
+  musicUrl: 'assets/music.mp3',
   companyName: 'Codu',
   eventTitle: 'Ամանորյա կորպորատիվ երեկույթ',
   companyArtwork: 'assets/botanical-codu.png',
@@ -19,7 +20,6 @@ const CONFIG = Object.freeze({
   giftBudget: '',
   rsvpDeadline: '',
   rsvpEndpoint: '', // Առանց endpoint-ի ձևը ցուցադրական է։ Գաղտնի բանալիներ չտեղադրել։
-  programNote: 'Ծրագիրը նախնական է․ ժամերը կարող են ճշտվել։',
   program: [
     {time:'17:00',title:'Հյուրերի դիմավորում',description:'Ջերմ հանդիպումներ և տոնական տրամադրություն'},
     {time:'17:30',title:'Տոնական ընթրիք',description:'Տարվա ձեռքբերումների ամփոփում և կենացներ'},
@@ -40,13 +40,11 @@ const cover = $('#cover');
 const inside = $('#inside');
 const scene = $('#scene');
 const openButton = $('#open-envelope');
-const closeButton = $('#close-envelope');
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 document.querySelectorAll('[data-company]').forEach(element => { element.textContent = CONFIG.companyName; });
 cover.querySelector('.invitation-from').textContent = CONFIG.coverHeading;
 cover.querySelector('.invitation-from').style.whiteSpace = 'pre-line';
 $('#open-caption').textContent = CONFIG.openCaption;
-$('#sample-note').hidden = !CONFIG.exampleData;
 $('#company-botanical').src = CONFIG.companyArtwork;
 $('#company-botanical').alt = `${CONFIG.companyName}՝ եղևնու ճյուղերով և ոսկեգույն լույսերով գրված ընկերության անունը`;
 $('#thank-message').textContent = CONFIG.thankMessage.replaceAll('{company}', CONFIG.companyName);
@@ -106,7 +104,6 @@ CONFIG.program.forEach(item=>{
   text.append(title,description);entry.append(time,text);program.append(entry);
 });
 $('#day-program').append(program);
-$('#program-note').textContent = CONFIG.programNote;
 $('#dress-description').textContent = CONFIG.dressCode;
 CONFIG.dressColors.forEach(color=>{
   const item = document.createElement('li');
@@ -129,16 +126,43 @@ if (CONFIG.venueImage) {
   image.addEventListener('error',()=>{image.hidden=true;$('#location-icon').hidden=false;});
   image.src = CONFIG.venueImage;
 }
+const music = $('#music');
+const musicButton = $('#music-toggle');
+let musicUnavailable = !CONFIG.musicUrl;
+let musicPlaying = false;
+if (CONFIG.musicUrl) music.src = CONFIG.musicUrl;
+function syncMusic() {
+  const playing = musicPlaying && !music.paused && !music.ended && !musicUnavailable;
+  musicButton.setAttribute('aria-pressed',String(playing));
+  musicButton.setAttribute('aria-label',musicUnavailable ? 'Երաժշտության ֆայլը հասանելի չէ' : playing ? 'Դադարեցնել երաժշտությունը' : 'Միացնել երաժշտությունը');
+  musicButton.disabled = musicUnavailable;
+}
+async function playMusic() {
+  if (musicUnavailable) return;
+  try { await music.play(); } catch {
+    musicPlaying = false;
+    $('#audio-status').textContent = musicUnavailable ? 'Երաժշտության ֆայլը հասանելի չէ։' : 'Երաժշտությունը չի միացել։ Կարող եք կրկին փորձել երաժշտության կոճակով։';
+  }
+  syncMusic();
+}
+music.addEventListener('playing',()=>{musicPlaying=true;syncMusic();});
+['pause','ended','waiting','stalled'].forEach(event=>music.addEventListener(event,()=>{musicPlaying=false;syncMusic();}));
+music.addEventListener('error',()=>{
+  musicUnavailable=true;musicPlaying=false;syncMusic();
+  $('#audio-status').textContent='Երաժշտության ֆայլը հասանելի չէ։';
+});
+musicButton.addEventListener('click',()=>{if(music.paused) void playMusic(); else {music.pause();syncMusic();}});
+syncMusic();
 let opening = false;
-let fadeTimer, revealTimer;
 function revealInvitation() {
   if (opening) return;
   opening = true;
+  void playMusic();
   openButton.disabled = true;
   openButton.setAttribute('aria-expanded', 'true');
   cover.classList.add('opening');
-  fadeTimer = setTimeout(() => cover.classList.add('leaving'), motion.matches ? 0 : 2300);
-  revealTimer = setTimeout(() => {
+  setTimeout(() => cover.classList.add('leaving'), motion.matches ? 0 : 2300);
+  setTimeout(() => {
     cover.hidden = true;
     inside.hidden = false;
     scene.classList.add('is-open');
@@ -148,18 +172,6 @@ function revealInvitation() {
   }, motion.matches ? 0 : 3400);
 }
 openButton.addEventListener('click', revealInvitation);
-closeButton.addEventListener('click', () => {
-  clearTimeout(fadeTimer); clearTimeout(revealTimer);
-  inside.hidden = true;
-  cover.hidden = false;
-  scene.classList.remove('is-open');
-  cover.classList.remove('opening', 'leaving');
-  opening = false;
-  openButton.disabled = false;
-  openButton.setAttribute('aria-expanded', 'false');
-  window.scrollTo({top:0,behavior:'instant'});
-  openButton.focus({preventScroll:true});
-});
 const form = $('#rsvp-form');
 const formPanel = $('#rsvp-form-panel');
 $('#open-rsvp').addEventListener('click',()=>{

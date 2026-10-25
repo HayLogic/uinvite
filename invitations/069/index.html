@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
  <meta name="theme-color" content="#e6e6d8"><meta name="description" content="Նուրբ ձմեռային հրավիրատոմս՝ բացվող ձիթապտղագույն ծրարով։">
- <title>Հրավիրատոմս 069</title><link rel="stylesheet" href="style.css?v=069-snow-3"><script src="script.js?v=069-snow-3" defer></script>
+ <title>Հրավիրատոմս 069</title><link rel="stylesheet" href="style.css?v=069-music-1"><script src="script.js?v=069-music-1" defer></script>
 </head>
 <body>
  <main class="winter-scene" id="scene">
@@ -24,10 +24,9 @@
   <article class="inside" id="inside" hidden aria-label="Ամանորյա կորպորատիվ հրավիրատոմս">
    <section class="party-hero invitation-section" id="party-home" aria-labelledby="party-heading">
 
-    <p class="sample-note" id="sample-note">Ընկերության անվանումն օրինակային է</p>
     <img class="christmas-tree" src="assets/christmas-tree.png" alt="Ձյունածածկ տոնածառ՝ նուրբ ոսկեգույն լույսերով" width="600" height="900" decoding="async">
     <p class="small-caps">ՍԻՐՈՎ ՀՐԱՎԻՐՈՒՄ ԵՆՔ ՁԵԶ</p><h2 id="party-heading"><span class="script-title">Ամանորյա</span><span class="roman-title">կորպորատիվ երեկույթի</span></h2>
-    <p class="small-caps hosted-label">ՄԵԶ ՀԵՏ ՏՈՆՈՒՄ Է</p><p class="hosts" data-company>Codu</p>
+    <p class="hosts" data-company>Codu</p>
     <a class="down-link" href="#party-details" aria-label="Տեսնել միջոցառման տվյալները">↓</a>
    </section>
    <section class="party-details invitation-section" id="party-details" aria-labelledby="details-heading">
@@ -47,7 +46,7 @@
    </section>
    <section class="program-section invitation-section" aria-labelledby="program-heading">
     <p class="small-caps">ՄԻ ԵՐԵԿՈ՝ ՄԵԶ ԲՈԼՈՐԻ ՀԱՄԱՐ</p><h2 class="section-title" id="program-heading"><span class="script-title">Օրվա</span><span class="roman-title">ծրագիրը</span></h2>
-    <ol class="day-program" id="day-program"></ol><p class="program-note" id="program-note"></p>
+    <ol class="day-program" id="day-program"></ol>
    </section>
    <section class="dress-section invitation-section" aria-labelledby="dress-heading">
     <p class="small-caps">ԵՐԵԿՈՅԻ ՏՐԱՄԱԴՐՈՒԹՅՈՒՆԸ</p>
@@ -88,11 +87,12 @@ Codu ընկերությունը շնորհակալություն է հայտնո
 
 Թող 2027 թվականը բերի նոր հնարավորություններ, մեծ ձեռքբերումներ և միասին ստեղծված գեղեցիկ պահեր։</p>
     <p class="small-caps with-love">ՍԻՐՈՎ՝</p><p class="hosts" data-company>Codu</p>
-    <button class="close-invitation" id="close-envelope">Վերադառնալ ծրարին</button>
    </section>
   </article>
  </main>
  <canvas class="snowfall" id="snowfall" aria-hidden="true"></canvas>
+ <button class="music-button" id="music-toggle" type="button" aria-label="Միացնել երաժշտությունը" aria-pressed="false"><svg class="music-play" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7Z"/></svg><svg class="music-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button>
+ <audio id="music" loop preload="none"></audio><span class="sr-only" id="audio-status" role="status" aria-live="polite"></span>
  <noscript><p class="noscript">Հրավիրատոմսը բացելու համար միացրեք JavaScript-ը։</p></noscript>
 </body>
 </html>
