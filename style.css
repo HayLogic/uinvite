@@ -2,3 +2,61 @@
 
 /* Separate procedural velvet layer; no reference image is used. */
 body::before{content:"";position:fixed;inset:0;z-index:-1;background:url("assets/velvet.svg") repeat;opacity:.26;pointer-events:none}.intro{background-image:url("assets/velvet.svg"),radial-gradient(ellipse at 50% 50%,#63213755,transparent 65%);background-color:var(--wine)}.envelope-back,.envelope-front,.flap{background-blend-mode:soft-light;background-image:url("assets/velvet.svg"),linear-gradient(155deg,#7b3041,#370c18)}.seal-mark{width:43px;height:43px;fill:#91612d;stroke:#f4cf87;stroke-width:.7;filter:drop-shadow(0 1px 0 #f5d491)}.hero-title{max-width:700px;margin-left:auto;margin-right:auto;color:var(--gold);font-size:clamp(32px,5vw,60px)}
+
+/* Reference envelope: full portrait on phones, landscape stationery on desktop. */
+.intro{background:#100806;min-height:100svh;padding:0;overflow:hidden}
+.intro::after{display:none}
+.intro-inner{height:100svh;width:100%;padding:0;display:grid;place-items:center}
+.envelope{--tip:67%;--seal:clamp(92px,25vw,120px);width:100%;height:100%;max-height:none;aspect-ratio:auto;margin:0;border:0;border-radius:13px;filter:none;perspective:1600px;isolation:isolate;text-align:center;color:#b2935d;box-shadow:0 0 0 1px #b2915b33,inset 0 0 30px #000}
+.envelope-back,.envelope-front,.flap{background-image:url('assets/envelope-velvet.png');background-size:440px 440px;background-blend-mode:normal}
+.envelope-back{inset:0;border:1px solid #9b5b332e;border-radius:13px;background-color:#210604;box-shadow:inset 0 0 70px #000}
+.envelope-front{inset:0;clip-path:polygon(0 0,50% var(--tip),100% 0,100% 100%,0 100%);border-radius:13px;background-image:linear-gradient(0deg,#10030280,#36070515),url('assets/envelope-velvet.png');box-shadow:inset 0 0 50px #0008}
+.envelope-front::after{inset:0;background:none;clip-path:polygon(0 100%,50% 43%,100% 100%);background-image:linear-gradient(0deg,#13030233,#5e1e121c),url('assets/envelope-velvet.png');filter:drop-shadow(0 -1px 1px #bc78434d);border-radius:0 0 13px 13px}
+.flap{height:var(--tip);inset:0 0 auto;clip-path:polygon(0 0,100% 0,100% 69%,50% 100%,0 69%);border-radius:13px 13px 0 0;background-image:radial-gradient(ellipse at 48% 10%,#521b1122,#0c020170),url('assets/envelope-velvet.png');transform-origin:top;overflow:visible;filter:drop-shadow(0 4px 3px #000);transition:transform 1.05s .2s,z-index 0s .75s;backface-visibility:visible}
+.flap::after{content:'';position:absolute;inset:0;border-top:1px solid #c2854b55;border-radius:13px 13px 0 0;box-shadow:inset 1px 0 #a75a2833,inset -1px 0 #a75a2833;pointer-events:none}
+.flap-face{position:absolute;inset:0;display:flex;align-items:center;flex-direction:column;padding:clamp(70px,13svh,110px) 20px 0}
+.envelope-heading{font-size:10px;line-height:1.65;letter-spacing:1.4px;color:#b89a6c;opacity:.82;font-weight:400}
+.envelope-name{position:static;display:block;margin-top:26px;max-width:100%;font-family:'Baskerville','Palatino Linotype',Georgia,serif;font-style:italic;font-size:clamp(25px,7vw,35px);line-height:1.5;letter-spacing:0;color:#b99a65;font-weight:400;text-shadow:0 1px 1px #0008;overflow-wrap:break-word}
+.seal{width:var(--seal);height:var(--seal);left:calc(50% - var(--seal)/2);top:calc(var(--tip) - var(--seal)*.48);background:none;border-radius:0;box-shadow:none;display:block;filter:drop-shadow(1px 6px 4px #0009);transition:transform .6s,opacity .6s;pointer-events:none}
+.seal img{display:block;width:100%;height:100%;object-fit:contain}
+.open-hint{position:absolute;z-index:5;left:12px;right:12px;bottom:9%;margin:0;font-size:11px;letter-spacing:1px;color:#bea06a;font-weight:400;opacity:.85;transition:opacity .3s}
+.letter{inset:5% 6% 4%;font-size:17px;padding:25px;background:linear-gradient(135deg,#e3ce9f,#f7ecd1,#ddc49a);border:1px solid #b49a69;color:#6b352e;gap:20px;border-radius:5px}
+.letter [data-company]{font-size:19px;font-style:italic}
+.opening .flap{transform:rotateX(180deg);z-index:0}
+.opening .letter{transform:translateY(-40%);z-index:2}
+.opening .seal{transform:translateY(45px) rotate(16deg) scale(.9);opacity:0}
+.opening .open-hint{opacity:0}
+body.intro-active .music-button{width:42px;height:42px;min-height:42px;justify-content:center;right:12px;bottom:12px;background:#1c0805aa;border-color:#a5864d55;padding:10px}
+body.intro-active .music-button span{display:none}
+@media(min-width:700px){
+ .intro{padding:32px;background:radial-gradient(ellipse,#30140f,#100806)}
+ .intro-inner{height:100%;min-height:0}
+ .envelope{--tip:70%;--seal:100px;width:min(100%,1000px);height:auto;aspect-ratio:1.58;border-radius:9px;box-shadow:0 35px 90px #0009,0 0 0 1px #865b3a55}
+ .flap{clip-path:polygon(0 0,100% 0,50% 100%);border-radius:9px 9px 0 0;background-image:linear-gradient(155deg,#8a3a1b18,#0005),url('assets/envelope-velvet.png')}
+ .flap-face{padding-top:35px}
+ .envelope-heading{font-size:10px;letter-spacing:1px}
+ .envelope-name{font-size:34px;margin-top:18px}
+ .open-hint{bottom:8%;font-size:12px}
+ .envelope-front::after{clip-path:polygon(0 100%,50% 20%,100% 100%)}
+ .opening .letter{transform:translateY(-55%)}
+}
+@media(min-width:700px) and (max-height:650px){.envelope{width:min(90vw,calc((100svh - 70px)*1.58))}.flap-face{padding-top:20px}.envelope-name{margin-top:10px;font-size:27px}}
+@media(prefers-reduced-motion:reduce){.opening .flap{transform:rotateX(180deg)}.opening .letter{transform:translateY(-25%)}}
+.flap-seam{position:absolute;inset:0;width:100%;height:100%;fill:none;pointer-events:none}
+.flap-seam path{vector-effect:non-scaling-stroke}
+.seam-shadow{stroke:#080100;stroke-width:9;filter:blur(3px)}
+.seam-light{stroke:#9e5638;stroke-opacity:.55;stroke-width:1}
+.seam-landscape{display:none}
+@media(min-width:700px){.seam-portrait{display:none}.seam-landscape{display:block}}
+/* Fine photographic velvet remains separate from the folds. */
+.envelope-back,.envelope-front,.flap,.envelope-front::after{background-size:cover}
+.envelope-front{background-image:linear-gradient(0deg,#08010170,#36070515),url('assets/envelope-velvet.png')}
+.flap{background-image:radial-gradient(ellipse at 48% 10%,#521b1115,#0c020145),url('assets/envelope-velvet.png')}
+.tree{width:min(330px,88vw);height:420px;margin:0 auto 4px;position:relative;isolation:isolate}
+#tree-lights{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 12px #f1bc4414)}
+@media(min-width:768px){.tree{width:350px;height:455px;margin-top:8px}.hero{padding-top:125px}}
+.envelope-back{background-image:linear-gradient(#1000005c,#1000005c),url('assets/envelope-velvet.png')}
+.envelope-front{background-image:linear-gradient(0deg,#08010199,#16010055),url('assets/envelope-velvet.png')}
+.envelope-front::after{background-image:linear-gradient(0deg,#10010166,#21060344),url('assets/envelope-velvet.png')}
+.flap{background-image:radial-gradient(ellipse at 48% 10%,#220a0355,#08000088),url('assets/envelope-velvet.png')}
+@media(max-width:699px){.music-button{width:44px;height:44px;min-height:44px;padding:11px;justify-content:center}.music-button span{display:none}}
