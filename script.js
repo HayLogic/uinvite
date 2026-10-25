@@ -4,6 +4,8 @@ const CONFIG = Object.freeze({
   companyName: 'HayLogic Line Day',
   eventTitle: 'Ամանորյա կորպորատիվ երեկո',
   newYearGreeting: 'Միասին դեպի 2027 թվական',
+  giftsTitle: 'Սպասվում են նվերներ',
+  giftsImage: 'assets/christmas-gifts.png',
   eventDate: '2026-12-18T18:00:00+04:00', // Հայաստանի ժամային գոտի. ժամը նույնպես այստեղ է։
   venueName: 'Ադանա Կոմպլեքս',
   venueImage: '', // Add the supplied restaurant photo here, e.g. assets/adana-complex.jpg,
@@ -79,6 +81,8 @@ if (CONFIG.venueImage) {
 document.title = `${CONFIG.eventTitle} · ${CONFIG.companyName}`;
 $('.hero-title').textContent = CONFIG.eventTitle;
 $('#new-year-greeting').textContent = CONFIG.newYearGreeting;
+$('#gifts-title').textContent = CONFIG.giftsTitle;
+$('#gifts-image').src = CONFIG.giftsImage;
 $('#sample-note').hidden = !CONFIG.demoMode;
 function safeHttpUrl(value) { try { const url = new URL(value); return ['http:','https:'].includes(url.protocol) ? url.href : ''; } catch { return ''; } }
 const mapsUrl = safeHttpUrl(CONFIG.mapsUrl);
@@ -237,13 +241,11 @@ const form=$('#rsvp-form');
 const isDemo=CONFIG.demoMode || !CONFIG.rsvpEndpoint;
 $('#demo-notice').hidden=!isDemo;
 $('#submit-rsvp').firstChild.textContent=isDemo ? 'Ստուգել պատասխանը ' : 'Հաստատել մասնակցությունը ';
-function syncGuests() { const attending=form.elements.attendance.value==='yes'; $('#guests-field').hidden=!attending; $('#guests').required=attending; $('#guests').disabled=!attending; }
-form.querySelectorAll('[name=attendance]').forEach(el => el.addEventListener('change',syncGuests)); syncGuests();
 let submitting=false;
 // API ինտեգրացիայի միակ հատվածը. endpoint-ը պետք է ընդունի JSON և վերադարձնի 2xx։
 // Սերվերը պետք է ստուգի դաշտերը, սահմանափակի հարցումները և ապահովի CORS-ը, եթե այլ դոմեն է։
 async function sendRSVP(payload) { const endpoint=safeHttpUrl(CONFIG.rsvpEndpoint); if(!endpoint) throw new Error('invalid endpoint'); const controller=new AbortController(); const timeout=setTimeout(()=>controller.abort(),15000); try { const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal}); if(!response.ok) throw new Error('request failed'); } finally { clearTimeout(timeout); } }
-form.addEventListener('submit',async event => { event.preventDefault(); if(submitting) return; const name=$('#full-name'); name.setCustomValidity(name.value.trim().split(/\s+/).length<2 ? 'Խնդրում ենք նշել անունը և ազգանունը։' : ''); if(!form.reportValidity()) return; const status=$('#form-status'); status.classList.remove('error'); const payload={fullName:name.value.trim(),attendance:form.elements.attendance.value,guests:form.elements.attendance.value==='yes' ? Number($('#guests').value) : 0,comment:$('#comment').value.trim()}; if(isDemo) { status.textContent='Դաշտերը ճիշտ են լրացված։ Սա ցուցադրական ստուգում է․ պատասխանը չի ուղարկվել և չի պահպանվել։'; status.focus(); return; } submitting=true; $('#submit-rsvp').disabled=true; form.setAttribute('aria-busy','true'); status.textContent='Ուղարկվում է…'; try { await sendRSVP(payload); status.textContent='Շնորհակալություն։ Ձեր պատասխանն ընդունված է։'; form.reset(); syncGuests(); } catch { status.classList.add('error'); status.textContent='Չհաջողվեց հաստատել պատասխանի ընդունումը։ Փորձեք ավելի ուշ կամ կապվեք կազմակերպչի հետ։'; } finally { submitting=false; $('#submit-rsvp').disabled=false; form.removeAttribute('aria-busy'); status.focus(); } });
+form.addEventListener('submit',async event => { event.preventDefault(); if(submitting) return; const name=$('#full-name'); name.setCustomValidity(name.value.trim().split(/\s+/).length<2 ? 'Խնդրում ենք նշել անունը և ազգանունը։' : ''); if(!form.reportValidity()) return; const status=$('#form-status'); status.classList.remove('error'); const payload={fullName:name.value.trim(),attendance:form.elements.attendance.value,guests:form.elements.attendance.value==='yes' ? 1 : 0,comment:$('#comment').value.trim()}; if(isDemo) { status.textContent='Դաշտերը ճիշտ են լրացված։ Սա ցուցադրական ստուգում է․ պատասխանը չի ուղարկվել և չի պահպանվել։'; status.focus(); return; } submitting=true; $('#submit-rsvp').disabled=true; form.setAttribute('aria-busy','true'); status.textContent='Ուղարկվում է…'; try { await sendRSVP(payload); status.textContent='Շնորհակալություն։ Ձեր պատասխանն ընդունված է։'; form.reset(); } catch { status.classList.add('error'); status.textContent='Չհաջողվեց հաստատել պատասխանի ընդունումը։ Փորձեք ավելի ուշ կամ կապվեք կազմակերպչի հետ։'; } finally { submitting=false; $('#submit-rsvp').disabled=false; form.removeAttribute('aria-busy'); status.focus(); } });
 $('#full-name').addEventListener('input',event => event.target.setCustomValidity(''));
 
 

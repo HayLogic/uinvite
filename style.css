@@ -247,3 +247,12 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .dress-footnote{font-size:10px;color:#bda68f;line-height:1.9;margin:0 auto;max-width:400px}
 @media(hover:hover){.dress-palette li:hover .fabric-swatch{transform:translateY(-5px);box-shadow:0 12px 26px #d3ad4c22}}
 @media(min-width:768px){.dress{padding:85px 35px}.dress-panel{padding:60px 55px 45px}.dress-palette{margin-top:45px;margin-bottom:35px;gap:55px}.fabric-swatch{width:112px}.dress-description{font-size:14px}.fabric-name{font-size:18px;margin-top:25px}.fabric-caption{font-size:10px;max-width:140px}.dress-palette li:nth-child(2){transform:translateY(-8px)}.dress-panel h2 em{display:inline}.dress-footnote{font-size:12px}}
+
+/* The closing gift vignette echoes the gold and velvet invitation palette. */
+.gifts{padding-bottom:30px;background:radial-gradient(ellipse at 50% 55%,#ad78451a,transparent 62%)}
+.gifts h2{color:#e2c17d;margin-bottom:5px;text-wrap:balance}
+.gift-art{width:min(100%,440px);margin:5px auto 0;position:relative;isolation:isolate}
+.gift-art::before{content:'';position:absolute;left:15%;right:15%;bottom:10%;height:13%;border-radius:50%;background:#07020855;filter:blur(16px);z-index:-1}
+.gift-art img{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 20px #15040b44)}
+.gifts>.ornament{margin-top:0;margin-bottom:0}
+@media(min-width:768px){.gifts{padding-top:75px}.gift-art{width:470px}}
