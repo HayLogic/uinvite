@@ -166,7 +166,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .welcome .closing-line{margin-bottom:0;color:#e4c47f}
 @media(min-width:768px){.welcome{min-height:680px;padding-top:85px;padding-bottom:85px}}
 @media(max-width:767px){
- .welcome::after{background-image:url('assets/welcome-background-mobile.png')}
+ :is(.welcome,.festive-edges)::after{background-image:url('assets/welcome-background-mobile.png')}
 }
 
 /* Venue photo and event details, with an antique gold capsule map link. */
@@ -210,7 +210,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 @media(prefers-reduced-motion:reduce){.timeline-spark{animation:none;opacity:.8}}
 
 /* Only the artwork edges are visible; the middle exposes the original page velvet. */
-.welcome::after{
+:is(.welcome,.festive-edges)::after{
  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
  background-image:url('assets/welcome-background.png');
  background-size:cover;background-position:center;background-repeat:no-repeat;
@@ -218,7 +218,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
  mask-image:linear-gradient(90deg,#000 0%,#000 15%,transparent 35%,transparent 65%,#000 85%,#000 100%);
 }
 @media(max-width:767px){
- .welcome::after{background-image:url('assets/welcome-background-mobile.png');
+ :is(.welcome,.festive-edges)::after{background-image:url('assets/welcome-background-mobile.png');
  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 5%,transparent 24%,transparent 76%,#000 95%,#000 100%);
  mask-image:linear-gradient(90deg,#000 0%,#000 5%,transparent 24%,transparent 76%,#000 95%,#000 100%)}
 }
@@ -263,3 +263,10 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 .music-button .music-pause{display:none;stroke-width:3;stroke-linecap:round}
 .music-button[aria-pressed=true] .music-play{display:none}
 .music-button[aria-pressed=true] .music-pause{display:block}
+
+/* Venue and dress code share the welcome section's transparent festive edges. */
+.festive-edges{isolation:isolate;background:transparent;text-shadow:0 2px 12px #10000566}
+.dress.festive-edges .dress-panel{background:transparent;border:0;box-shadow:none}
+.dress.festive-edges .dress-panel::before,.dress.festive-edges .dress-corner{display:none}
+.details.festive-edges .venue-card{background:#22091233;border-color:#d5b57733;box-shadow:none;max-width:900px}
+@media(min-width:768px){.details.festive-edges{padding-left:12%;padding-right:12%}.dress.festive-edges{padding-top:65px;padding-bottom:65px}}
