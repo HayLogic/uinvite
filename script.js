@@ -24,6 +24,42 @@ document.querySelectorAll('[data-date]').forEach(el => { el.textContent = validD
 document.querySelectorAll('[data-time]').forEach(el => { el.textContent = validDate ? new Intl.DateTimeFormat('hy-AM',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Yerevan'}).format(eventDate) : 'Ժամը կճշտվի'; });
 document.querySelectorAll('[data-year]').forEach(el => { el.textContent = validDate ? new Intl.DateTimeFormat('en',{year:'numeric',timeZone:'Asia/Yerevan'}).format(eventDate) : ''; });
 $('#day-number').textContent = validDate ? new Intl.DateTimeFormat('en',{day:'2-digit',timeZone:'Asia/Yerevan'}).format(eventDate) : '—';
+// Calendar uses Armenia's event date, never the browser's local timezone.
+function renderEventCalendar() {
+  if (!validDate) { $('#event-calendar').hidden = true; return; }
+  $('#event-calendar').hidden = false;
+  const year = Number(armenianParts.year);
+  const month = Number(armenianParts.month) - 1;
+  const selectedDay = Number(armenianParts.day);
+  const monthLabels = ['Հունվար','Փետրվար','Մարտ','Ապրիլ','Մայիս','Հունիս','Հուլիս','Օգոստոս','Սեպտեմբեր','Հոկտեմբեր','Նոյեմբեր','Դեկտեմբեր'];
+  $('#calendar-month').textContent = `${monthLabels[month]} ${year}`;
+  const firstWeekday = (new Date(Date.UTC(year, month, 1)).getUTCDay() + 6) % 7;
+  const numberOfDays = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+  const fragment = document.createDocumentFragment();
+  for (let week = 0; week < Math.ceil((firstWeekday + numberOfDays) / 7); week++) {
+    const row = document.createElement('tr');
+    for (let weekday = 0; weekday < 7; weekday++) {
+      const cell = document.createElement('td');
+      const day = week * 7 + weekday - firstWeekday + 1;
+      if (day > 0 && day <= numberOfDays) {
+        const date = document.createElement('time');
+        date.dateTime = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+        date.textContent = day;
+        if (day === selectedDay) {
+          cell.className = 'event-day';
+          date.setAttribute('aria-label', `${dateFormatter.format(eventDate)}՝ միջոցառման օրը`);
+          // Separate decorative tree; the date remains readable HTML text.
+          cell.innerHTML = '<svg class="calendar-tree" viewBox="0 0 70 80" aria-hidden="true"><path d="m35 2 2 5 5 .4-4 3 1.3 5L35 13l-4.3 2.4L32 10.4l-4-3 5-.4Z" fill="#f4d88f"/><path d="M35 14 22 31h7L15 46h8L8 65h22v10h10V65h22L47 46h8L41 31h7Z" fill="#cba258" stroke="#f4d895" stroke-width="1"/><path d="M22 31h7M15 46h8m24 0h8M41 31h7" fill="none" stroke="#9d7135"/></svg>';
+        }
+        cell.append(date);
+      }
+      row.append(cell);
+    }
+    fragment.append(row);
+  }
+  $('#calendar-days').replaceChildren(fragment);
+}
+renderEventCalendar();
 $('#venue').textContent = CONFIG.venueName;
 $('#address').textContent = CONFIG.address;
 document.title = `${CONFIG.eventTitle} · ${CONFIG.companyName}`;
