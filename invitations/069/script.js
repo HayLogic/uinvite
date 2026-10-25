@@ -233,8 +233,8 @@ function initializeSnowfall() {
     canvas.width = Math.round(width * ratio);
     canvas.height = Math.round(height * ratio);
     context.setTransform(ratio,0,0,ratio,0,0);
-    const count = Math.min(150,Math.max(72,Math.round(width*height/8000)));
-    flakes = Array.from({length:count},()=>({x:random()*width,y:random()*height,radius:1.8+random()*3.6,speed:27+random()*38,drift:4+random()*10,phase:random()*Math.PI*2,opacity:.65+random()*.3,crystal:random()>.82}));
+    const count = Math.min(65,Math.max(28,Math.round(width*height/19000)));
+    flakes = Array.from({length:count},()=>({x:random()*width,y:random()*height,radius:1.8+random()*3.6,speed:10+random()*14,drift:2+random()*4,phase:random()*Math.PI*2,opacity:.65+random()*.3,crystal:random()>.82}));
     draw(0);
   }
   function draw(elapsed) {
@@ -242,7 +242,7 @@ function initializeSnowfall() {
     context.shadowColor='rgba(73,89,61,.28)'; context.shadowBlur=3;
     for (const flake of flakes) {
       if (elapsed>0) {
-        flake.phase += elapsed * .55;
+        flake.phase += elapsed * .3;
         flake.y += elapsed * flake.speed;
         flake.x += Math.sin(flake.phase)*flake.drift*elapsed;
         if (flake.y>height+6) { flake.y=-6; flake.x=random()*width; }
