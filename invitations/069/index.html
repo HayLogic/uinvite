@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="hy">
 <head>
  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
  <meta name="theme-color" content="#e6e6d8"><meta name="description" content="Նուրբ ձմեռային հրավիրատոմս՝ բացվող ձիթապտղագույն ծրարով։">
- <title>Հրավիրատոմս 069</title><link rel="stylesheet" href="style.css?v=069-sections-1"><script src="script.js?v=069-sections-1" defer></script>
+ <title>Հրավիրատոմս 069</title><link rel="stylesheet" href="style.css?v=069-hy-1"><script src="script.js?v=069-hy-1" defer></script>
 </head>
 <body>
  <main class="winter-scene" id="scene">
   <section class="invitation-cover" id="cover" aria-label="Հրավիրատոմսի ծրարը">
-   <p class="invitation-from">YOU HAVE AN<br>INVITATION FROM</p>
-   <h1 class="hosts" data-hosts>Patricia &amp; Adam</h1>
+   <p class="invitation-from">ԴՈՒՔ ՀՐԱՎԻՐՎԱԾ ԵՔ</p>
+   <h1 class="hosts" data-company>Codu</h1>
    <button class="envelope" id="open-envelope" aria-label="Բացել հրավիրատոմսը" aria-controls="inside" aria-expanded="false">
     <span class="envelope-back paper" aria-hidden="true"></span>
     <span class="envelope-pocket paper" aria-hidden="true"></span>
@@ -19,54 +19,76 @@
     <span class="flap paper" aria-hidden="true"><svg viewBox="0 0 500 220" preserveAspectRatio="none"><path d="M0 30 250 210 500 30"/></svg></span>
     <span class="seal-decoration" aria-hidden="true"><img src="assets/winter-seal.png" alt="" width="600" height="400" fetchpriority="high"></span>
    </button>
-   <p class="open-caption" id="open-caption">CLICK TO OPEN</p>
+   <p class="open-caption" id="open-caption">ՍԵՂՄԵՔ՝ ԲԱՑԵԼՈՒ ՀԱՄԱՐ</p>
   </section>
-  <article class="inside" id="inside" hidden aria-label="Christmas party invitation">
+  <article class="inside" id="inside" hidden aria-label="Ամանորյա կորպորատիվ հրավիրատոմս">
    <section class="party-hero invitation-section" id="party-home" aria-labelledby="party-heading">
     <span class="gold-stars stars-hero" aria-hidden="true"></span>
-    <p class="sample-note" id="sample-note">Preview · sample names · event details to follow</p>
-    <img class="christmas-tree" src="assets/christmas-tree.png" alt="A snow-covered Christmas tree with delicate golden lights" width="600" height="900" decoding="async">
-    <p class="small-caps">PLEASE JOIN US FOR A</p><h2 id="party-heading"><span class="script-title">Christmas</span><span class="roman-title">PARTY</span></h2>
-    <p class="small-caps hosted-label">HOSTED BY</p><p class="hosts" data-hosts>Patricia &amp; Adam</p>
-    <a class="down-link" href="#party-details" aria-label="See the party details">↓</a>
+    <p class="sample-note" id="sample-note">Ընկերության անվանումն օրինակային է</p>
+    <img class="christmas-tree" src="assets/christmas-tree.png" alt="Ձյունածածկ տոնածառ՝ նուրբ ոսկեգույն լույսերով" width="600" height="900" decoding="async">
+    <p class="small-caps">ՍԻՐՈՎ ՀՐԱՎԻՐՈՒՄ ԵՆՔ ՁԵԶ</p><h2 id="party-heading"><span class="script-title">Ամանորյա</span><span class="roman-title">կորպորատիվ երեկույթի</span></h2>
+    <p class="small-caps hosted-label">ՄԵԶ ՀԵՏ ՏՈՆՈՒՄ Է</p><p class="hosts" data-company>Codu</p>
+    <a class="down-link" href="#party-details" aria-label="Տեսնել միջոցառման տվյալները">↓</a>
    </section>
    <section class="party-details invitation-section" id="party-details" aria-labelledby="details-heading">
     <span class="gold-stars stars-details" aria-hidden="true"></span>
-    <h2 class="section-title" id="details-heading"><span class="script-title">The</span><span class="roman-title">DETAILS</span></h2>
+    <h2 class="section-title" id="details-heading"><span class="script-title">Հանդիպման</span><span class="roman-title">մանրամասները</span></h2>
     <div class="detail-stack">
-     <div class="event-detail"><h3>DATE &amp; TIME</h3><div class="sage-pill date-pill"><p id="event-date">Date to be announced</p><p id="event-time"></p></div></div>
-     <div class="event-detail"><h3>LOCATION</h3><div class="sage-pill location-pill"><img id="location-image" alt="" hidden><svg class="location-icon" id="location-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 34s12-11 12-20a12 12 0 0 0-24 0c0 9 12 20 12 20Z"/><circle cx="20" cy="14" r="4"/></svg><div><p id="venue-name">Location to be announced</p><p id="venue-address"></p></div></div><a class="gold-button" id="maps-link" target="_blank" rel="noopener noreferrer" hidden>GOOGLE MAP ↗</a></div>
-     <div class="event-detail"><h3>RSVP</h3><a class="sage-pill rsvp-pill" href="#party-rsvp">LET US KNOW IF YOU CAN JOIN US<span>We would love to celebrate with you</span></a></div>
+     <div class="event-detail"><h3>ՕՐԸ ԵՎ ԺԱՄԸ</h3><div class="sage-pill date-pill"><p id="event-date">Ամսաթիվը կճշտվի</p><p id="event-time"></p></div></div>
+     <div class="event-detail"><h3>ՎԱՅՐԸ</h3><div class="sage-pill location-pill"><img id="location-image" alt="" hidden><svg class="location-icon" id="location-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 34s12-11 12-20a12 12 0 0 0-24 0c0 9 12 20 12 20Z"/><circle cx="20" cy="14" r="4"/></svg><div><p id="venue-name">Վայրը կճշտվի</p><p id="venue-address"></p></div></div><a class="gold-button" id="maps-link" target="_blank" rel="noopener noreferrer" hidden>ՏԵՍՆԵԼ ՔԱՐՏԵԶԻ ՎՐԱ ↗</a></div>
+     <div class="event-detail"><h3>ՄԱՍՆԱԿՑՈՒԹՅՈՒՆ</h3><a class="sage-pill rsvp-pill" href="#party-rsvp">ԿԼԻՆԵ՞Ք ՄԵԶ ՀԵՏ<span>Սիրով սպասում ենք ձեր պատասխանին</span></a></div>
     </div>
    </section>
+   <section class="calendar-section invitation-section" id="event-calendar" aria-labelledby="calendar-heading">
+    <span class="gold-stars stars-details" aria-hidden="true"></span><p class="small-caps">ՊԱՀՊԱՆԵՔ ԱՅՍ ՕՐԸ</p>
+    <h2 class="section-title" id="calendar-heading"><span class="script-title">Մեր հանդիպման</span><span class="roman-title">օրը</span></h2>
+    <table class="event-calendar"><caption id="calendar-month"></caption><thead><tr><th scope="col"><abbr title="Երկուշաբթի">Երկ</abbr></th><th scope="col"><abbr title="Երեքշաբթի">Երք</abbr></th><th scope="col"><abbr title="Չորեքշաբթի">Չրք</abbr></th><th scope="col"><abbr title="Հինգշաբթի">Հնգ</abbr></th><th scope="col"><abbr title="Ուրբաթ">Ուրբ</abbr></th><th scope="col"><abbr title="Շաբաթ">Շբթ</abbr></th><th scope="col"><abbr title="Կիրակի">Կիր</abbr></th></tr></thead><tbody id="calendar-days"></tbody></table>
+    <p class="calendar-note">Կանաչ տոնածառով նշված է մեր տոնական երեկոյի օրը։</p>
+   </section>
+   <section class="program-section invitation-section" aria-labelledby="program-heading">
+    <p class="small-caps">ՄԻ ԵՐԵԿՈ՝ ՄԵԶ ԲՈԼՈՐԻ ՀԱՄԱՐ</p><h2 class="section-title" id="program-heading"><span class="script-title">Օրվա</span><span class="roman-title">ծրագիրը</span></h2>
+    <ol class="day-program" id="day-program"></ol><p class="program-note" id="program-note"></p>
+   </section>
+   <section class="dress-section invitation-section" aria-labelledby="dress-heading">
+    <span class="gold-stars stars-details" aria-hidden="true"></span><p class="small-caps">ԵՐԵԿՈՅԻ ՏՐԱՄԱԴՐՈՒԹՅՈՒՆԸ</p>
+    <h2 class="section-title" id="dress-heading"><span class="script-title">Տոնական</span><span class="roman-title">դրես կոդ</span></h2>
+    <p class="dress-description" id="dress-description"></p><ul class="dress-colors" id="dress-colors" aria-label="Դրես կոդի գույները"></ul>
+    <p class="dress-note">Ընտրեք ձեր սիրելի երանգը կամ համադրեք կանաչն ու սպիտակը։</p>
+   </section>
    <section class="gift-exchange invitation-section" id="gift-exchange" aria-labelledby="gift-heading">
-    <p class="small-caps">A LITTLE CHRISTMAS MAGIC</p><h2 id="gift-heading">GIFT EXCHANGE</h2>
-    <p class="gift-message" id="gift-message">Bring a little joy, wrapped with love. Join our gift exchange and share a festive surprise with someone special.</p>
+    <p class="small-caps">ՏՈՆԱԿԱՆ ԱՆԱԿՆԿԱԼՆԵՐ</p><h2 id="gift-heading">ՆՎԵՐՆԵՐԻ ՓՈԽԱՆԱԿՈՒՄ</h2>
+    <p class="gift-message" id="gift-message">Փոքրիկ նվեր, մեծ ուրախություն։ Միացեք մեր տոնական նվերների փոխանակմանը և հաճելի անակնկալ պարգևեք ձեր գործընկերոջը։</p>
     <p class="gift-budget" id="gift-budget" hidden></p>
-    <img class="gift-picture" src="assets/christmas-gifts.png" alt="Ivory and sage wrapped presents with gold ribbons and evergreen sprigs" width="900" height="600" loading="lazy" decoding="async">
+    <img class="gift-picture" src="assets/christmas-gifts.png" alt="Սպիտակ և կանաչ տոնական նվերներ՝ ոսկեգույն ժապավեններով" width="900" height="600" loading="lazy" decoding="async">
     <span class="fine-divider" aria-hidden="true"></span>
    </section>
    <section class="party-rsvp invitation-section" id="party-rsvp" aria-labelledby="rsvp-heading">
-    <h2 class="sr-only" id="rsvp-heading">RSVP — let us know</h2>
-    <img class="botanical-rsvp" src="assets/botanical-rsvp.png" alt="RSVP in evergreen branches with golden lights" width="700" height="700" loading="lazy" decoding="async">
-    <p class="small-caps deadline" id="rsvp-deadline" hidden></p><p class="rsvp-intro">Confirm your attendance by filling out<br>the form below.</p>
-    <button class="gold-button" id="open-rsvp" aria-expanded="false" aria-controls="rsvp-form-panel">OPEN RSVP FORM</button>
+    <h2 class="rsvp-title" id="rsvp-heading">Մասնակցության հաստատում</h2>
+    <img class="company-botanical" id="company-botanical" src="assets/botanical-codu.png" alt="Codu՝ եղևնու ճյուղերով և ոսկեգույն լույսերով գրված ընկերության անունը" width="700" height="700" loading="lazy" decoding="async">
+    <p class="small-caps deadline" id="rsvp-deadline" hidden></p><p class="rsvp-intro">Խնդրում ենք հաստատել ձեր մասնակցությունը՝<br>լրացնելով ստորև ներկայացված ձևը։</p>
+    <button class="gold-button" id="open-rsvp" aria-expanded="false" aria-controls="rsvp-form-panel">ԲԱՑԵԼ ՀԱՍՏԱՏՄԱՆ ՁԵՎԸ</button>
     <div id="rsvp-form-panel" hidden>
-     <form id="rsvp-form"><p class="preview-form-note" id="preview-form-note">Preview form — responses are not sent or stored.</p>
-      <label for="full-name">Name &amp; surname <span aria-hidden="true">*</span></label><input id="full-name" name="fullName" autocomplete="name" required minlength="3" maxlength="120" placeholder="Your full name">
-      <fieldset><legend>Will you join us? <span aria-hidden="true">*</span></legend><div class="attendance-options"><label><input type="radio" name="attendance" value="yes" required checked> I will attend</label><label><input type="radio" name="attendance" value="no"> I will not attend</label></div></fieldset>
-      <label for="comment">Comment <span class="optional">(optional)</span></label><textarea id="comment" name="comment" rows="3" maxlength="1000" placeholder="A little note for the hosts…"></textarea>
-      <button class="gold-button" id="submit-rsvp" type="submit">CONFIRM</button><p id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+     <form id="rsvp-form"><p class="preview-form-note" id="preview-form-note">Ցուցադրական ձև․ պատասխանները չեն ուղարկվում և չեն պահպանվում։</p>
+      <label for="full-name">Անուն, ազգանուն <span aria-hidden="true">*</span></label><input id="full-name" name="fullName" autocomplete="name" required minlength="3" maxlength="120" placeholder="Ձեր անունը և ազգանունը">
+      <fieldset><legend>Մասնակցություն <span aria-hidden="true">*</span></legend><div class="attendance-options"><label><input type="radio" name="attendance" value="yes" required checked> Մասնակցելու եմ</label><label><input type="radio" name="attendance" value="no"> Չեմ մասնակցելու</label></div></fieldset>
+      <label for="comment">Մեկնաբանություն <span class="optional">(ոչ պարտադիր)</span></label><textarea id="comment" name="comment" rows="3" maxlength="1000" placeholder="Ձեր ցանկությունը կամ հաղորդագրությունը…"></textarea>
+      <button class="gold-button" id="submit-rsvp" type="submit">ՀԱՍՏԱՏԵԼ</button><p id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
      </form>
     </div>
    </section>
    <section class="thank-you invitation-section" aria-labelledby="thank-heading">
     <span class="gold-stars stars-thanks" aria-hidden="true"></span>
     <img class="thank-tree" src="assets/christmas-tree.png" alt="" width="600" height="900" loading="lazy" decoding="async">
-    <h2 class="script-title" id="thank-heading">Thank you!</h2><span class="fine-divider" aria-hidden="true"></span>
-    <p class="thank-message">WE’RE SO EXCITED TO CELEBRATE<br>THIS HOLIDAY SEASON WITH<br>SPARKLE, JOY, AND YOU.<br><br>THANK YOU FOR BEING A PART OF<br>THIS MAGICAL EVENING. YOUR<br>PRESENCE IS THE PERFECT FINISHING<br>TOUCH TO OUR CELEBRATION.<br><br>LET’S MAKE THIS A NIGHT TO REMEMBER,<br>FULL OF LIGHTS, LAUGHTER, AND<br>CHRISTMAS CHEER.</p>
-    <p class="small-caps with-love">WITH LOVE</p><p class="hosts" data-hosts>Patricia &amp; Adam</p>
-    <button class="close-invitation" id="close-envelope">Back to the envelope</button>
+    <h2 class="script-title" id="thank-heading">Շնորհակալություն</h2><span class="fine-divider" aria-hidden="true"></span>
+    <p class="thank-message" id="thank-message">Սիրելի՛ գործընկերներ,
+
+Codu ընկերությունը շնորհակալություն է հայտնում ձեզ՝ ձեր աշխատանքի, նվիրվածության և մեր համատեղ ձեռքբերումների համար։
+
+Մեր հաջողությունների հիմքում ձեր տաղանդն է, ջանքն ու թիմային ոգին։ Շնորհակալ ենք, որ մեր թիմի մասն եք։
+
+Թող 2027 թվականը բերի նոր հնարավորություններ, մեծ ձեռքբերումներ և միասին ստեղծված գեղեցիկ պահեր։</p>
+    <p class="small-caps with-love">ՍԻՐՈՎ՝</p><p class="hosts" data-company>Codu</p>
+    <button class="close-invitation" id="close-envelope">Վերադառնալ ծրարին</button>
    </section>
   </article>
  </main>

@@ -1,27 +1,33 @@
-# Invitation 069 — Ivory & Sage Christmas Party
+# Հրավիրատոմս 069 — Codu
 
-A standalone HTML/CSS/vanilla JavaScript invitation, with no build or package dependencies. The winter forest and sage envelope opening is followed by five image-led sections: snowy Christmas tree hero, event details, gift exchange, botanical RSVP, and thank-you.
+Հայերեն ամանորյա կորպորատիվ հրավիրատոմս՝ ձմեռային անտառով, բացվող ձիթապտղագույն ծրարով և բաց կրեմագույն/կանաչ ձևավորմամբ։ 068-ի էջի ֆայլերը չեն փոփոխվում։
 
-## Run
+## Միջոցառում և տվյալներ
 
-From the repository root: `python3 -m http.server 8000`, then use the `/invitations/069/` path. Alternatively, from this directory use `npx serve .`, or open `index.html` directly. For cPanel upload this directory's `index.html`, `style.css`, `script.js`, and `assets/` to a separate document root. All asset paths are relative.
+- Ընկերություն՝ **Codu**․ օգտատիրոջ խնդրանքով հորինված օրինակային անվանում։ `exampleData: true`-ը էջում նշում է, որ անվանումն օրինակային է։
+- Օրը՝ **26․12․2026**, ժամը՝ **17։00**, Հայաստանի ժամային գոտի։
+- Վայրը՝ **Աղաբաբյանս ռեստորան**։ Ճշգրիտ հասցե կամ իրական լուսանկար դեռ չի տրամադրվել։ Քարտեզի կոճակը բացում է ռեստորանի անվան որոնումը, ոչ թե չհաստատված ճշգրիտ կետ։
+- Դրես կոդ՝ կանաչի բոլոր երանգները և սպիտակ։
+- Օրվա ծրագիրը նախնական է՝ 17։00 դիմավորում, 17։30 ընթրիք, 18։30 խաղեր ու անակնկալներ, 19։30 երաժշտություն ու պարեր, 21։00 ավարտ։ Այն նշված է որպես ճշտման ենթակա։
 
-## Confirm before publication
+Բոլոր փոփոխելի միջոցառման տվյալները, ծրագիրը, գույները, նվերների տեքստը, ընկերության պատկերը և շնորհակալության տեքստը գտնվում են `script.js`-ի սկզբի `CONFIG`-ում։ `eventDate`-ը ISO ամսաթիվ է՝ `+04:00`։ Դեկտեմբերի օրացույցը և կանաչ տոնածառով նշված 26-ը գեներացվում են նույն ամսաթվից՝ անկախ բրաուզերի ժամային գոտուց։
 
-Edit `CONFIG` at the beginning of `script.js`. Patricia & Adam are sample names from the design reference; `exampleData: true` displays a small preview note. Set it to false when real names are confirmed.
+Բաժիններ՝ տոնածառով գլխավոր էջ, հանդիպման մանրամասներ, օրացույց, օրվա ծրագիր, դրես կոդ, նվերների փոխանակում, մասնակցության հաստատում և աշխատակիցներին ուղղված ընկերության շնորհակալություն։
 
-`eventDate` expects a confirmed ISO date with Armenia's `+04:00` offset. It is shown in the Armenia timezone regardless of the visitor's browser timezone. Empty date and venue fields show “to be announced”; no venue or date is invented. Fill `venueName`, `address`, and optionally `venueImage` with a real venue photo. `mapsUrl` is hidden until a valid HTTP(S) URL is supplied. A supplied photo that fails to load falls back to a small location symbol. Gift-exchange text, optional budget, and RSVP deadline are also in CONFIG; empty budget/deadline text is hidden.
+## Գործարկում և cPanel
 
-## RSVP
+Պահոցի արմատից՝ `python3 -m http.server 8000`, ապա օգտագործեք `/invitations/069/` ուղին։ Կամ այս պանակից՝ `npx serve .`։ Հնարավոր է նաև անմիջապես բացել `index.html`-ը։ cPanel-ում վերբեռնեք հենց այս պանակի `index.html`, `style.css`, `script.js` և `assets/`-ը համապատասխան document root-ում։ Build և կախվածություններ պետք չեն։
 
-The gold button opens a keyboard-accessible form with name and surname, attending/not attending, and an optional comment. Without `rsvpEndpoint`, the form is explicitly a preview and does not send or store responses. Validation never displays a delivery success message in this mode.
+## Հաստատման ձև
 
-To connect a backend, set `rsvpEndpoint` to a relative or HTTP(S) endpoint. `sendRSVP()` posts JSON with `fullName`, `attendance` (`yes`/`no`), and `comment`; only a 2xx response is treated as success. The backend must validate input, handle abuse/rate limiting, and allow CORS if hosted on another origin. No frontend secrets. Duplicate concurrent submissions are prevented; timeout is 15 seconds, failures preserve entered data for retry.
+Դաշտերը՝ անուն/ազգանուն, մասնակցելու եմ/չեմ մասնակցելու, ոչ պարտադիր մեկնաբանություն։ Առանց `rsvpEndpoint`-ի ձևը հստակ ցուցադրական է և չի ուղարկում կամ պահպանում պատասխաններ։
 
-## Assets and accessibility
+Իրական ինտեգրացիայի համար լրացրեք `rsvpEndpoint`-ը։ `sendRSVP()`-ը POST JSON է ուղարկում՝ `fullName`, `attendance` (`yes`/`no`), `comment`։ Միայն 2xx պատասխանը համարվում է հաջող ընդունում։ Սերվերը պետք է ստուգի տվյալները, սահմանափակի հարցումները և այլ ծագման դեպքում ապահովի CORS։ Frontend-ում գաղտնի բանալիներ չտեղադրել։ Կրկնակի զուգահեռ ուղարկումները կանխվում են, timeout-ը՝ 15 վայրկյան։
 
-`winter-forest.png`, `winter-seal.png`, `christmas-tree.png`, `christmas-gifts.png`, and `botanical-rsvp.png` were individually generated for this invitation. Transparent decorative assets are separate from all event text and interactive controls. The botanical RSVP image has a text alternative. `sage-paper.svg` and `gold-stars.svg` provide lightweight texture and decoration. Pinyon Script is included locally from the official Google Fonts repository, along with its SIL Open Font License (`assets/PinyonScript-OFL.txt`).
+## Պատկերներ և տառատեսակներ
 
-The envelope uses independent CSS/SVG folds, not a screenshot. Buttons are keyboard accessible, opening prevents repeated clicks, focus moves to the opened invitation, and reduced motion is respected. Verified at 360, 390, 768, and 1440px. Mock API checks are separate from actual delivery; a real endpoint has not been provided.
+Անտառը, կնիքը, տոնածառը, նվերները և ճյուղերից կազմված CODU անվանումը ստեղծված են որպես առանձին պատկերներ։ Ընկերության անունը փոխելիս անհրաժեշտ է փոխել նաև `companyArtwork`-ը․ պատկերի մեջ գրված է CODU։ Փոփոխելի տեքստերն ու դաշտերը մնում են HTML/JavaScript-ում։
 
-Invitation 068 remains at the repository root and is not changed by this implementation.
+Noto Serif Armenian և Pinyon Script տառատեսակները ներառված են տեղային՝ Google Fonts-ի պաշտոնական պահոցից, իրենց SIL Open Font License ֆայլերով։
+
+Ստուգված են 360, 390, 768 և 1440px լայնությունները, ստեղնաշարով բացումն ու վերադարձը, նվազեցված շարժումը, ամսաթիվն այլ բրաուզերային ժամային գոտում, օրացույցը, ձևի վավերացումը։ API-ի հաջողության, սխալի և կրկնակի ուղարկման ստուգումները կատարված են փորձնական պատասխաններով․ իրական backend չի միացվել։
