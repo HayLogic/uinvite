@@ -123,7 +123,33 @@ musicButton.addEventListener('click',() => { if(audio.paused) void playMusic(); 
 syncMusic();
 let opened=false;
 document.body.classList.add('intro-active');
-$('#open-invite').addEventListener('click',() => { if(opened) return; opened=true; $('#open-invite').disabled=true; void playMusic(); $('#intro').classList.add('opening'); const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches; setTimeout(() => { $('#invitation').hidden=false; $('#intro').classList.add('leaving'); setTimeout(() => { $('#intro').hidden=true; document.body.classList.remove('intro-active'); const heading=$('.hero-title'); heading.tabIndex=-1; heading.focus({preventScroll:true}); },reduced ? 0 : 700); },reduced ? 0 : 1700); });
+$('#open-invite').addEventListener('click', () => {
+  if (opened) return;
+  opened = true;
+  $('#open-invite').disabled = true;
+  // Keep playback inside the original user gesture.
+  void playMusic();
+  const intro = $('#intro');
+  const invitation = $('#invitation');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  invitation.hidden = false;
+  invitation.inert = true;
+  invitation.setAttribute('aria-hidden', 'true');
+  window.scrollTo(0, 0);
+  intro.classList.add('opening');
+  // Unfold the cover itself; no card is lifted out of the envelope.
+  setTimeout(() => intro.classList.add('leaving'), reduced ? 0 : 2900);
+  setTimeout(() => {
+    intro.hidden = true;
+    invitation.inert = false;
+    invitation.removeAttribute('aria-hidden');
+    document.body.classList.remove('intro-active');
+    const heading = $('.hero-title');
+    heading.tabIndex = -1;
+    heading.focus({preventScroll:true});
+  }, reduced ? 0 : 4400);
+});
+
 function updateCountdown(now=Date.now()) { const remaining=validDate ? eventDate.getTime()-now : NaN; if(!Number.isFinite(remaining)||remaining<=0) { $('#countdown').hidden=true; $('#countdown-message').hidden=false; $('#countdown-message').textContent=validDate ? 'Մեր տոնական երեկոն արդեն մեկնարկել է։' : 'Միջոցառման ամսաթիվը կճշտվի։'; return; } $('#countdown').hidden=false; $('#countdown-message').hidden=true; const seconds=Math.floor(remaining/1000); const values=[Math.floor(seconds/86400),Math.floor(seconds/3600)%24,Math.floor(seconds/60)%60,seconds%60]; ['days','hours','minutes','seconds'].forEach((id,i) => { document.getElementById(id).textContent=String(values[i]).padStart(2,'0'); }); }
 updateCountdown(); setInterval(updateCountdown,1000);
 const form=$('#rsvp-form');
