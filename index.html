@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#310c18">
 <meta name="description" content="Տարվա ամենաջերմ երեկոյի հրավերը։ Ամանորյա կորպորատիվ տոն՝ միասին։">
-<title>Ամանորյա հրավեր · Uinvite</title><link rel="stylesheet" href="style.css?v=welcome-art-1"><script src="script.js?v=welcome-art-1" defer></script>
+<title>Ամանորյա հրավեր · Uinvite</title><link rel="stylesheet" href="style.css?v=adana-1"><script src="script.js?v=adana-1" defer></script>
 </head>
 <body>
 <div class="intro" id="intro">
@@ -32,7 +32,16 @@
   <div class="event-calendar"><table id="calendar-table"><caption id="calendar-month"></caption><thead><tr><th scope="col"><abbr title="Երկուշաբթի">Երկ</abbr></th><th scope="col"><abbr title="Երեքշաբթի">Երք</abbr></th><th scope="col"><abbr title="Չորեքշաբթի">Չրք</abbr></th><th scope="col"><abbr title="Հինգշաբթի">Հնգ</abbr></th><th scope="col"><abbr title="Ուրբաթ">Ուրբ</abbr></th><th scope="col"><abbr title="Շաբաթ">Շբթ</abbr></th><th scope="col"><abbr title="Կիրակի">Կիր</abbr></th></tr></thead><tbody id="calendar-days"></tbody></table></div>
   <p class="calendar-note"><span class="calendar-key" aria-hidden="true"></span>Մեր տոնական երեկոն՝ <span data-date></span></p>
  </section>
- <section class="details section" id="details"><p class="eyebrow">ՊԱՀՊԱՆԵՔ ԱՅՍ ՕՐԸ</p><h2>Հանդիպման վայրը</h2><div class="detail-grid"><div><span class="detail-number" id="day-number"></span><span data-date></span><p>Սկիզբը՝ <span data-time></span></p></div><span class="detail-divider" aria-hidden="true"></span><div><span class="line-icon" aria-hidden="true">⌖</span><h3 id="venue"></h3><p id="address"></p><a class="text-link" id="map-link" target="_blank" rel="noopener noreferrer" hidden>Տեսնել քարտեզի վրա ↗</a></div></div></section>
+ <section class="details section" id="details" aria-labelledby="venue-title">
+  <p class="eyebrow">ՍՊԱՍՈՒՄ ԵՆՔ ՁԵԶ ԱՅՍՏԵՂ</p><h2 id="venue-title">Հանդիպման վայրը</h2>
+  <div class="venue-card">
+   <figure class="venue-photo" id="venue-photo"><img id="venue-image" alt="" loading="lazy" decoding="async" hidden><div class="venue-photo-fallback" id="venue-photo-fallback"><span class="venue-monogram" aria-hidden="true">A</span><span>ADANA COMPLEX</span></div></figure>
+   <div class="venue-information"><p class="eyebrow">ՏՈՆԱԿԱՆ ԵՐԵԿՈ</p><h3 id="venue"></h3><p id="address"></p>
+    <div class="venue-date"><span class="detail-number" id="day-number"></span><div><span data-date></span><p>Սկիզբը՝ <span data-time></span></p></div></div>
+    <a class="map-button" id="map-link" target="_blank" rel="noopener noreferrer" hidden>Տեսնել քարտեզի վրա <span aria-hidden="true">↗</span></a>
+   </div>
+  </div>
+ </section>
  <section class="section program"><p class="eyebrow">ԱՄԵՆ ՊԱՀԸ՝ ՀԱՏՈՒԿ</p><h2>Երեկոյի ծրագիրը</h2><ol class="timeline"><li><time>18:00</time><div><h3>Հյուրերի դիմավորում</h3><p>Ջերմ հանդիպումներ և առաջին կենացը</p></div></li><li><time>18:30</time><div><h3>Տոնական ընթրիք</h3><p>Համեր, զրույցներ և գեղեցիկ պահեր</p></div></li><li><time>19:30</time><div><h3>Խաղեր և անակնկալներ</h3><p>Մի փոքր կախարդանք՝ յուրաքանչյուրի համար</p></div></li><li><time>20:30</time><div><h3>Երաժշտություն և պարեր</h3><p>Երեկոյի ամենավառ ռիթմերը</p></div></li><li><time>22:00</time><div><h3>Տոնական ավարտ</h3><p>Նոր հիշողություններով՝ դեպի նոր տարի</p></div></li></ol></section>
  <section class="section dress"><p class="eyebrow">ԵՐԵԿՈՅԻ ՏՐԱՄԱԴՐՈՒԹՅՈՒՆԸ</p><h2>Տոնական նրբագեղություն</h2><p class="muted">Ձեր անհատական ոճը՝ մեր տոնական գույներով։</p><div class="swatches"><div><i style="--swatch:#75263d"></i><span>Բորդո</span></div><div><i class="gold-swatch" style="--swatch:#cda65f"></i><span>Ոսկեգույն</span></div><div><i style="--swatch:#213e33"></i><span>Մուգ կանաչ</span></div><div><i style="--swatch:#171719"></i><span>Սև</span></div></div></section>
  <section class="section countdown-section"><p class="eyebrow">ՍՊԱՍՈՒՄ ԵՆՔ ՄԵՐ ՀԱՆԴԻՊՄԱՆԸ</p><h2>Տոնին մնացել է</h2><div class="countdown" id="countdown" role="timer" aria-label="Մինչև միջոցառումը մնացած ժամանակը"><div><strong id="days">00</strong><span>օր</span></div><b>:</b><div><strong id="hours">00</strong><span>ժամ</span></div><b>:</b><div><strong id="minutes">00</strong><span>րոպե</span></div><b>:</b><div><strong id="seconds">00</strong><span>վայրկյան</span></div></div><p id="countdown-message" hidden></p></section>
