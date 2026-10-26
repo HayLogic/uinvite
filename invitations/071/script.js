@@ -21,6 +21,7 @@ const CONFIG = Object.freeze({
   dressDescription:'Շամպայնի երանգների նրբությունը, ոսկու փայլը և սևի դասական շքեղությունը։',
   dressColors:[{name:'Շամպայն',color:'#d9c5a2'},{name:'Ոսկեգույն',color:'#d1aa56'},{name:'Սև',color:'#262018'}],
   rsvpEndpoint:'', // Առանց endpoint-ի ձևը ցուցադրական է։ Գաղտնի բանալիներ չտեղադրել։
+  musicUrl:'assets/music.mp3',
   bubblesEnabled:true
 });
 const $=selector=>document.querySelector(selector);
@@ -94,9 +95,40 @@ function initializeReveals(){
   preference.addEventListener('change',refresh);
 }
 initializeReveals();
+const music = $('#music');
+const musicButton = $('#music-toggle');
+let musicUnavailable = !CONFIG.musicUrl;
+let musicPlaying = false;
+if (CONFIG.musicUrl) music.src = CONFIG.musicUrl;
+function syncMusic() {
+  const playing = musicPlaying && !music.paused && !music.ended && !musicUnavailable;
+  musicButton.setAttribute('aria-pressed',String(playing));
+  musicButton.setAttribute('aria-label',musicUnavailable ? 'Երաժշտության ֆայլը հասանելի չէ' : playing ? 'Դադարեցնել երաժշտությունը' : 'Միացնել երաժշտությունը');
+  musicButton.disabled = musicUnavailable;
+}
+async function playMusic() {
+  if (musicUnavailable) return;
+  try { await music.play(); } catch {
+    musicPlaying = false;
+    $('#audio-status').textContent = musicUnavailable ? 'Երաժշտության ֆայլը հասանելի չէ։' : 'Երաժշտությունը չի միացել։ Կարող եք կրկին փորձել երաժշտության կոճակով։';
+  }
+  syncMusic();
+}
+music.addEventListener('playing',()=>{musicPlaying=true;syncMusic();});
+['pause','ended','waiting','stalled'].forEach(event=>music.addEventListener(event,()=>{musicPlaying=false;syncMusic();}));
+music.addEventListener('error',()=>{
+  musicUnavailable=true;musicPlaying=false;syncMusic();
+  $('#audio-status').textContent='Երաժշտության ֆայլը հասանելի չէ։';
+});
+musicButton.addEventListener('click',()=>{if(music.paused) void playMusic(); else {music.pause();syncMusic();}});
+syncMusic();
+
+
 let opened=false;
 $('#open-gift').addEventListener('click',()=>{
-  if(opened)return;opened=true;
+  if(opened)return;
+  void playMusic();
+  opened=true;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   $('#open-gift').disabled=true;$('#open-gift').setAttribute('aria-expanded','true');
   $('#invitation').hidden=false;$('#invitation').inert=true;$('#invitation').setAttribute('aria-hidden','true');
