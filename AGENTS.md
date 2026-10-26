@@ -15,7 +15,7 @@ Check envelope opening, audio state, countdown expiry, conditional RSVP fields a
 
 ## Invitation numbering and current work
 
-The user is building multiple distinct invitations. The completed burgundy/gold corporate New Year invitation for HayLogic Line Day is **068**. Its files currently remain at the repository root. Its recorded application revision is `872ca6db9fd74298ca7151b0c97a8a8b416a0e9b`; see `INVITATIONS.md`.
+The user is building multiple distinct invitations. The completed burgundy/gold corporate New Year invitation for HayLogic Line Day is **068**. A complete standalone copy is now in `invitations/068/`; use that numbered folder for future 068 work. The legacy repository-root copy is retained unchanged. Its recorded application revision is `872ca6db9fd74298ca7151b0c97a8a8b416a0e9b`; see `INVITATIONS.md`.
 
 The latest invitation is **071**, in `invitations/071/`, now completed after the user requested adding music as the final change. Preserve it along with all prior invitations until a new task is specified. Preserve application files for 068, 069 and 070; do not edit them while working on 071 unless explicitly requested. Each new invitation has its own index.html, style.css, script.js and assets/ in its numbered folder; this supersedes the original root-only layout instruction. Do not assume that new templates share old company, venue, event date, music or dress code.
 
