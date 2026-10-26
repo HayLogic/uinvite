@@ -30,7 +30,6 @@ const CONFIG = Object.freeze({
 const $ = selector => document.querySelector(selector);
 document.querySelectorAll('[data-company]').forEach(element=>{element.textContent=CONFIG.companyName;});
 document.title = `${CONFIG.companyName} · ${CONFIG.eventTitle} · ${CONFIG.invitationNumber}`;
-$('#example-note').hidden=!CONFIG.exampleData;
 $('#invite-copy').textContent=CONFIG.inviteMessage;
 $('#thank-message').textContent=CONFIG.thankMessage;
 $('#venue-name').textContent=CONFIG.venueName;
@@ -130,7 +129,6 @@ $('#open-envelope').addEventListener('click',()=>{
 });
 const form=$('#rsvp-form');
 const isPreview=!CONFIG.rsvpEndpoint;
-$('#preview-note').hidden=!isPreview;
 let submitting=false;
 // API integration: JSON POST with fullName, attendance (yes/no) and comment.
 async function sendRSVP(payload){
