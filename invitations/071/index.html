@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="hy">
+<head>
+ <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#8c622e">
+ <meta name="description" content="Ոսկեգույն շամպայնի հրավիրատոմս՝ շարժվող պղպջակներով և սքրոլի ընթացքում բացվող հայերեն տեքստերով։">
+ <title>Ամանորյա հրավիրատոմս · 071</title><link rel="stylesheet" href="style.css?v=071-1"><script src="script.js?v=071-1" defer></script>
+</head>
+<body class="cover-active">
+ <div class="champagne-backdrop" aria-hidden="true"><img id="champagne-background" src="assets/champagne-scene.png" alt="" width="900" height="1600" decoding="async"></div>
+ <canvas id="champagne-bubbles" class="champagne-bubbles" aria-hidden="true"></canvas>
+ <div class="gift-cover" id="gift-cover">
+  <button class="open-gift" id="open-gift" type="button" aria-label="Բացել ոսկեգույն ժապավենով հրավիրատոմսը" aria-controls="invitation" aria-expanded="false">
+   <span class="cover-photo" aria-hidden="true"><img src="assets/champagne-cover.png" alt="" width="600" height="1800" fetchpriority="high"></span>
+   <span class="cover-card" aria-hidden="true"></span><span class="ribbon-band" aria-hidden="true"></span>
+   <span class="ribbon-bow" aria-hidden="true"><img src="assets/gold-bow.png" alt="" width="600" height="750" fetchpriority="high"></span>
+   <span class="open-caption">Սեղմեք՝ հրավերը բացելու համար</span>
+  </button>
+ </div>
+ <main id="invitation" hidden>
+  <section class="hero page-section" id="home" aria-labelledby="hero-title">
+   <div class="section-inner">
+    <p class="example-note reveal" id="example-note">Օրինակային տվյալներ․ օրը, ժամը, վայրն ու ընկերությունը դեռ հաստատված չեն։</p>
+    <div class="reveal" data-delay="80"><p class="eyebrow">ՏՈՆԵՆՔ ՄԻԱՍԻՆ</p><h1 id="hero-title"><span id="hero-heading">Միասին դեպի</span><strong id="celebration-year">2027</strong></h1></div>
+    <div class="reveal" data-delay="160"><p class="hero-event" id="event-title">Ամանորյա կորպորատիվ երեկույթ</p><p class="company-name" data-company>Ձեր ընկերությունը</p></div>
+    <div class="date-plate reveal" data-delay="240"><span id="date-month"></span><div><span id="date-weekday"></span><strong id="date-day"></strong><span id="date-time"></span></div></div>
+    <a class="scroll-cue reveal" data-delay="300" href="#info" aria-label="Տեսնել հրավերի մանրամասները"><span>Իջեք ներքև</span><svg viewBox="0 0 20 35" aria-hidden="true"><path d="M10 0v30m-6-6 6 6 6-6"/></svg></a>
+   </div>
+  </section>
+  <section class="page-section info-section" id="info" aria-labelledby="info-title">
+   <div class="section-inner reveal"><p class="eyebrow">ՄԻ ԵՐԵԿՈ՝ ՄԵԶ ԲՈԼՈՐԻ ՀԱՄԱՐ</p><h2 id="info-title">Բաժակ բարձրացնենք<br><em>նոր սկիզբների համար</em></h2><span class="fine-rule" aria-hidden="true"></span><p class="prose" id="invite-message"></p><div class="venue-details"><p class="eyebrow">ՀԱՆԴԻՊՄԱՆ ՎԱՅՐԸ</p><h3 id="venue-name"></h3><p id="venue-address"></p><a class="gold-button" id="maps-link" target="_blank" rel="noopener noreferrer" hidden>Տեսնել քարտեզի վրա <span aria-hidden="true">↗</span></a></div></div>
+  </section>
+  <section class="page-section calendar-section" id="calendar-section" aria-labelledby="calendar-title">
+   <div class="section-inner reveal"><p class="eyebrow">ՄԵՐ ՀԱՆԴԻՊՄԱՆ ՕՐԸ</p><h2 id="calendar-title">Պահպանեք այս օրը</h2><table class="calendar"><caption id="calendar-month"></caption><thead><tr><th scope="col"><abbr title="Երկուշաբթի">Երկ</abbr></th><th scope="col"><abbr title="Երեքշաբթի">Երք</abbr></th><th scope="col"><abbr title="Չորեքշաբթի">Չրք</abbr></th><th scope="col"><abbr title="Հինգշաբթի">Հնգ</abbr></th><th scope="col"><abbr title="Ուրբաթ">Ուրբ</abbr></th><th scope="col"><abbr title="Շաբաթ">Շբթ</abbr></th><th scope="col"><abbr title="Կիրակի">Կիր</abbr></th></tr></thead><tbody id="calendar-days"></tbody></table><p class="calendar-note" id="calendar-note"></p></div>
+  </section>
+  <section class="page-section countdown-section" aria-labelledby="countdown-title">
+   <div class="section-inner reveal"><p class="eyebrow">ՏՈՆԻՆ ԸՆԴԱՌԱՋ</p><h2 id="countdown-title">Մինչ հանդիպումը</h2><span class="fine-rule" aria-hidden="true"></span><div class="countdown" id="countdown" role="timer" aria-label="Միջոցառմանը մնացած ժամանակը"><div><strong id="days">00</strong><span>օր</span></div><b aria-hidden="true">:</b><div><strong id="hours">00</strong><span>ժամ</span></div><b aria-hidden="true">:</b><div><strong id="minutes">00</strong><span>րոպե</span></div><b aria-hidden="true">:</b><div><strong id="seconds">00</strong><span>վայրկյան</span></div></div><p id="countdown-message" hidden></p><p class="countdown-caption">Յուրաքանչյուր վայրկյանը մեզ մոտեցնում է<br>նոր հիշողություններին։</p></div>
+  </section>
+  <section class="page-section program-section" id="program" aria-labelledby="program-title"><div class="section-inner"><div class="reveal"><p class="eyebrow">ԱՄԵՆ ՊԱՀԸ՝ ՀԱՏՈՒԿ</p><h2 id="program-title">Երեկոյի ծրագիրը</h2></div><ol class="program" id="program-items"></ol></div></section>
+  <section class="page-section dress-section" aria-labelledby="dress-title"><div class="section-inner reveal"><p class="eyebrow">ԵՐԵԿՈՅԻ ՏՐԱՄԱԴՐՈՒԹՅՈՒՆԸ</p><h2 id="dress-title">Տոնական նրբագեղություն</h2><span class="fine-rule" aria-hidden="true"></span><p class="dress-description" id="dress-description"></p><ul class="dress-colors" id="dress-colors" aria-label="Դրես կոդի գույները"></ul><p class="soft-note">Թող ձեր ոճն արտահայտի տոնի տրամադրությունը։</p></div></section>
+  <section class="page-section rsvp-section" id="rsvp" aria-labelledby="rsvp-title"><div class="section-inner"><div class="reveal"><p class="eyebrow">ՁԵՐ ՏԵՂԸ ՍՊԱՍՈՒՄ Է ՁԵԶ</p><h2 id="rsvp-title">Մասնակցության հաստատում</h2><p class="rsvp-intro">Խնդրում ենք հայտնել՝ կլինե՞ք մեզ հետ։</p></div><form class="reveal" id="rsvp-form"><p class="preview-note" id="preview-note">Ցուցադրական ձև․ պատասխանները չեն ուղարկվում և չեն պահպանվում։</p><label for="full-name">Անուն, ազգանուն <span aria-hidden="true">*</span></label><input id="full-name" name="fullName" autocomplete="name" minlength="3" maxlength="120" placeholder="Ձեր անունը և ազգանունը" required><fieldset><legend>Մասնակցություն <span aria-hidden="true">*</span></legend><div class="attendance-options"><label><input type="radio" name="attendance" value="yes" checked required>Մասնակցելու եմ</label><label><input type="radio" name="attendance" value="no">Չեմ մասնակցելու</label></div></fieldset><label for="comment">Մեկնաբանություն <span class="optional">(ոչ պարտադիր)</span></label><textarea id="comment" name="comment" rows="3" maxlength="1000" placeholder="Ձեր ցանկությունը կամ հաղորդագրությունը…"></textarea><button class="gold-button" id="submit-rsvp" type="submit">Հաստատել <span aria-hidden="true">↗</span></button><p id="form-status" role="status" aria-live="polite" tabindex="-1"></p></form></div></section>
+  <section class="page-section thank-you" aria-labelledby="thank-title"><div class="section-inner reveal"><p class="eyebrow">ՏՈՆԸ ՍԿՍՎՈՒՄ Է ՄԱՐԴԿԱՆՑԻՑ</p><h2 id="thank-title">Սիրով սպասում ենք ձեզ</h2><span class="fine-rule" aria-hidden="true"></span><p class="prose">Շնորհակալ ենք, որ մեր պատմության մի մասն եք։<br>Թող այս երեկոն լցվի ժպիտներով, ջերմությամբ<br>և միասին ստեղծված գեղեցիկ պահերով։</p><p class="company-name" data-company>Ձեր ընկերությունը</p></div></section>
+ </main>
+ <noscript><p class="noscript">Հրավիրատոմսը բացելու համար միացրեք JavaScript-ը։</p></noscript>
+</body></html>
