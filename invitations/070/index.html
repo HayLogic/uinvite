@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f5f5f1">
  <meta name="description" content="Սպիտակ և ոսկեգույն ամանորյա հրավիրատոմս՝ բացվող ծրարով, տոնական ծրագրով և մասնակցության հաստատմամբ։">
- <title>Ամանորյա հրավիրատոմս · 070</title><link rel="stylesheet" href="style.css?v=070-clean-notes-1"><script src="script.js?v=070-clean-notes-1" defer></script>
+ <title>Ամանորյա հրավիրատոմս · 070</title><link rel="stylesheet" href="style.css?v=070-music-1"><script src="script.js?v=070-music-1" defer></script>
 </head>
 <body class="cover-active">
  <div class="envelope-cover" id="envelope-cover">
@@ -65,5 +65,7 @@
   </section>
  </main>
  <canvas class="snowfall" id="snowfall" aria-hidden="true"></canvas>
+ <button class="music-button" id="music-toggle" type="button" aria-label="Միացնել երաժշտությունը" aria-pressed="false"><svg class="music-play" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7Z"/></svg><svg class="music-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button>
+ <audio id="music" loop preload="none"></audio><span class="sr-only" id="audio-status" role="status" aria-live="polite"></span>
  <noscript><p class="noscript">Հրավիրատոմսը բացելու համար միացրեք JavaScript-ը։</p></noscript>
 </body></html>

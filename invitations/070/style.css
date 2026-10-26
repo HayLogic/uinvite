@@ -86,3 +86,14 @@ footer{padding:35px 22px 65px;text-align:center;background:linear-gradient(#fbfb
 .thanks-content>.company-name{font-size:clamp(26px,5vw,38px)}
 @media(min-width:768px){.calendar .event-date time{min-width:49px;min-height:49px}.thank-message{font-size:14px;line-height:2.3}.thank-closing{font-size:15px}.thanks-content>.eyebrow{font-size:9px}}
 @media(min-width:1000px){.thank-you{min-height:760px;justify-content:flex-start;padding-left:10%;padding-right:45%}.thanks-content{min-width:0}.thanks-tree{right:-10px;bottom:-55px;width:52%;height:680px;opacity:.78}.thanks-ornament{left:2%;top:-100px;width:175px;height:270px}}
+
+/* Persistent icon-only music control, matching the champagne gold palette. */
+.music-button{position:fixed;right:16px;bottom:18px;z-index:60;display:grid;place-items:center;width:46px;height:46px;border:1px solid #c8ae72;border-radius:50%;padding:12px;color:#9d803e;background:linear-gradient(135deg,#fffef4ed,#f1e5c9ed);box-shadow:0 3px 14px #8c793c22;backdrop-filter:blur(4px)}
+.music-button svg{width:20px;height:20px;display:block}
+.music-button .music-play{fill:currentColor;stroke:none}
+.music-button .music-pause{display:none;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round}
+.music-button[aria-pressed=true] .music-play{display:none}
+.music-button[aria-pressed=true] .music-pause{display:block}
+.music-button:disabled{opacity:.45;cursor:default}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(min-width:768px){.music-button{right:25px;bottom:25px}}

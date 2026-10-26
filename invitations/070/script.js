@@ -25,6 +25,7 @@ const CONFIG = Object.freeze({
     {name:'Արծաթագույն',color:'#bec5c9'}
   ],
   rsvpEndpoint: '', // Առանց backend-ի ձևը ցուցադրական է։ Գաղտնի բանալիներ չտեղադրել։
+  musicUrl: 'assets/music.mp3',
   snowEnabled: true
 });
 const $ = selector => document.querySelector(selector);
@@ -111,9 +112,38 @@ CONFIG.dressColors.forEach(color=>{
   item.append(swatch,label);$('#dress-colors').append(item);
 });
 // Open the outer folds around the page, without pulling a card out of the envelope.
+const music = $('#music');
+const musicButton = $('#music-toggle');
+let musicUnavailable = !CONFIG.musicUrl;
+let musicPlaying = false;
+if (CONFIG.musicUrl) music.src = CONFIG.musicUrl;
+function syncMusic() {
+  const playing = musicPlaying && !music.paused && !music.ended && !musicUnavailable;
+  musicButton.setAttribute('aria-pressed',String(playing));
+  musicButton.setAttribute('aria-label',musicUnavailable ? 'Երաժշտության ֆայլը հասանելի չէ' : playing ? 'Դադարեցնել երաժշտությունը' : 'Միացնել երաժշտությունը');
+  musicButton.disabled = musicUnavailable;
+}
+async function playMusic() {
+  if (musicUnavailable) return;
+  try { await music.play(); } catch {
+    musicPlaying = false;
+    $('#audio-status').textContent = musicUnavailable ? 'Երաժշտության ֆայլը հասանելի չէ։' : 'Երաժշտությունը չի միացել։ Կարող եք կրկին փորձել երաժշտության կոճակով։';
+  }
+  syncMusic();
+}
+music.addEventListener('playing',()=>{musicPlaying=true;syncMusic();});
+['pause','ended','waiting','stalled'].forEach(event=>music.addEventListener(event,()=>{musicPlaying=false;syncMusic();}));
+music.addEventListener('error',()=>{
+  musicUnavailable=true;musicPlaying=false;syncMusic();
+  $('#audio-status').textContent='Երաժշտության ֆայլը հասանելի չէ։';
+});
+musicButton.addEventListener('click',()=>{if(music.paused) void playMusic(); else {music.pause();syncMusic();}});
+syncMusic();
+
 let opened=false;
 $('#open-envelope').addEventListener('click',()=>{
   if(opened)return;
+  void playMusic();
   opened=true;$('#open-envelope').disabled=true;$('#open-envelope').setAttribute('aria-expanded','true');
   const cover=$('#envelope-cover'),invitation=$('#invitation');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
