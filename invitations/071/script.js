@@ -1,23 +1,22 @@
 'use strict';
-// 071-ի միջոցառման տվյալները դեռ օրինակային են։ Նախորդ տարբերակներից տվյալներ չեն փոխանցվում։
+// Հաստատված միջոցառման տվյալներ. հասցեն, քարտեզը և RSVP endpoint-ը դեռ չեն տրամադրվել։
 const CONFIG = Object.freeze({
   invitationNumber:'071',
-  companyName:'Ձեր ընկերությունը',
+  companyName:'SS group',
   heroHeading:'Միասին դեպի',
   celebrationYear:'2027',
   eventTitle:'Ամանորյա կորպորատիվ երեկույթ',
-  eventDate:'2026-12-31T20:00:00+04:00', // Օրինակային օր և ժամ՝ Հայաստանի ժամային գոտով։
-  exampleData:true,
-  venueName:'Միջոցառման վայրը կճշտվի',
+  eventDate:'2026-12-26T17:30:00+04:00', // Հայաստանի ժամային գոտի։
+  venueName:'Դվին Հոլլ',
   address:'',
   mapsUrl:'',
   inviteMessage:'Սիրելի՛ գործընկերներ, հրավիրում ենք ձեզ միասին ամփոփելու անցնող տարին, կիսվելու մեր ձեռքբերումներով և նոր երազանքներով դիմավորելու գալիքը։ Թող այս երեկոն լցվի բաժակների զնգոցով, ժպիտներով ու ջերմ հիշողություններով։',
   program:[
-    {time:'20:00',title:'Հյուրերի դիմավորում',description:'Առաջին հանդիպումները և տոնական կենացը'},
-    {time:'20:30',title:'Տոնական ընթրիք',description:'Տարվա ձեռքբերումների ամփոփում և ջերմ զրույցներ'},
-    {time:'21:30',title:'Խաղեր և անակնկալներ',description:'Մի փոքր կախարդանք՝ յուրաքանչյուրի համար'},
-    {time:'22:30',title:'Երաժշտություն և պարեր',description:'Երեկոյի ամենավառ ռիթմերը'},
-    {time:'00:00',title:'Դիմավորում ենք նոր տարին',description:'Բաժակ բարձրացնենք մեր նոր սկիզբների համար'}
+    {time:'17:30',title:'Հյուրերի դիմավորում',description:'Առաջին հանդիպումները և տոնական կենացը'},
+    {time:'18:00',title:'Տոնական ընթրիք',description:'Տարվա ձեռքբերումների ամփոփում և ջերմ զրույցներ'},
+    {time:'19:00',title:'Խաղեր և անակնկալներ',description:'Մի փոքր կախարդանք՝ յուրաքանչյուրի համար'},
+    {time:'20:00',title:'Երաժշտություն և պարեր',description:'Երեկոյի ամենավառ ռիթմերը'},
+    {time:'21:30',title:'Տոնական ավարտ',description:'Նոր հիշողություններով՝ դեպի նոր տարի'}
   ],
   dressDescription:'Շամպայնի երանգների նրբությունը, ոսկու փայլը և սևի դասական շքեղությունը։',
   dressColors:[{name:'Շամպայն',color:'#d9c5a2'},{name:'Ոսկեգույն',color:'#d1aa56'},{name:'Սև',color:'#262018'}],
@@ -28,7 +27,6 @@ const $=selector=>document.querySelector(selector);
 document.querySelectorAll('[data-company]').forEach(element=>{element.textContent=CONFIG.companyName;});
 $('#hero-heading').textContent=CONFIG.heroHeading;$('#celebration-year').textContent=CONFIG.celebrationYear;$('#event-title').textContent=CONFIG.eventTitle;
 document.title=`${CONFIG.companyName} · ${CONFIG.eventTitle} · ${CONFIG.invitationNumber}`;
-$('#example-note').hidden=!CONFIG.exampleData;
 $('#invite-message').textContent=CONFIG.inviteMessage;$('#venue-name').textContent=CONFIG.venueName;$('#venue-address').textContent=CONFIG.address;
 function safeURL(value,relative=false){
   if(!value)return '';
