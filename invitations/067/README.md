@@ -35,3 +35,9 @@
 `hero-background-mobile.png` և `hero-background-wide.png`-ը նոր սկզբնական հատվածի առանձին հեռախոսային/լայն ֆոներն են՝ առանց պատկերի մեջ գրված տեքստի։ `gold-bow-seal.png`-ը մուտքի առանձին պատկերն է։ Նախորդ `celebration-scene.png` և `gold-streamer.png` նյութերը պահպանված են, բայց ներկայիս սկզբնական հատվածում չեն օգտագործվում։ `white-paper.png`-ը առանձին թղթե տեքստուրա է։ Noto Serif Armenian տառատեսակը տեղային է՝ իր SIL Open Font License-ով։ Ամբողջ հղում-նկարը որպես կայքի ֆոն չի օգտագործվում․ տեքստերը, տվյալներն ու կոճակները իրական HTML են։
 
 Ստուգված են 360, 390, 768, 1440px լայնությունները, բացման անիմացիան և կրկնակի սեղմումների կանխումը, սքրոլի մուտք/ելք/կրկնակի մուտքը, հեռախոսի ցանկը և Escape-ը, Հայաստանի ժամային գոտին, հետհաշվարկի ավարտը, իրական տվյալների բացակայության դեպքում վայրի/քարտեզի թաքցնելը, ստեղնաշարը և նվազեցված շարժումը։ RSVP-ի վավերացումը, ցուցադրական ռեժիմը, ինչպես նաև փորձնական API-ի հաջողության, սխալի և կրկնակի ուղարկման վարքը ստուգված են․ իրական endpoint չի միացվել։
+
+
+## Latest confirmed details
+Company: TT Group. Start: 18:00 Armenia. Venue: Adana complex. The existing 31 December 2026 date remains illustrative; no new date was supplied. The provisional program starts at 18:00. Exact address/map remain unset.
+
+The user requested the supplied fireworks/Christmas-tree image as the 067 hero background. The inline reference is visible in chat but no image file or downloadable URL is available in the workspace. Background replacement is pending the original file; the existing background remains in place. Do not generate a substitute and claim it is the supplied image.
