@@ -53,3 +53,5 @@ A compact five-image gallery appears before venue, matching the requested horizo
 
 ## Latest venue card
 Venue is now a wide photo-led section with a translucent dark rounded location card over its lower center: pin, CONFIG.venueName, optional CONFIG.address and map search button. Generated assets/venue-atmosphere.png is used as clearly labeled illustrative hall art via venueArtwork; it is NOT an Adana photograph. Set venueImage to a real photo to replace the illustration and hide the artwork label. The user explicitly requested a blank address. Keep CONFIG.address empty and hide its line; do not invent it. Map remains a venue-name search.
+
+Latest dress-code edit: removed the shoe and clutch cards at the user’s request. Only tuxedo and gown remain, in two columns at all widths. Shared generated contact sheet remains as the source for those two cards.
