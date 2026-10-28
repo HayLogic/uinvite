@@ -12,7 +12,7 @@
 
 ## Տվյալներ
 
-Իրական տվյալներ 067-ի համար դեռ չեն տրամադրվել։ `script.js`-ի սկզբի `CONFIG`-ում կենտրոնացված են օրինակային ընկերությունը, դիմավորվող տարին, 31․12․2026-ի 19։00 ամսաթիվ/ժամը, հրավերի տեքստը, ծրագիրը, վայրի լուսանկարը, քարտեզը և RSVP endpoint-ը։ Նախորդ տարբերակների SS group/AMA/Codu տվյալները չեն փոխանցվել։
+Ընկերությունը՝ TT Group, ժամը՝ 18։00, վայրը՝ Adana complex։ Օրը դեռ օրինակային է։ `script.js`-ի սկզբի `CONFIG`-ում կենտրոնացված են ընկերությունը, դիմավորվող տարին, օրինակային 31․12․2026 օրը և հաստատված 18։00 ժամը, հրավերի տեքստը, ծրագիրը, վայրի լուսանկարը, քարտեզը և RSVP endpoint-ը։ Նախորդ տարբերակների SS group/AMA/Codu տվյալները չեն փոխանցվել։
 
 Օրը ISO ձևաչափով է՝ `+04:00` Հայաստանի offset-ով։ Ցուցադրված ամսաթիվն ու ժամը անկախ են այցելուի ժամային գոտուց, հետհաշվարկը մեկնարկից հետո բացասական չի դառնում։
 
@@ -40,4 +40,4 @@
 ## Latest confirmed details
 Company: TT Group. Start: 18:00 Armenia. Venue: Adana complex. The existing 31 December 2026 date remains illustrative; no new date was supplied. The provisional program starts at 18:00. Exact address/map remain unset.
 
-The user requested the supplied fireworks/Christmas-tree image as the 067 hero background. The inline reference is visible in chat but no image file or downloadable URL is available in the workspace. Background replacement is pending the original file; the existing background remains in place. Do not generate a substitute and claim it is the supplied image.
+The user clarified that the supplied fireworks/Christmas-tree artwork belongs in a separate decorative interlude AFTER welcome/features and BEFORE the program, not in the hero. The existing hero and entrance remain unchanged. The responsive interlude has full-width art, dark fade edges, a gold Armenian caption, scroll reveal and TT Group signature. It is hidden until its image successfully loads. To finish: obtain the actual uploaded image file, save it to assets/celebration-fireworks.png and set CONFIG.celebrationImage to that relative path. The inline chat image has no accessible file or URL in the workspace yet; no substitute was generated.

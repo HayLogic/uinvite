@@ -8,6 +8,7 @@ const CONFIG=Object.freeze({
   eventDate:'2026-12-31T18:00:00+04:00',
   venueName:'Adana complex',
   address:'Միջոցառման ճշգրիտ հասցեն կհայտարարվի շուտով։',
+  celebrationImage:'', // Կցված հրավառության նկարի ֆայլը՝ assets/celebration-fireworks.png։ Hero-ի համար չէ։
   venueImage:'', // Միայն հաստատված իրական վայրի լուսանկար։
   mapsUrl:'',
   inviteMessage:'Սիրելի՛ գործընկերներ, հրավիրում ենք ձեզ միասին ամփոփելու անցնող տարին, նշելու մեր ձեռքբերումները և նոր երազանքներով դիմավորելու գալիքը։ Սպասվում է ջերմ երեկո՝ երաժշտությամբ, հաճելի անակնկալներով և միասին ստեղծված անմոռանալի պահերով։',
@@ -35,6 +36,13 @@ const mapsUrl=safeURL(CONFIG.mapsUrl);if(mapsUrl){$('#maps-link').href=mapsUrl;$
 if(CONFIG.venueImage){
   const image=$('#venue-image');image.alt=`${CONFIG.venueName}՝ միջոցառման վայրի լուսանկարը`;
   image.addEventListener('load',()=>{$('#venue-photo').hidden=false;});image.addEventListener('error',()=>{$('#venue-photo').hidden=true;});image.src=CONFIG.venueImage;
+}
+// Decorative interlude below the welcome section, separate from the hero and venue photo.
+if(CONFIG.celebrationImage){
+  const image=$('#celebration-image');
+  image.addEventListener('load',()=>{$('#celebration-scene').hidden=false;});
+  image.addEventListener('error',()=>{$('#celebration-scene').hidden=true;});
+  image.src=CONFIG.celebrationImage;
 }
 const eventDate=new Date(CONFIG.eventDate),validDate=Number.isFinite(eventDate.getTime())&&/\+04:00$/.test(CONFIG.eventDate);
 const months=['հունվարի','փետրվարի','մարտի','ապրիլի','մայիսի','հունիսի','հուլիսի','օգոստոսի','սեպտեմբերի','հոկտեմբերի','նոյեմբերի','դեկտեմբերի'];
