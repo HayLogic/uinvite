@@ -16,7 +16,7 @@
 
 Օրը ISO ձևաչափով է՝ `+04:00` Հայաստանի offset-ով։ Ցուցադրված ամսաթիվն ու ժամը անկախ են այցելուի ժամային գոտուց, հետհաշվարկը մեկնարկից հետո բացասական չի դառնում։
 
-Վայրը՝ Adana complex։ Ճշգրիտ հասցե, քարտեզի հղում և իրական լուսանկար դեռ չկան։ Վայրի լուսանկարի բլոկը չի ցուցադրվում, մինչև `venueImage`-ում իրական լուսանկար չլրացվի և այն հաջողությամբ բեռնվի։ Չկա դատարկ նկար կամ հորինված սրահի լուսանկար։ Քարտեզի կոճակը դատարկ/անվավեր URL-ի դեպքում թաքնված է, իրական հղումը բացվում է նոր ներդիրում։
+Վայրը՝ Adana complex։ Ճշգրիտ հասցե, քարտեզի հղում և իրական լուսանկար դեռ չկան։ Վայրի լուսանկարի բլոկը չի ցուցադրվում, մինչև `venueImage`-ում իրական լուսանկար չլրացվի և այն հաջողությամբ բեռնվի։ Չկա դատարկ նկար կամ հորինված սրահի լուսանկար։ Քարտեզի կոճակը բացում է Adana complex անվանմամբ որոնում, ոչ հաստատված հասցե։ Դատարկ/անվավեր URL-ի դեպքում այն թաքնված է։
 
 ## Գործարկում և cPanel
 
@@ -41,3 +41,7 @@
 Company: TT Group. Start: 18:00 Armenia. Venue: Adana complex. The existing 31 December 2026 date remains illustrative; no new date was supplied. The provisional program starts at 18:00. Exact address/map remain unset.
 
 The decorative fireworks interlude appears AFTER welcome/features and BEFORE the program, not in the hero. The user explicitly authorized creating images: assets/celebration-fireworks.png (portrait) and celebration-fireworks-wide.png (wide) are generated festive artwork, not photographs of Adana complex. The responsive picture has dark fade edges, a gold Armenian caption, scroll reveal and TT Group signature. It appears only on successful image load. The existing hero and entrance are unchanged.
+
+
+## Dress code and venue layout
+Black Tie section added after venue and before RSVP, matching the reference editorial strip. Four equal fashion cards use generated black-tie-collection.png: tuxedo, gown, heels and gold-accent clutch. Two columns on phones, four on tablets and a side-by-side copy/gallery layout on desktop. Existing reveal/reduced-motion behavior applies. Venue uses left-aligned typography, a diagonal photo frame when an actual CONFIG.venueImage is provided, and a venue-name Google Maps SEARCH link (not an asserted exact pin). An actual Adana interior photo has not been supplied; no generated artwork is presented as the real restaurant.
