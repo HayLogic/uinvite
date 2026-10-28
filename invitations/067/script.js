@@ -80,6 +80,22 @@ $('#site-nav').querySelectorAll('a').forEach(link=>link.addEventListener('click'
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menuOpen){menuOpen=false;updateMenu();$('#nav-toggle').focus();}});
 document.addEventListener('click',event=>{if(menuOpen&&!$('#site-header').contains(event.target)){menuOpen=false;updateMenu();}});
 desktop.addEventListener('change',()=>{menuOpen=false;updateMenu();});updateMenu();
+// Manual gallery: touch/trackpad scrolling, arrow keys, and named buttons; no autoplay.
+const momentsTrack=$('#moments-track');
+function updateMomentsButtons(){
+  $('#moments-prev').disabled=momentsTrack.scrollLeft<=5;
+  $('#moments-next').disabled=momentsTrack.scrollLeft+momentsTrack.clientWidth>=momentsTrack.scrollWidth-5;
+}
+function scrollMoments(direction){
+  const card=momentsTrack.querySelector('figure');
+  momentsTrack.scrollBy({left:direction*(card.getBoundingClientRect().width+10),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+}
+$('#moments-prev').addEventListener('click',()=>scrollMoments(-1));
+$('#moments-next').addEventListener('click',()=>scrollMoments(1));
+momentsTrack.addEventListener('scroll',updateMomentsButtons,{passive:true});
+momentsTrack.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();scrollMoments(event.key==='ArrowRight'?1:-1);}});
+window.addEventListener('resize',updateMomentsButtons,{passive:true});
+document.addEventListener('invitation:opened',updateMomentsButtons);
 function initializeReveals(){
   if(!('IntersectionObserver' in window))return;
   const targets=Array.from(document.querySelectorAll('.reveal')),preference=matchMedia('(prefers-reduced-motion: reduce)');

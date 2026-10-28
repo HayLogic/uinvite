@@ -45,3 +45,7 @@ The decorative fireworks interlude appears AFTER welcome/features and BEFORE the
 
 ## Dress code and venue layout
 Black Tie section added after venue and before RSVP, matching the reference editorial strip. Four equal fashion cards use generated black-tie-collection.png: tuxedo, gown, heels and gold-accent clutch. Two columns on phones, four on tablets and a side-by-side copy/gallery layout on desktop. Existing reveal/reduced-motion behavior applies. Venue uses left-aligned typography, a diagonal photo frame when an actual CONFIG.venueImage is provided, and a venue-name Google Maps SEARCH link (not an asserted exact pin). An actual Adana interior photo has not been supplied; no generated artwork is presented as the real restaurant.
+
+
+## Մեր պահերը միասին
+A compact five-image gallery appears before venue, matching the requested horizontal strip. Generated illustrative mood images (not actual company-event photographs) show table, toast, tree, hall and dinner details in assets/moments-collection.png. Real photos can replace the artwork later. Gallery supports named previous/next buttons, horizontal swipe/trackpad, left/right keyboard keys, scroll snapping and reduced motion. No autoplay or dependency. Arrows disable at boundaries and re-evaluate on resize/open.
