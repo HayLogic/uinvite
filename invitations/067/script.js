@@ -7,9 +7,10 @@ const CONFIG=Object.freeze({
   eventTitle:'Տոնական երեկո',
   eventDate:'2026-12-31T18:00:00+04:00',
   venueName:'Adana complex',
-  address:'Միջոցառման ճշգրիտ հասցեն կհայտարարվի շուտով։',
+  address:'',
   celebrationImage:'assets/celebration-fireworks.png', // Գեներացված տոնական դեկոր՝ առանձին ստորին հատվածում։
   venueImage:'', // Միայն հաստատված իրական վայրի լուսանկար։
+  venueArtwork:'assets/venue-atmosphere.png', // Տոնական սրահի գեներացված պատկերազարդում։
   mapsUrl:'https://www.google.com/maps/search/?api=1&query=Adana%20complex', // Որոնում ըստ անվանման, ոչ հաստատված հասցե։
   inviteMessage:'Սիրելի՛ գործընկերներ, հրավիրում ենք ձեզ միասին ամփոփելու անցնող տարին, նշելու մեր ձեռքբերումները և նոր երազանքներով դիմավորելու գալիքը։ Սպասվում է ջերմ երեկո՝ երաժշտությամբ, հաճելի անակնկալներով և միասին ստեղծված անմոռանալի պահերով։',
   program:[
@@ -27,15 +28,17 @@ document.querySelectorAll('[data-company]').forEach(element=>{element.textConten
 document.querySelectorAll('[data-year]').forEach(element=>{element.textContent=CONFIG.celebrationYear;});
 $('#entry-year').textContent=CONFIG.celebrationYear;
 document.title=`${CONFIG.companyName} · ${CONFIG.eventTitle} · ${CONFIG.invitationNumber}`;
-$('#invite-message').textContent=CONFIG.inviteMessage;$('#hero-venue').textContent=CONFIG.venueName;$('#venue-name').textContent=CONFIG.venueName;$('#venue-address').textContent=CONFIG.address;
+$('#invite-message').textContent=CONFIG.inviteMessage;$('#hero-venue').textContent=CONFIG.venueName;$('#venue-name').textContent=CONFIG.venueName;$('#venue-address').textContent=CONFIG.address;$('#venue-address').hidden=!CONFIG.address;
 function safeURL(value,relative=false){
   if(!value)return '';
   try{const url=relative ? new URL(value,location.href) : new URL(value);return ['http:','https:'].includes(url.protocol) ? url.href : '';}catch{return '';}
 }
 const mapsUrl=safeURL(CONFIG.mapsUrl);if(mapsUrl){$('#maps-link').href=mapsUrl;$('#maps-link').hidden=false;}
-if(CONFIG.venueImage){
-  const image=$('#venue-image');image.alt=`${CONFIG.venueName}՝ միջոցառման վայրի լուսանկարը`;
-  image.addEventListener('load',()=>{$('#venue-photo').hidden=false;});image.addEventListener('error',()=>{$('#venue-photo').hidden=true;});image.src=CONFIG.venueImage;
+const venuePicture=CONFIG.venueImage||CONFIG.venueArtwork;
+$('#venue-art-note').hidden=Boolean(CONFIG.venueImage);
+if(venuePicture){
+  const image=$('#venue-image');image.alt=CONFIG.venueImage?`${CONFIG.venueName}՝ միջոցառման վայրի լուսանկարը`:'Ոսկեգույն տոնական սրահի պատկերազարդում';
+  image.addEventListener('load',()=>{$('#venue-photo').hidden=false;});image.addEventListener('error',()=>{$('#venue-photo').hidden=true;});image.src=venuePicture;
 }
 // Decorative interlude below the welcome section, separate from the hero and venue photo.
 if(CONFIG.celebrationImage){

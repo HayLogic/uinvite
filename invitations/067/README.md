@@ -49,3 +49,7 @@ Black Tie section added after venue and before RSVP, matching the reference edit
 
 ## Մեր պահերը միասին
 A compact five-image gallery appears before venue, matching the requested horizontal strip. Generated illustrative mood images (not actual company-event photographs) show table, toast, tree, hall and dinner details in assets/moments-collection.png. Real photos can replace the artwork later. Gallery supports named previous/next buttons, horizontal swipe/trackpad, left/right keyboard keys, scroll snapping and reduced motion. No autoplay or dependency. Arrows disable at boundaries and re-evaluate on resize/open.
+
+
+## Latest venue card
+Venue is now a wide photo-led section with a translucent dark rounded location card over its lower center: pin, CONFIG.venueName, optional CONFIG.address and map search button. Generated assets/venue-atmosphere.png is used as clearly labeled illustrative hall art via venueArtwork; it is NOT an Adana photograph. Set venueImage to a real photo to replace the illustration and hide the artwork label. The user explicitly requested a blank address. Keep CONFIG.address empty and hide its line; do not invent it. Map remains a venue-name search.
