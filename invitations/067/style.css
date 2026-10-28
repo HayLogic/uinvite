@@ -68,7 +68,7 @@ h1{font-size:clamp(42px,11vw,74px);line-height:1.45;margin:0 auto 20px;text-shad
 
 /* An immersive lower-page interlude, independent of the existing hero. */
 .celebration-scene{position:relative;isolation:isolate;overflow:hidden;width:100%;max-width:1440px;margin:0 auto;min-height:650px;aspect-ratio:2/3;background:#050504}
-.celebration-art{position:absolute;inset:0;z-index:-2}.celebration-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.celebration-art{display:block;position:absolute;inset:0;z-index:-2}.celebration-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 .celebration-scene::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#050504 0%,#05050422 15%,transparent 37%,transparent 75%,#050504 100%)}
 .celebration-caption{position:relative;text-align:center;padding:95px 26px 0;width:min(100%,650px);margin:auto;text-shadow:0 2px 18px #000}
 .celebration-caption h2{font-size:clamp(26px,5vw,46px);line-height:1.9;color:#f0d39b;text-wrap:balance}.celebration-caption>p:last-child{color:#e5c387;font-size:15px;letter-spacing:3px}.celebration-caption .fine-rule{width:100px}
