@@ -7,17 +7,6 @@ const CONFIG=Object.freeze({
   eventTitle:'Տոնական երեկո',
   eventDate:'2026-12-26T19:00:00+04:00',
   venueName:'Վայրը կճշտվի',
-  address:'Միջոցառման ճշգրիտ հասցեն կհայտարարվի շուտով։',
-  venueImage:'', // Միայն հաստատված իրական վայրի լուսանկար։
-  mapsUrl:'',
-  inviteMessage:'Սիրելի՛ գործընկերներ, հրավիրում ենք ձեզ միասին ամփոփելու անցնող տարին, նշելու մեր ձեռքբերումները և նոր երազանքներով դիմավորելու գալիքը։ Սպասվում է ջերմ երեկո՝ երաժշտությամբ, հաճելի անակնկալներով և միասին ստեղծված անմոռանալի պահերով։',
-  program:[
-    {time:'19:00',title:'Հյուրերի դիմավորում',description:'Տոնական տրամադրություն և առաջին կենացը'},
-    {time:'19:30',title:'Տոնական ընթրիք',description:'Համեր, զրույցներ և գեղեցիկ պահեր'},
-    {time:'20:30',title:'Խաղեր և անակնկալներ',description:'Ժպիտներ և տոնական կախարդանք'},
-    {time:'22:00',title:'Երաժշտություն և պարեր',description:'Երեկոյի ամենավառ ռիթմերը'},
-    {time:'23:00',title:'Միասին՝ դեպի նոր տարի',description:'Բաժակ բարձրացնենք մեր նոր սկիզբների համար'}
-  ],
   rsvpEndpoint:'', // Առանց endpoint-ի ձևը ցուցադրական է։ Գաղտնի բանալիներ չտեղադրել։
   glitterEnabled:true
 });
@@ -26,15 +15,10 @@ document.querySelectorAll('[data-company]').forEach(element=>{element.textConten
 document.querySelectorAll('[data-year]').forEach(element=>{element.textContent=CONFIG.celebrationYear;});
 
 document.title=`${CONFIG.companyName} · ${CONFIG.eventTitle} · ${CONFIG.invitationNumber}`;
-$('#invite-message').textContent=CONFIG.inviteMessage;$('#hero-venue').textContent=CONFIG.venueName;$('#venue-name').textContent=CONFIG.venueName;$('#venue-address').textContent=CONFIG.address;
+$('#hero-venue').textContent=CONFIG.venueName;
 function safeURL(value,relative=false){
   if(!value)return '';
   try{const url=relative ? new URL(value,location.href) : new URL(value);return ['http:','https:'].includes(url.protocol) ? url.href : '';}catch{return '';}
-}
-const mapsUrl=safeURL(CONFIG.mapsUrl);if(mapsUrl){$('#maps-link').href=mapsUrl;$('#maps-link').hidden=false;}
-if(CONFIG.venueImage){
-  const image=$('#venue-image');image.alt=`${CONFIG.venueName}՝ միջոցառման վայրի լուսանկարը`;
-  image.addEventListener('load',()=>{$('#venue-photo').hidden=false;});image.addEventListener('error',()=>{$('#venue-photo').hidden=true;});image.src=CONFIG.venueImage;
 }
 const eventDate=new Date(CONFIG.eventDate),validDate=Number.isFinite(eventDate.getTime())&&/\+04:00$/.test(CONFIG.eventDate);
 const months=['հունվարի','փետրվարի','մարտի','ապրիլի','մայիսի','հունիսի','հուլիսի','օգոստոսի','սեպտեմբերի','հոկտեմբերի','նոյեմբերի','դեկտեմբերի'];
@@ -43,22 +27,6 @@ if(validDate){
   $('#event-date').textContent=`${Number(parts.day)} ${months[Number(parts.month)-1]} ${parts.year}`;
   $('#event-time').textContent=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',hourCycle:'h23',timeZone:'Asia/Yerevan'}).format(eventDate);
 }else{$('#event-date').textContent='Ամսաթիվը կճշտվի';$('#event-time').textContent='Ժամը կճշտվի';}
-function updateCountdown(now=Date.now()){
-  const remaining=validDate ? eventDate.getTime()-now : NaN;
-  if(!Number.isFinite(remaining)||remaining<=0){$('#countdown').hidden=true;$('#countdown-message').hidden=false;$('#countdown-message').textContent=validDate ? 'Մեր տոնական երեկոն արդեն մեկնարկել է։' : 'Միջոցառման ամսաթիվը կճշտվի։';return;}
-  $('#countdown').hidden=false;$('#countdown-message').hidden=true;
-  const seconds=Math.floor(remaining/1000),values=[Math.floor(seconds/86400),Math.floor(seconds/3600)%24,Math.floor(seconds/60)%60,seconds%60];
-  ['days','hours','minutes','seconds'].forEach((id,i)=>{document.getElementById(id).textContent=String(values[i]).padStart(2,'0');});
-}
-updateCountdown();setInterval(updateCountdown,1000);
-const entries=document.createDocumentFragment();
-CONFIG.program.forEach((item,i)=>{
-  const entry=document.createElement('li');entry.className='reveal';entry.dataset.delay=String(i%2*70);
-  const time=document.createElement('time');time.textContent=item.time;time.dateTime=item.time;
-  const text=document.createElement('div'),title=document.createElement('h3'),description=document.createElement('p');title.textContent=item.title;description.textContent=item.description;
-  text.append(title,description);entry.append(time,text);entries.append(entry);
-});
-$('#program-items').append(entries);
 function initializeReveals(){
   if(!('IntersectionObserver' in window))return;
   const targets=Array.from(document.querySelectorAll('.reveal')),preference=matchMedia('(prefers-reduced-motion: reduce)');
@@ -82,43 +50,11 @@ form.addEventListener('submit',async event=>{
   const name=$('#full-name');name.setCustomValidity(name.value.trim().split(/\s+/).length<2 ? 'Խնդրում ենք նշել անունը և ազգանունը։' : '');if(!form.reportValidity())return;
   const status=$('#form-status');status.classList.remove('error');
   if(isPreview){status.textContent='Դաշտերը ճիշտ են լրացված։ Սա ցուցադրական ձև է․ պատասխանը չի ուղարկվել և չի պահպանվել։';status.focus();return;}
-  const payload={fullName:name.value.trim(),attendance:form.elements.attendance.value,comment:$('#comment').value.trim()};
+  const payload={fullName:name.value.trim(),attendance:form.elements.attendance.value,comment:''};
   submitting=true;$('#submit-rsvp').disabled=true;form.setAttribute('aria-busy','true');status.textContent='Ուղարկվում է…';
   try{await sendRSVP(payload);status.textContent='Շնորհակալություն։ Ձեր պատասխանն ընդունված է։';form.reset();}
   catch{status.classList.add('error');status.textContent='Չհաջողվեց հաստատել պատասխանի ընդունումը։ Փորձեք ավելի ուշ կամ կապվեք կազմակերպչի հետ։';}
   finally{submitting=false;$('#submit-rsvp').disabled=false;form.removeAttribute('aria-busy');status.focus();}
 });
 $('#full-name').addEventListener('input',event=>event.target.setCustomValidity(''));
-function initializeGoldDust(){
-  const canvas=$('#gold-dust'),context=canvas.getContext('2d');if(!CONFIG.glitterEnabled||!context){canvas.hidden=true;return;}
-  const preference=matchMedia('(prefers-reduced-motion: reduce)');
-  let width=0,height=0,particles=[],frame=0,last=0,entry=true,seed=672027;
-  const random=()=>{seed=seed*16807%2147483647;return(seed-1)/2147483646;};
-  const sprite=document.createElement('canvas');sprite.width=sprite.height=48;
-  const brush=sprite.getContext('2d'),gradient=brush.createRadialGradient(24,24,0,24,24,24);
-  gradient.addColorStop(0,'rgba(255,246,194,1)');gradient.addColorStop(.12,'rgba(255,213,104,.95)');gradient.addColorStop(.4,'rgba(215,161,46,.25)');gradient.addColorStop(1,'rgba(183,119,19,0)');brush.fillStyle=gradient;brush.fillRect(0,0,48,48);
-  function resize(){
-    width=innerWidth;height=innerHeight;entry=document.body.classList.contains('cover-active');const ratio=Math.min(devicePixelRatio||1,1.5);
-    canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);context.setTransform(ratio,0,0,ratio,0,0);
-    const count=entry ? Math.min(1100,Math.max(700,Math.round(width*1.7))) : Math.min(180,Math.max(80,Math.round(width/8)));
-    particles=Array.from({length:count},(_,i)=>({x:entry ? random()*width : (i%6===0 ? width*(.94+random()*.06) : width*Math.pow(random(),1.9)*.105),y:entry ? Math.pow(random(),1.9)*height*.36 : random()*height,size:.35+random()*1.05,speed:entry ? 5+random()*12 : 3+random()*5,phase:random()*Math.PI*2,opacity:entry ? .5+random()*.5 : .25+random()*.65,star:random()>.975}));draw(0,0);
-  }
-  function draw(elapsed,time){
-    context.clearRect(0,0,width,height);context.globalCompositeOperation='lighter';
-    particles.forEach(particle=>{
-      if(elapsed){particle.y+=particle.speed*elapsed;particle.phase+=elapsed*.35;particle.x+=Math.sin(particle.phase)*2*elapsed;if(particle.y>(entry ? height*.42 : height)+7){particle.y=-7;if(entry)particle.x=random()*width;}}
-      const twinkle=preference.matches ? .75 : .35+.65*(.5+.5*Math.sin(time*.0008+particle.phase));
-      context.globalAlpha=particle.opacity*twinkle;const radius=particle.size*(particle.star ? 6 : 3.6);
-      context.drawImage(sprite,particle.x-radius,particle.y-radius,radius*2,radius*2);
-      context.fillStyle='#f1c75e';context.fillRect(particle.x,particle.y,particle.size*.65,particle.size*.65);
-      if(particle.star){context.strokeStyle='#ffeab0';context.lineWidth=.5;context.beginPath();context.moveTo(particle.x-3,particle.y);context.lineTo(particle.x+3,particle.y);context.moveTo(particle.x,particle.y-3);context.lineTo(particle.x,particle.y+3);context.stroke();}
-    });
-    context.globalAlpha=1;context.globalCompositeOperation='source-over';
-  }
-  function tick(time){frame=0;if(document.hidden||preference.matches)return;if(!last)last=time;if(time-last>=33){draw(Math.min((time-last)/1000,.1),time);last=time;}frame=requestAnimationFrame(tick);}
-  function resume(){if(frame)cancelAnimationFrame(frame);frame=0;last=0;draw(0,0);if(!document.hidden&&!preference.matches)frame=requestAnimationFrame(tick);}
-  window.addEventListener('resize',resize,{passive:true});document.addEventListener('visibilitychange',resume);document.addEventListener('invitation:opened',()=>{resize();resume();});preference.addEventListener('change',resume);resize();resume();
-}
-initializeGoldDust();
-
 document.dispatchEvent(new Event('invitation:opened'));

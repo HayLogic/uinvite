@@ -1,9 +1,9 @@
-# 072 · Գիշերային ոսկեգույն ամանորյա հրավեր
+# 072 · Պարզ ամանորյա հրավիրատոմս
 
-Self-contained Armenian static invitation: `index.html`, `style.css`, `script.js`, `assets/`. Open directly or run `npx serve . -p 3000` from this folder. No build or dependencies.
+Մեկ տոնական լուսանկար՝ վերևում ընկերության անուն, կարճ հայերեն հրավեր, ներքևում օր/ժամ/վայր։ Լուսանկարից հետո միայն RSVP՝ անուն/ազգանուն, այո/ոչ և Հաստատել։ Չկան ծրար, նավիգացիա, հաշվիչ, ծրագիր, առանձին վայրի կամ շնորհակալության բաժիններ, երաժշտություն կամ canvas էֆեկտներ։
 
-The latest supplied reference guides the midnight-blue/gold terrace background, hanging ornaments, illuminated tree and dark central typography area. Artwork is generated, not a photo of the actual venue. The invitation opens directly as a full photographic poster, without an envelope. Scroll reveals, countdown, provisional evening program, venue details and RSVP follow. Reduced motion and keyboard access are supported.
+Ֆոնը գեներացված տոնական լաունջ է՝ սկզբնական հղման նման։ Իրական վայրի լուսանկար չէ։ CONFIG-ում ընկերությունն ու վայրը լրացվող են, 26․12․2026 19։00-ը օրինակային է։ 067-ի TT Group/Adana/18։00 տվյալներն այստեղ չեն փոխանցվել։
 
-Event data lives in `CONFIG` in script.js. Company and venue are placeholders. 26 December 2026 at 19:00 Armenia (+04:00), welcoming 2027, and the program are illustrative reference values, not confirmed event information. No music has been requested for 072. No venue photo or map appears until supplied. Do not carry details from previous templates.
+RSVP-ն ցուցադրական է մինչև rsvpEndpoint-ի միացումը, տվյալներ չի ուղարկում և չի պահպանվում։ Իրական endpoint-ը ստանում է fullName, attendance, comment (դատարկ) JSON։ Ստուգվում են անուն/ազգանունը, կրկնակի ուղարկումը և HTTP սխալները։
 
-RSVP is explicitly a preview until `rsvpEndpoint` is set; it validates name/surname and attendance and never claims a preview was sent. A configured endpoint receives JSON with fullName, attendance and comment; request timeout, duplicate-submit guard and retry messages are implemented. Never put secrets in client code.
+Ինքնուրույն ստատիկ պանակ է՝ HTML/CSS/vanilla JS, տեղային ֆոնտ և նկար։ Պանակից գործարկեք npx serve . -p 3000։ Build կամ dependencies պետք չեն։
