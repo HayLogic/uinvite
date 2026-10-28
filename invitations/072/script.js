@@ -5,10 +5,12 @@ const CONFIG=Object.freeze({
   companyName:'Ձեր ընկերությունը',
   celebrationYear:'2027',
   eventTitle:'Տոնական երեկո',
-  eventDate:'2026-12-26T19:00:00+04:00',
+  eventDate:'2026-12-31T19:00:00+04:00',
   venueName:'Վայրը կճշտվի',
   rsvpEndpoint:'', // Առանց endpoint-ի ձևը ցուցադրական է։ Գաղտնի բանալիներ չտեղադրել։
-  glitterEnabled:true
+  address:'',
+  mapsUrl:'',
+  program:[{time:'18:30',title:'Հյուրերի դիմավորում'},{time:'19:00',title:'Բացման խոսք և առաջին կենաց'},{time:'20:00',title:'Ընթրիք'},{time:'21:00',title:'Տոնական խաղեր և անակնկալներ'},{time:'22:00',title:'Կենդանի երաժշտություն'},{time:'23:30',title:'DJ և պարեր'}]
 });
 const $=selector=>document.querySelector(selector);
 document.querySelectorAll('[data-company]').forEach(element=>{element.textContent=CONFIG.companyName;});
@@ -27,6 +29,19 @@ if(validDate){
   $('#event-date').textContent=`${Number(parts.day)} ${months[Number(parts.month)-1]} ${parts.year}`;
   $('#event-time').textContent=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',hourCycle:'h23',timeZone:'Asia/Yerevan'}).format(eventDate);
 }else{$('#event-date').textContent='Ամսաթիվը կճշտվի';$('#event-time').textContent='Ժամը կճշտվի';}
+$('#venue-name').textContent=CONFIG.venueName;
+$('#venue-address').textContent=CONFIG.address;$('#venue-address').hidden=!CONFIG.address;
+const mapURL=safeURL(CONFIG.mapsUrl);if(mapURL){$('#maps-link').href=mapURL;$('#maps-link').hidden=false;}
+function updateCountdown(now=Date.now()){
+ const remaining=validDate?eventDate.getTime()-now:NaN;
+ const finished=!Number.isFinite(remaining)||remaining<=0;
+ $('#countdown').hidden=finished;$('#countdown-message').hidden=!finished;
+ if(finished){$('#countdown-message').textContent=validDate?'Մեր տոնական երեկոն արդեն մեկնարկել է։':'Ամսաթիվը կճշտվի։';return;}
+ const seconds=Math.floor(remaining/1000);const values=[Math.floor(seconds/86400),Math.floor(seconds/3600)%24,Math.floor(seconds/60)%60,seconds%60];
+ ['days','hours','minutes','seconds'].forEach((id,i)=>document.getElementById(id).textContent=String(values[i]).padStart(2,'0'));
+}
+updateCountdown();setInterval(updateCountdown,1000);
+CONFIG.program.forEach(item=>{const li=document.createElement('li');li.className='reveal';const time=document.createElement('time');time.dateTime=item.time;time.textContent=item.time;const title=document.createElement('span');title.textContent=item.title;li.append(time,title);$('#program-items').append(li);});
 function initializeReveals(){
   if(!('IntersectionObserver' in window))return;
   const targets=Array.from(document.querySelectorAll('.reveal')),preference=matchMedia('(prefers-reduced-motion: reduce)');

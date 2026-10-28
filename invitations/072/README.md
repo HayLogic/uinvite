@@ -1,9 +1,11 @@
-# 072 · Պարզ ամանորյա հրավիրատոմս
+# 072 · Ձմեռային հեքիաթ
 
-Մեկ տոնական լուսանկար՝ վերևում ընկերության անուն, կարճ հայերեն հրավեր, ներքևում օր/ժամ/վայր։ Լուսանկարից հետո միայն RSVP՝ անուն/ազգանուն, այո/ոչ և Հաստատել։ Չկան ծրար, նավիգացիա, հաշվիչ, ծրագիր, առանձին վայրի կամ շնորհակալության բաժիններ, երաժշտություն կամ canvas էֆեկտներ։
+The former black/gold single-photo 072 was explicitly replaced by the user. This is the new white/ice-blue winter invitation, matching their snowy venue reference. Self-contained HTML/CSS/vanilla JS with relative generated images and local Armenian font; no build or dependencies.
 
-Ֆոնը գեներացված տոնական լաունջ է՝ սկզբնական հղման նման։ Իրական վայրի լուսանկար չէ։ CONFIG-ում ընկերությունն ու վայրը լրացվող են, 26․12․2026 19։00-ը օրինակային է։ 067-ի TT Group/Adana/18։00 տվյալներն այստեղ չեն փոխանցվել։
+Sections: snowy hero with company/navigation, Armenian invitation, date/time/place, live countdown, RSVP CTA; winter theme; white suit/ice-blue gown/silver dress code; provisional six-step program; illustrated venue gallery and optional map/address; RSVP. Reduced-motion and keyboard supported. No opening envelope or music requested.
 
-RSVP-ն ցուցադրական է մինչև rsvpEndpoint-ի միացումը, տվյալներ չի ուղարկում և չի պահպանվում։ Իրական endpoint-ը ստանում է fullName, attendance, comment (դատարկ) JSON։ Ստուգվում են անուն/ազգանունը, կրկնակի ուղարկումը և HTTP սխալները։
+CONFIG in script.js holds all event data. Company and venue are placeholders. 31 December 2026 19:00 Armenia (+04:00), welcoming 2027, and program times are illustrative reference values. No 067 TT Group/Adana data was carried over. Address/maps remain empty and hidden. Generated winter scenes are illustrative, not actual venue photos.
 
-Ինքնուրույն ստատիկ պանակ է՝ HTML/CSS/vanilla JS, տեղային ֆոնտ և նկար։ Պանակից գործարկեք npx serve . -p 3000։ Build կամ dependencies պետք չեն։
+RSVP: name/surname, attendance yes/no, confirm. Without rsvpEndpoint it is clearly a preview and sends/stores nothing. Configured HTTP(S) endpoint receives fullName, attendance, comment (empty). Validation, timeout, duplicate guard and error handling are retained. Never put secrets in browser code.
+
+Run npx serve . -p 3000 from this folder, or serve repository root and open /invitations/072/. cPanel: upload index.html/style.css/script.js/assets together.
