@@ -1,16 +1,16 @@
 'use strict';
-// 073-ի ընկերությունը, օրը, ժամը, վայրը և ծրագիրը դեռ օրինակային են։
+// Հաստատված են՝ Dvin Hall, 17:00։ Ընկերությունը, օրը և ծրագիրը դեռ օրինակային են։
 const CONFIG=Object.freeze({
   invitationNumber:'073',
   companyName:'Ձեր ընկերությունը',
   celebrationYear:'2027',
   eventTitle:'Տոնական երեկո',
-  eventDate:'2026-12-31T19:00:00+04:00',
-  venueName:'Վայրը կճշտվի',
+  eventDate:'2026-12-31T17:00:00+04:00',
+  venueName:'Dvin Hall',
   rsvpEndpoint:'', // Առանց endpoint-ի ձևը ցուցադրական է։ Գաղտնի բանալիներ չտեղադրել։
   address:'',
   mapsUrl:'',
-  program:[{time:'18:30',title:'Հյուրերի դիմավորում'},{time:'19:00',title:'Բացման խոսք և առաջին կենաց'},{time:'20:00',title:'Ընթրիք'},{time:'21:00',title:'Տոնական խաղեր և անակնկալներ'},{time:'22:00',title:'Կենդանի երաժշտություն'},{time:'23:30',title:'DJ և պարեր'}]
+  program:[{time:'17:00',title:'Հյուրերի դիմավորում'},{time:'17:30',title:'Բացման խոսք և առաջին կենաց'},{time:'18:30',title:'Ընթրիք'},{time:'19:30',title:'Տոնական խաղեր և անակնկալներ'},{time:'20:30',title:'Կենդանի երաժշտություն'},{time:'22:00',title:'DJ և պարեր'}]
 });
 const $=selector=>document.querySelector(selector);
 document.querySelectorAll('[data-company]').forEach(element=>{element.textContent=CONFIG.companyName;});
