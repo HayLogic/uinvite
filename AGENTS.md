@@ -13,6 +13,9 @@ Music must start only following user interaction and handle rejected play promis
 ## Verification
 Check envelope opening, audio state, countdown expiry, conditional RSVP fields and widths 360, 390, 768 and 1440 pixels. Report any checks that cannot be run. Do not deploy or add dependencies unless requested.
 
+## Collection-wide music update (latest user request)
+The user explicitly requested music for every invitation 067–076 that lacked it. Existing 068–071 music is preserved. Added the previously supplied local Happy-New-Year MP3 to 067, 072, 073, 074, 075 and 076 with their own assets/music.mp3, CONFIG.musicUrl, music.js, icon-only persistent play/pause and Armenian accessible labels. Start only on first visitor click (including opening gift/envelope), never on load. Handle real media state, rejection and missing file without blocking opening or RSVP. No new permission needed for this already authorized collection-wide request. Earlier per-template “no music requested” notes are superseded. All folders remain self-contained; upload music.js too.
+
 ## Invitation numbering and current work
 
 The user is building multiple distinct invitations. The completed burgundy/gold corporate New Year invitation for HayLogic Line Day is **068**. A complete standalone copy is now in `invitations/068/`; use that numbered folder for future 068 work. The legacy repository-root copy is retained unchanged. Its recorded application revision is `872ca6db9fd74298ca7151b0c97a8a8b416a0e9b`; see `INVITATIONS.md`.

@@ -1,6 +1,7 @@
 'use strict';
 // Հաստատված են՝ Անտառամուտ ռեստորան, Դիլիջան, 16:00։ Ընկերությունը, օրը և ծրագիրը դեռ օրինակային են։
 const CONFIG=Object.freeze({
+  musicUrl:'assets/music.mp3',
   invitationNumber:'072',
   companyName:'Ձեր ընկերությունը',
   celebrationYear:'2027',

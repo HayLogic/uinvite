@@ -55,3 +55,7 @@ A compact five-image gallery appears before venue, matching the requested horizo
 Venue is now a wide photo-led section with a translucent dark rounded location card over its lower center: pin, CONFIG.venueName, optional CONFIG.address and map search button. Generated assets/venue-atmosphere.png is used as clearly labeled illustrative hall art via venueArtwork; it is NOT an Adana photograph. Set venueImage to a real photo to replace the illustration and hide the artwork label. The user explicitly requested a blank address. Keep CONFIG.address empty and hide its line; do not invent it. Map remains a venue-name search.
 
 Latest dress-code edit: removed the shoe and clutch cards at the user’s request. Only tuxedo and gown remain, in two columns at all widths. Shared generated contact sheet remains as the source for those two cards.
+
+
+## Music added across the collection
+The user explicitly authorized adding music to all 067–076 invitations that lacked it. This folder now includes their previously supplied Happy-New-Year(chosic.com).mp3 as assets/music.mp3, plus a self-contained music.js (upload it with the HTML/CSS/script/assets). CONFIG.musicUrl owns the track path. Playback begins from the first visitor click (including the entry opening when present), never on page load. Persistent icon-only play/pause control uses actual media events and accessible Armenian labels; failed playback/missing file cannot block invitation opening or RSVP. Volume .45, loop enabled, no preload. Existing templates with music were preserved.
