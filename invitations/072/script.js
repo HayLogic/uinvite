@@ -1,16 +1,16 @@
 'use strict';
-// 072-ի օրինակային տվյալներ. ընկերությունը, օրը, ժամը և վայրը դեռ հաստատված չեն։
+// Հաստատված են՝ Անտառամուտ ռեստորան, Դիլիջան, 16:00։ Ընկերությունը, օրը և ծրագիրը դեռ օրինակային են։
 const CONFIG=Object.freeze({
   invitationNumber:'072',
   companyName:'Ձեր ընկերությունը',
   celebrationYear:'2027',
   eventTitle:'Տոնական երեկո',
-  eventDate:'2026-12-31T19:00:00+04:00',
-  venueName:'Վայրը կճշտվի',
+  eventDate:'2026-12-31T16:00:00+04:00',
+  venueName:'Անտառամուտ ռեստորան',
   rsvpEndpoint:'', // Առանց endpoint-ի ձևը ցուցադրական է։ Գաղտնի բանալիներ չտեղադրել։
-  address:'',
-  mapsUrl:'',
-  program:[{time:'18:30',title:'Հյուրերի դիմավորում'},{time:'19:00',title:'Բացման խոսք և առաջին կենաց'},{time:'20:00',title:'Ընթրիք'},{time:'21:00',title:'Տոնական խաղեր և անակնկալներ'},{time:'22:00',title:'Կենդանի երաժշտություն'},{time:'23:30',title:'DJ և պարեր'}]
+  address:'Դիլիջան',
+  mapsUrl:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent('Անտառամուտ ռեստորան Դիլիջան'),
+  program:[{time:'16:00',title:'Հյուրերի դիմավորում'},{time:'16:30',title:'Բացման խոսք և առաջին կենաց'},{time:'17:00',title:'Ընթրիք'},{time:'18:00',title:'Տոնական խաղեր և անակնկալներ'},{time:'19:00',title:'Կենդանի երաժշտություն'},{time:'20:30',title:'DJ և պարեր'}]
 });
 const $=selector=>document.querySelector(selector);
 document.querySelectorAll('[data-company]').forEach(element=>{element.textContent=CONFIG.companyName;});
@@ -44,12 +44,17 @@ updateCountdown();setInterval(updateCountdown,1000);
 CONFIG.program.forEach(item=>{const li=document.createElement('li');li.className='reveal';const time=document.createElement('time');time.dateTime=item.time;time.textContent=item.time;const title=document.createElement('span');title.textContent=item.title;li.append(time,title);$('#program-items').append(li);});
 function initializeReveals(){
   if(!('IntersectionObserver' in window))return;
-  const targets=Array.from(document.querySelectorAll('.reveal')),preference=matchMedia('(prefers-reduced-motion: reduce)');
-  document.body.classList.add('js-reveal');targets.forEach(target=>target.style.setProperty('--delay',`${Number(target.dataset.delay)||0}ms`));
-  const observer=new IntersectionObserver(items=>items.forEach(item=>item.target.classList.toggle('is-visible',item.isIntersecting)),{threshold:.1,rootMargin:'0px 0px -5% 0px'});
-  let active=false;
-  function refresh(){observer.disconnect();if(!active)return;targets.forEach(target=>{if(preference.matches)target.classList.add('is-visible');else{target.classList.remove('is-visible');observer.observe(target);}});}
-  document.addEventListener('invitation:opened',()=>{active=true;refresh();},{once:true});preference.addEventListener('change',refresh);
+  const targets=Array.from(document.querySelectorAll('.reveal'));
+  const preference=matchMedia('(prefers-reduced-motion: reduce)');
+  // Observe stable layout boxes; never hide a section again after it appears.
+  // In particular, a tall section must not need 10% visibility to remain readable.
+  const observer=new IntersectionObserver(items=>items.forEach(item=>{
+    if(item.isIntersecting){item.target.classList.add('is-visible');observer.unobserve(item.target);}
+  }),{threshold:0,rootMargin:'0px 0px 30px 0px'});
+  document.body.classList.add('js-reveal');
+  function revealAll(){targets.forEach(target=>target.classList.add('is-visible'));observer.disconnect();}
+  if(preference.matches)revealAll();else targets.forEach(target=>observer.observe(target));
+  preference.addEventListener('change',event=>{if(event.matches)revealAll();});
 }
 initializeReveals();
 const form=$('#rsvp-form'),isPreview=!CONFIG.rsvpEndpoint;
