@@ -11,3 +11,5 @@ RSVP: name/surname, attendance yes/no, confirm. Without rsvpEndpoint it is clear
 Run npx serve . -p 3000 from this folder, or serve repository root and open /invitations/072/. cPanel: upload index.html/style.css/script.js/assets together.
 
 Latest fixes: contact-sheet panels now use intrinsic-proportion SVG viewports (meet for outfits, slice for photo crops) instead of stretched backgrounds. Photo boxes are responsive aspect ratios. Reveal animations only show once and never hide again; opacity only, no moving observer target. Transparent snowy fir branches decorate program and venue edges and do not intercept clicks.
+
+Left venue branch refined: upright mirrored lower-corner accent, smaller size, soft top mask, no diagonal rotation; venue text and icon stay above decoration.

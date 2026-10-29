@@ -13,3 +13,7 @@
 
 .program-branch{right:0;width:150px}.venue-branch-right{right:0;width:150px}.venue-branch-left{left:-10px;width:135px}
 @media(min-width:768px){.program-branch{right:0;width:210px}.venue-branch-right{right:0;width:195px}.venue-branch-left{left:0;width:180px}}
+/* A quiet upright accent at the lower-left edge, without a diagonal cut. */
+.venue-branch-left{left:-22px;bottom:0;width:90px;height:135px;transform:scaleX(-1);transform-origin:center;mask-image:linear-gradient(to bottom,transparent,#000 25%);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 25%)}
+.venue-info>svg,.venue-info>div{position:relative;z-index:3}
+@media(min-width:768px){.venue-branch-left{left:-24px;bottom:0;width:130px;height:195px}}
